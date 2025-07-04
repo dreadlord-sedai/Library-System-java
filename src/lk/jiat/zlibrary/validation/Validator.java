@@ -1,7 +1,7 @@
-package lk.jiat.neolibrary.validation;
+package lk.jiat.zlibrary.validation;
 
 import javax.swing.JOptionPane;
-import lk.jiat.neolibrary.entity.Validation;
+import lk.jiat.zlibrary.entity.Validation;
 
 /**
  *

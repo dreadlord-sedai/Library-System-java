@@ -1,4 +1,4 @@
-package lk.jiat.neolibrary.entity;
+package lk.jiat.zlibrary.entity;
 
 public enum UserStatus {
      ACTIVE(1), INACTIVE(2);

@@ -1,4 +1,4 @@
-package lk.jiat.neolibrary.component;
+package lk.jiat.zlibrary.component;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import javax.swing.JButton;

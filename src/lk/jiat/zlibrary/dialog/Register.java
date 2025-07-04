@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package lk.jiat.neolibrary.dialog;
+package lk.jiat.zlibrary.dialog;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import lk.jiat.neolibrary.component.RoundButton;
-import lk.jiat.neolibrary.entity.Gender;
-import lk.jiat.neolibrary.entity.UserRole;
-import lk.jiat.neolibrary.validation.Validator;
+import lk.jiat.zlibrary.component.RoundButton;
+import lk.jiat.zlibrary.entity.Gender;
+import lk.jiat.zlibrary.entity.UserRole;
+import lk.jiat.zlibrary.validation.Validator;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import lk.jiat.neolibrary.connection.MySQL;
+import lk.jiat.zlibrary.connection.MySQL;
 import raven.toast.Notifications;
 
 /**

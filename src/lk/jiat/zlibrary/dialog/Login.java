@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package lk.jiat.neolibrary.dialog;
+package lk.jiat.zlibrary.dialog;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import lk.jiat.neolibrary.component.RoundButton;
+import lk.jiat.zlibrary.component.RoundButton;
 
 /**
  *
@@ -54,7 +54,6 @@ public class Login extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("NeoLibrary | Login");
-        setPreferredSize(new java.awt.Dimension(403, 531));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 36)); // NOI18N

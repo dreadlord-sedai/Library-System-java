@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package lk.jiat.neolibrary.gui;
+package lk.jiat.zlibrary.gui;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import lk.jiat.neolibrary.component.ImageBackgroundPanel.BackgroundPanel;
+import lk.jiat.zlibrary.component.ImageBackgroundPanel.BackgroundPanel;
 
 /**
  *

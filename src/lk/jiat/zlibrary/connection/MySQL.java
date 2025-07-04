@@ -1,4 +1,4 @@
-package lk.jiat.neolibrary.connection;
+package lk.jiat.zlibrary.connection;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,7 +17,7 @@ public class MySQL {
 
     public static Connection getConnection() {
         appProperties = new Properties();
-        String filePath = System.getProperty("user.dir") + "//neolibrary.properties";
+        String filePath = System.getProperty("user.dir") + "//zlibrary.properties";
         
         try {
             FileInputStream fis = new FileInputStream(filePath);
