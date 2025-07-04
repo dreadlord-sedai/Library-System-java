@@ -24,7 +24,7 @@ public class Home extends javax.swing.JFrame {
     }
     
     private void init() {
-        FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/neolibrary/images/logo.svg",
+        FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/zlibrary/images/logo.svg",
                 logo.getWidth(),
                 logo.getHeight());
         logo.setIcon(icon);
@@ -103,7 +103,7 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NeoLibrary");
+        jLabel1.setText("Z Library");
         jLabel1.setPreferredSize(new java.awt.Dimension(0, 16));
 
         jLabel2.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N

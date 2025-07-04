@@ -24,7 +24,7 @@ public class SplashScreen extends javax.swing.JFrame {
     }
 
     private void init() {
-        FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/neolibrary/images/logo.svg",
+        FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/zlibrary/images/logo.svg",
                 logo.getWidth(),
                 logo.getHeight());
         logo.setIcon(icon);
@@ -61,7 +61,7 @@ public class SplashScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new BackgroundPanel("/lk/jiat/neolibrary/images/background.jpg");
+        jPanel1 = new BackgroundPanel("/lk/jiat/zlibrary/images/background.jpg");
         logo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -77,7 +77,7 @@ public class SplashScreen extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NeoLibrary");
+        jLabel1.setText("Z Library");
 
         jProgressBar1.setForeground(new java.awt.Color(0, 153, 255));
 

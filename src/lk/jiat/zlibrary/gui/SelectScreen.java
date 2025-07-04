@@ -29,7 +29,7 @@ public class SelectScreen extends javax.swing.JFrame {
     }
     
     private void init() {
-        FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/neolibrary/images/logo.svg",
+        FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/zlibrary/images/logo.svg",
                 logo.getWidth(),
                 logo.getHeight());
         logo.setIcon(icon);
@@ -45,7 +45,7 @@ public class SelectScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new BackgroundPanel("/lk/jiat/neolibrary/images/background.jpg");
+        jPanel1 = new BackgroundPanel("/lk/jiat/zlibrary/images/background.jpg");
         logo = new javax.swing.JLabel();
         loginBtn = new RoundButton();
         registerBtn = new RoundButton();

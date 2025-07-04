@@ -37,11 +37,12 @@ public class Register extends javax.swing.JDialog {
     }
 
     private void init() {
-        FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/neolibrary/images/logo.svg",
+        FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/zlibrary/images/logo.svg",
                 logo.getWidth(),
                 logo.getHeight());
         logo.setIcon(icon);
         this.setIconImage(icon.getImage());
+        setTitle("Z Library | Register");
     }
 
     private void loadUserRole() {
@@ -138,7 +139,7 @@ public class Register extends javax.swing.JDialog {
         registerBtn = new RoundButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("NeoLibrary | Register");
+        setTitle("Z Library | Register");
         setIconImage(null);
         setResizable(false);
 
