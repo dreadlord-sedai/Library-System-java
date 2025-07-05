@@ -50,6 +50,7 @@ public class AddMember extends javax.swing.JDialog {
         jTextField5 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        resetBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("zlibrary | Add Member");
@@ -142,7 +143,7 @@ public class AddMember extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Mobile Number");
+        jLabel3.setText("Date of Birth");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
@@ -263,6 +264,24 @@ public class AddMember extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 30, 10, 30);
         jPanel2.add(jDateChooser1, gridBagConstraints);
 
+        resetBtn.setText("Reset");
+        resetBtn.setFont(new java.awt.Font("Dubai Medium", 0, 18));
+        resetBtn.setBackground(new java.awt.Color(59, 130, 246));
+        resetBtn.setForeground(new java.awt.Color(255, 255, 255));
+        resetBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(20, 30, 15, 30);
+        jPanel2.add(resetBtn, gridBagConstraints);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -279,8 +298,79 @@ public class AddMember extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // Collect form data
+        String fname = jTextField1.getText().trim();
+        String lname = jTextField3.getText().trim();
+        String email = jTextField2.getText().trim();
+        String mobile = jTextField4.getText().trim();
+        String nic = jTextField5.getText().trim();
+        java.util.Date dob = jDateChooser1.getDate();
+        String gender = jRadioButton1.isSelected() ? "Male" : (jRadioButton2.isSelected() ? "Female" : null);
+
+        // Validate input
+        if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || mobile.isEmpty() || nic.isEmpty() || dob == null || gender == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Validation Error", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (mobile.length() > 10) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Mobile number must be at most 10 digits.", "Validation Error", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Get gender_id from gender name
+        int genderId = -1;
+        try {
+            java.sql.ResultSet rs = lk.jiat.neolibrary.connection.MySQL.executeSearch(
+                "SELECT gender_id FROM gender WHERE gender_name='" + gender.replace("'", "''") + "'"
+            );
+            if (rs.next()) {
+                genderId = rs.getInt("gender_id");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Gender not found in database.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error fetching gender.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Format date for SQL
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String dobStr = sdf.format(dob);
+
+        // Insert member into database (only the required columns)
+        try {
+            String sql = String.format(
+                "INSERT INTO member (fname, lname, email, mobile, nic, gender_id, registered_date, status_id) VALUES ('%s', '%s', '%s', '%s', '%s', %d, NOW(), 1)",
+                fname.replace("'", "''"),
+                lname.replace("'", "''"),
+                email.replace("'", "''"),
+                mobile.replace("'", "''"),
+                nic.replace("'", "''"),
+                genderId
+            );
+            System.out.println("[DEBUG] AddMember SQL: " + sql);
+            lk.jiat.neolibrary.connection.MySQL.executeIUD(sql);
+            javax.swing.JOptionPane.showMessageDialog(this, "Member added successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Failed to add member: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jDateChooser1.setDate(null);
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+    }
     
     private void updateTypography() {
         // Title
@@ -411,5 +501,6 @@ public class AddMember extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton resetBtn;
     // End of variables declaration//GEN-END:variables
 }
