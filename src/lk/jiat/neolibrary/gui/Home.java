@@ -130,7 +130,7 @@ public class Home extends javax.swing.JFrame {
         logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("NeoLibrary || Home");
+        setTitle("zlibrary || Home");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -178,7 +178,7 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NeoLibrary");
+        jLabel1.setText("zlibrary");
         jLabel1.setPreferredSize(new java.awt.Dimension(0, 16));
 
         userNameLabel.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N

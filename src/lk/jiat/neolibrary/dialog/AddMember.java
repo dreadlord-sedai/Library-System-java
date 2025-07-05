@@ -48,6 +48,7 @@ public class AddMember extends javax.swing.JDialog {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("zlibrary | Add Member");
         setResizable(false);
 
         jPanel2.setLayout(new java.awt.GridBagLayout());

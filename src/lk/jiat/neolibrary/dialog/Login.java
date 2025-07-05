@@ -102,7 +102,7 @@ public class Login extends javax.swing.JDialog {
         loginBtn = new RoundButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("NeoLibrary | Login");
+        setTitle("zlibrary | Login");
         setPreferredSize(new java.awt.Dimension(403, 531));
         setResizable(false);
 

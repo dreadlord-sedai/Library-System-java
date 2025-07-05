@@ -147,7 +147,7 @@ public class Register extends javax.swing.JDialog {
         registerBtn = new RoundButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("NeoLibrary | Register");
+        setTitle("zlibrary | Register");
         setIconImage(null);
         setResizable(false);
 

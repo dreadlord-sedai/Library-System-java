@@ -79,7 +79,7 @@ public class SplashScreen extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NeoLibrary");
+        jLabel1.setText("zlibrary");
 
         jProgressBar1.setForeground(new java.awt.Color(0, 153, 255));
 

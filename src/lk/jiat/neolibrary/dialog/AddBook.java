@@ -41,6 +41,7 @@ public class AddBook extends javax.swing.JDialog {
         jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("zlibrary | Add Book");
         setResizable(false);
 
         jPanel2.setLayout(new java.awt.GridBagLayout());

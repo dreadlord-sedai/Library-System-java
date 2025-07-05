@@ -17,7 +17,7 @@ public class MySQL {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             appProperties = new Properties();
-            String filePath = System.getProperty("user.dir") + "\\neolibrary.properties";
+            String filePath = System.getProperty("user.dir") + "\\zlibrary.properties";
 
             try (java.io.InputStream fis = new java.io.FileInputStream(filePath);) {
                 appProperties.load(fis);
