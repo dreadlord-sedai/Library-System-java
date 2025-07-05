@@ -25,7 +25,7 @@ public enum Validation {
 
         @Override
         public String validate() {
-            return "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$";
+            return "^.*(?=.{4,8})(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$";
         }
 
     };
