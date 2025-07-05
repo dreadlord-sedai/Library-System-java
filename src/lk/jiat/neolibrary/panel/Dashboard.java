@@ -39,12 +39,51 @@ public class Dashboard extends javax.swing.JPanel {
 
     public Dashboard(Home parent) {
         initComponents();
+        // --- BEGIN ROBUST CARD LAYOUT FIX ---
+        // MEMBER LIST PANEL
+        memberListPanel.removeAll();
+        memberListPanel.setLayout(new javax.swing.BoxLayout(memberListPanel, javax.swing.BoxLayout.Y_AXIS));
+        jLabel15.setAlignmentX(LEFT_ALIGNMENT);
+        memberListPanel.add(jLabel15);
+        memberListPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 10)));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(Integer.MAX_VALUE, 180));
+        jScrollPane1.setAlignmentX(LEFT_ALIGNMENT);
+        memberListPanel.add(jScrollPane1);
+        memberListPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 10)));
+        javax.swing.JPanel memberBtnPanel = new javax.swing.JPanel();
+        memberBtnPanel.setLayout(new javax.swing.BoxLayout(memberBtnPanel, javax.swing.BoxLayout.X_AXIS));
+        memberBtnPanel.setOpaque(false);
+        memberBtnPanel.setAlignmentX(LEFT_ALIGNMENT);
+        memberBtnPanel.add(javax.swing.Box.createHorizontalGlue());
+        memberBtnPanel.add(addNewMemberBtn);
+        memberBtnPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(10, 0)));
+        memberBtnPanel.add(memberSeeAllBtn);
+        memberListPanel.add(memberBtnPanel);
+        // BOOK LIST PANEL
+        bookListPanel.removeAll();
+        bookListPanel.setLayout(new javax.swing.BoxLayout(bookListPanel, javax.swing.BoxLayout.Y_AXIS));
+        jLabel16.setAlignmentX(LEFT_ALIGNMENT);
+        bookListPanel.add(jLabel16);
+        bookListPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 10)));
+        jScrollPane3.setMaximumSize(new java.awt.Dimension(Integer.MAX_VALUE, 180));
+        jScrollPane3.setAlignmentX(LEFT_ALIGNMENT);
+        bookListPanel.add(jScrollPane3);
+        bookListPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 10)));
+        javax.swing.JPanel bookBtnPanel = new javax.swing.JPanel();
+        bookBtnPanel.setLayout(new javax.swing.BoxLayout(bookBtnPanel, javax.swing.BoxLayout.X_AXIS));
+        bookBtnPanel.setOpaque(false);
+        bookBtnPanel.setAlignmentX(LEFT_ALIGNMENT);
+        bookBtnPanel.add(javax.swing.Box.createHorizontalGlue());
+        bookBtnPanel.add(addNewBookBtn);
+        bookBtnPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(10, 0)));
+        bookBtnPanel.add(bookSeeAllBtn);
+        bookListPanel.add(bookBtnPanel);
+        // --- END ROBUST CARD LAYOUT FIX ---
         init();
         updateDateTime();
         loadBookDetails();
         loadMemberDetails();
         this.homeScreen = parent;
-        
         // Ensure proper sizing after initialization
         this.revalidate();
         this.repaint();
@@ -102,9 +141,9 @@ public class Dashboard extends javax.swing.JPanel {
         jScrollPane1.putClientProperty(FlatClientProperties.STYLE, "arc:16; borderWidth:0");
         jScrollPane3.putClientProperty(FlatClientProperties.STYLE, "arc:16; borderWidth:0");
         
-        // Fix scroll pane sizing - make them smaller
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(350, 250));
-        jScrollPane3.setPreferredSize(new java.awt.Dimension(350, 250));
+        // Fix scroll pane sizing - make them much smaller to fit in cards
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(300, 180));
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(300, 180));
         
         // DateTime field styling
         dateTimeFormattedFeild.setBorder(BorderFactory.createEmptyBorder());
@@ -117,6 +156,9 @@ public class Dashboard extends javax.swing.JPanel {
         
         // Additional layout fixes to prevent overflow
         fixLayoutConstraints();
+        
+        // Fix table and button sizing within cards
+        fixCardContentSizing();
     }
     
     private void updateTypography() {
@@ -168,8 +210,8 @@ public class Dashboard extends javax.swing.JPanel {
         overdueBookPanel.setMaximumSize(new java.awt.Dimension(280, 140));
         totalMemberPanel.setMaximumSize(new java.awt.Dimension(280, 140));
         
-        memberListPanel.setMaximumSize(new java.awt.Dimension(400, 300));
-        bookListPanel.setMaximumSize(new java.awt.Dimension(400, 300));
+        memberListPanel.setMaximumSize(new java.awt.Dimension(350, 250));
+        bookListPanel.setMaximumSize(new java.awt.Dimension(350, 250));
         
         // Ensure panels can shrink
         totalBookPanel.setMinimumSize(new java.awt.Dimension(200, 100));
@@ -177,8 +219,65 @@ public class Dashboard extends javax.swing.JPanel {
         overdueBookPanel.setMinimumSize(new java.awt.Dimension(200, 100));
         totalMemberPanel.setMinimumSize(new java.awt.Dimension(200, 100));
         
-        memberListPanel.setMinimumSize(new java.awt.Dimension(300, 200));
-        bookListPanel.setMinimumSize(new java.awt.Dimension(300, 200));
+        memberListPanel.setMinimumSize(new java.awt.Dimension(280, 200));
+        bookListPanel.setMinimumSize(new java.awt.Dimension(280, 200));
+    }
+    
+    private void fixCardContentSizing() {
+        // Fix table column widths to fit in smaller space
+        if (memberTable.getColumnModel().getColumnCount() > 0) {
+            memberTable.getColumnModel().getColumn(0).setPreferredWidth(40);  // ID
+            memberTable.getColumnModel().getColumn(1).setPreferredWidth(120); // Name
+            memberTable.getColumnModel().getColumn(2).setPreferredWidth(80);  // NIC
+            memberTable.getColumnModel().getColumn(3).setPreferredWidth(80);  // Mobile
+            memberTable.getColumnModel().getColumn(4).setPreferredWidth(120); // Email
+        }
+        
+        if (bookTable.getColumnModel().getColumnCount() > 0) {
+            bookTable.getColumnModel().getColumn(0).setPreferredWidth(40);   // ID
+            bookTable.getColumnModel().getColumn(1).setPreferredWidth(100);  // Title
+            bookTable.getColumnModel().getColumn(2).setPreferredWidth(80);   // Author
+            bookTable.getColumnModel().getColumn(3).setPreferredWidth(60);   // Genre
+            bookTable.getColumnModel().getColumn(4).setPreferredWidth(80);   // Added Date
+            bookTable.getColumnModel().getColumn(5).setPreferredWidth(60);   // Status
+        }
+        
+        // Fix button sizes to fit in cards
+        addNewMemberBtn.setPreferredSize(new java.awt.Dimension(120, 30));
+        memberSeeAllBtn.setPreferredSize(new java.awt.Dimension(80, 25));
+        addNewBookBtn.setPreferredSize(new java.awt.Dimension(120, 30));
+        bookSeeAllBtn.setPreferredSize(new java.awt.Dimension(80, 25));
+        
+        // Set smaller row height for tables
+        memberTable.setRowHeight(25);
+        bookTable.setRowHeight(25);
+        
+        // Ensure tables don't take too much space
+        memberTable.setPreferredScrollableViewportSize(new java.awt.Dimension(280, 150));
+        bookTable.setPreferredScrollableViewportSize(new java.awt.Dimension(280, 150));
+        
+        // Style the buttons within cards
+        styleCardButtons();
+    }
+    
+    private void styleCardButtons() {
+        // Style member list buttons
+        addNewMemberBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        addNewMemberBtn.setBackground(new Color(34, 197, 94)); // Green
+        addNewMemberBtn.setForeground(new Color(255, 255, 255));
+        
+        memberSeeAllBtn.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        memberSeeAllBtn.setBackground(new Color(99, 102, 241)); // Indigo
+        memberSeeAllBtn.setForeground(new Color(255, 255, 255));
+        
+        // Style book list buttons
+        addNewBookBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        addNewBookBtn.setBackground(new Color(34, 197, 94)); // Green
+        addNewBookBtn.setForeground(new Color(255, 255, 255));
+        
+        bookSeeAllBtn.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        bookSeeAllBtn.setBackground(new Color(99, 102, 241)); // Indigo
+        bookSeeAllBtn.setForeground(new Color(255, 255, 255));
     }
 
     private void updateDateTime() {
