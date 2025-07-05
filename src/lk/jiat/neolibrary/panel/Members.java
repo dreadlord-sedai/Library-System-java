@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
+import javax.swing.BorderFactory;
 import javax.swing.table.DefaultTableModel;
 import lk.jiat.neolibrary.component.FormattedTable;
 import lk.jiat.neolibrary.component.FormattedTextField;
@@ -21,6 +22,8 @@ import lk.jiat.neolibrary.dialog.AddMember;
 import lk.jiat.neolibrary.entity.UserStatus;
 import lk.jiat.neolibrary.gui.Home;
 import lk.jiat.neolibrary.validation.Validator;
+import java.awt.Color;
+import java.awt.Font;
 
 /**
  *
@@ -49,9 +52,64 @@ public class Members extends javax.swing.JPanel {
     }
 
     private void init() {
-        jScrollPane2.putClientProperty(FlatClientProperties.STYLE, "arc:40;");
-        searchByCombo.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
-        memberStatusCombo.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
+        // Modern glassmorphism styling
+        this.setBackground(new Color(15, 23, 42)); // Slate-900
+        
+        // Enhanced scroll pane styling
+        jScrollPane2.putClientProperty(FlatClientProperties.STYLE, "arc:20; borderWidth:0");
+        
+        // Modern combo box styling
+        searchByCombo.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
+        memberStatusCombo.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
+        
+        // Enhanced search field styling
+        memberSearchField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(71, 85, 105), 1),
+            BorderFactory.createEmptyBorder(10, 15, 10, 15)
+        ));
+        memberSearchField.setBackground(new Color(30, 41, 59));
+        memberSearchField.setForeground(new Color(241, 245, 249));
+        memberSearchField.setFont(new Font("Inter", Font.PLAIN, 14));
+        
+        // Modern table styling
+        memberListTable.setRowHeight(45);
+        memberListTable.setFont(new Font("Inter", Font.PLAIN, 14));
+        memberListTable.setForeground(new Color(241, 245, 249));
+        memberListTable.setBackground(new Color(30, 41, 59));
+        memberListTable.setGridColor(new Color(71, 85, 105));
+        
+        // Enhanced typography
+        updateTypography();
+        
+        // Modern button styling
+        styleButtons();
+    }
+    
+    private void updateTypography() {
+        // Header with modern typography
+        jLabel1.setFont(new Font("Inter", Font.BOLD, 32));
+        jLabel1.setForeground(new Color(248, 250, 252));
+        
+        // Combo box styling
+        searchByCombo.setFont(new Font("Inter", Font.PLAIN, 14));
+        searchByCombo.setForeground(new Color(241, 245, 249));
+        searchByCombo.setBackground(new Color(30, 41, 59));
+        
+        memberStatusCombo.setFont(new Font("Inter", Font.PLAIN, 14));
+        memberStatusCombo.setForeground(new Color(241, 245, 249));
+        memberStatusCombo.setBackground(new Color(30, 41, 59));
+    }
+    
+    private void styleButtons() {
+        // Enhanced button styling
+        memberSearchBtn.setFont(new Font("Inter", Font.BOLD, 14));
+        memberSearchBtn.setPreferredSize(new java.awt.Dimension(120, 40));
+        
+        addMemberBtn.setFont(new Font("Inter", Font.BOLD, 14));
+        addMemberBtn.setPreferredSize(new java.awt.Dimension(160, 40));
+        
+        generateReportBtn.setFont(new Font("Inter", Font.BOLD, 14));
+        generateReportBtn.setPreferredSize(new java.awt.Dimension(180, 40));
     }
 
     private void loadStatus() {

@@ -14,17 +14,19 @@ import javax.swing.UIManager;
 
 public class RoundButton extends JButton {
 
-    // Modern color palette
-    private static final Color PRIMARY_COLOR = new Color(99, 102, 241); // Indigo
-    private static final Color PRIMARY_HOVER = new Color(129, 140, 248); // Lighter indigo
-    private static final Color SECONDARY_COLOR = new Color(55, 65, 81); // Gray-700
-    private static final Color SECONDARY_HOVER = new Color(75, 85, 99); // Gray-600
-    private static final Color SUCCESS_COLOR = new Color(34, 197, 94); // Green-500
-    private static final Color SUCCESS_HOVER = new Color(22, 163, 74); // Green-600
+    // Modern color palette with glassmorphism effects
+    private static final Color PRIMARY_COLOR = new Color(59, 130, 246); // Blue-500
+    private static final Color PRIMARY_HOVER = new Color(37, 99, 235); // Blue-600
+    private static final Color SECONDARY_COLOR = new Color(30, 41, 59); // Slate-800
+    private static final Color SECONDARY_HOVER = new Color(51, 65, 85); // Slate-700
+    private static final Color SUCCESS_COLOR = new Color(16, 185, 129); // Emerald-500
+    private static final Color SUCCESS_HOVER = new Color(5, 150, 105); // Emerald-600
     private static final Color DANGER_COLOR = new Color(239, 68, 68); // Red-500
     private static final Color DANGER_HOVER = new Color(220, 38, 38); // Red-600
     private static final Color WARNING_COLOR = new Color(245, 158, 11); // Amber-500
     private static final Color WARNING_HOVER = new Color(217, 119, 6); // Amber-600
+    private static final Color VIOLET_COLOR = new Color(139, 92, 246); // Violet-500
+    private static final Color VIOLET_HOVER = new Color(124, 58, 237); // Violet-600
 
     private boolean isDashBoardBtn = false;
     private boolean isHovered = false;
@@ -91,6 +93,10 @@ public class RoundButton extends JButton {
                 currentBackground = isHovered ? SUCCESS_HOVER : SUCCESS_COLOR;
             } else if (buttonText.contains("return")) {
                 currentBackground = isHovered ? WARNING_HOVER : WARNING_COLOR;
+            } else if (buttonText.contains("generate") || buttonText.contains("report")) {
+                currentBackground = isHovered ? VIOLET_HOVER : VIOLET_COLOR;
+            } else if (buttonText.contains("search")) {
+                currentBackground = isHovered ? PRIMARY_HOVER : PRIMARY_COLOR;
             } else {
                 currentBackground = isHovered ? SECONDARY_HOVER : SECONDARY_COLOR;
             }
@@ -110,15 +116,30 @@ public class RoundButton extends JButton {
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         
-        // Draw rounded background
-        g2d.setColor(currentBackground);
-        g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 12, 12);
+        // Create glassmorphism effect with subtle transparency
+        Color glassColor = new Color(
+            currentBackground.getRed(),
+            currentBackground.getGreen(), 
+            currentBackground.getBlue(),
+            isHovered ? 220 : 200
+        );
         
-        // Add subtle shadow for depth
+        // Draw main rounded background
+        g2d.setColor(glassColor);
+        g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 16, 16);
+        
+        // Add subtle inner highlight for depth
         if (isHovered) {
-            g2d.setColor(new Color(0, 0, 0, 20));
-            g2d.fillRoundRect(2, 2, getWidth() - 4, getHeight() - 4, 10, 10);
+            g2d.setColor(new Color(255, 255, 255, 30));
+            g2d.fillRoundRect(2, 2, getWidth() - 4, getHeight() - 4, 14, 14);
+        }
+        
+        // Add modern shadow effect
+        if (isHovered) {
+            g2d.setColor(new Color(0, 0, 0, 40));
+            g2d.fillRoundRect(3, 3, getWidth() - 6, getHeight() - 6, 13, 13);
         }
         
         g2d.dispose();

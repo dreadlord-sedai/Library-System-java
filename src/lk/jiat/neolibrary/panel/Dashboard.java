@@ -90,186 +90,189 @@ public class Dashboard extends javax.swing.JPanel {
     }
 
     private void init() {
-        // Set modern background
-        this.setBackground(new Color(31, 41, 55)); // Gray-800
+        // Set modern gradient background
+        this.setBackground(new Color(15, 23, 42)); // Slate-900
         
         // Fix sizing issues - remove fixed preferred size
         this.setPreferredSize(null);
         
-        // Modern card styling with subtle shadows
-        totalBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:16; borderWidth:0");
-        borrowedBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:16; borderWidth:0");
-        overdueBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:16; borderWidth:0");
-        totalMemberPanel.putClientProperty(FlatClientProperties.STYLE, "arc:16; borderWidth:0");
-        memberListPanel.putClientProperty(FlatClientProperties.STYLE, "arc:16; borderWidth:0");
-        bookListPanel.putClientProperty(FlatClientProperties.STYLE, "arc:16; borderWidth:0");
+        // Modern glassmorphism card styling
+        totalBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20; borderWidth:0");
+        borrowedBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20; borderWidth:0");
+        overdueBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20; borderWidth:0");
+        totalMemberPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20; borderWidth:0");
+        memberListPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20; borderWidth:0");
+        bookListPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20; borderWidth:0");
 
-        // Set card backgrounds
-        totalBookPanel.setBackground(new Color(99, 102, 241)); // Indigo
-        borrowedBookPanel.setBackground(new Color(34, 197, 94)); // Green
-        overdueBookPanel.setBackground(new Color(245, 158, 11)); // Amber
-        totalMemberPanel.setBackground(new Color(168, 85, 247)); // Purple
-        memberListPanel.setBackground(new Color(55, 65, 81)); // Gray-700
-        bookListPanel.setBackground(new Color(55, 65, 81)); // Gray-700
+        // New modern color scheme with gradients
+        totalBookPanel.setBackground(new Color(59, 130, 246)); // Blue-500
+        borrowedBookPanel.setBackground(new Color(16, 185, 129)); // Emerald-500
+        overdueBookPanel.setBackground(new Color(245, 158, 11)); // Amber-500
+        totalMemberPanel.setBackground(new Color(139, 92, 246)); // Violet-500
+        memberListPanel.setBackground(new Color(30, 41, 59, 180)); // Slate-800 with transparency
+        bookListPanel.setBackground(new Color(30, 41, 59, 180)); // Slate-800 with transparency
 
-        // Fix card panel sizing - make them smaller
-        totalBookPanel.setPreferredSize(new java.awt.Dimension(250, 120));
-        borrowedBookPanel.setPreferredSize(new java.awt.Dimension(250, 120));
-        overdueBookPanel.setPreferredSize(new java.awt.Dimension(250, 120));
-        totalMemberPanel.setPreferredSize(new java.awt.Dimension(250, 120));
+        // Enhanced card panel sizing
+        totalBookPanel.setPreferredSize(new java.awt.Dimension(280, 140));
+        borrowedBookPanel.setPreferredSize(new java.awt.Dimension(280, 140));
+        overdueBookPanel.setPreferredSize(new java.awt.Dimension(280, 140));
+        totalMemberPanel.setPreferredSize(new java.awt.Dimension(280, 140));
 
-        // Icon styling
+        // Modern icon styling with larger icons
         totalBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
         borrowedBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
         overdueBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
         totalMemberIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
 
         totalBookIcon.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/total_book_label.svg",
-                28,
-                28));
+                32,
+                32));
         borrowedBookIcon.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/borrowed_book_label.svg",
-                28,
-                28));
+                32,
+                32));
         overdueBookIcon.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/hourglass_label.svg",
-                28,
-                28));
+                32,
+                32));
         totalMemberIcon.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/members.svg",
-                28,
-                28));
+                32,
+                32));
 
-        // Scroll pane styling
+        // Enhanced scroll pane styling
         jScrollPane1.putClientProperty(FlatClientProperties.STYLE, "arc:16; borderWidth:0");
         jScrollPane3.putClientProperty(FlatClientProperties.STYLE, "arc:16; borderWidth:0");
         
-        // Fix scroll pane sizing - make them much smaller to fit in cards
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(300, 180));
-        jScrollPane3.setPreferredSize(new java.awt.Dimension(300, 180));
+        // Improved scroll pane sizing
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(320, 200));
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(320, 200));
         
-        // DateTime field styling
-        dateTimeFormattedFeild.setBorder(BorderFactory.createEmptyBorder());
-        dateTimeFormattedFeild.setBackground(new Color(55, 65, 81));
-        dateTimeFormattedFeild.setForeground(new Color(243, 244, 246));
-        dateTimeFormattedFeild.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        // Modern DateTime field styling
+        dateTimeFormattedFeild.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(71, 85, 105), 1),
+            BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
+        dateTimeFormattedFeild.setBackground(new Color(30, 41, 59));
+        dateTimeFormattedFeild.setForeground(new Color(241, 245, 249));
+        dateTimeFormattedFeild.setFont(new Font("Inter", Font.PLAIN, 14));
         
         // Update typography for labels
         updateTypography();
         
-        // Additional layout fixes to prevent overflow
+        // Enhanced layout fixes
         fixLayoutConstraints();
         
-        // Fix table and button sizing within cards
+        // Improved table and button sizing
         fixCardContentSizing();
     }
     
     private void updateTypography() {
-        // Header labels - smaller sizes to prevent overflow
-        jLabel1.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        jLabel1.setForeground(new Color(255, 255, 255));
+        // Header labels with modern typography
+        jLabel1.setFont(new Font("Inter", Font.BOLD, 28));
+        jLabel1.setForeground(new Color(248, 250, 252));
         
-        jLabel2.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        jLabel2.setForeground(new Color(156, 163, 175));
+        jLabel2.setFont(new Font("Inter", Font.PLAIN, 16));
+        jLabel2.setForeground(new Color(148, 163, 184));
         
-        // Card title labels
-        jLabel4.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        // Card title labels with enhanced styling
+        jLabel4.setFont(new Font("Inter", Font.BOLD, 16));
         jLabel4.setForeground(new Color(255, 255, 255));
         
-        jLabel7.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel7.setFont(new Font("Inter", Font.BOLD, 16));
         jLabel7.setForeground(new Color(255, 255, 255));
         
-        jLabel10.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel10.setFont(new Font("Inter", Font.BOLD, 16));
         jLabel10.setForeground(new Color(255, 255, 255));
         
-        jLabel13.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel13.setFont(new Font("Inter", Font.BOLD, 16));
         jLabel13.setForeground(new Color(255, 255, 255));
         
-        // Count labels - much smaller sizes to prevent overflow
-        tBCLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        // Count labels with larger, bolder fonts
+        tBCLabel.setFont(new Font("Inter", Font.BOLD, 24));
         tBCLabel.setForeground(new Color(255, 255, 255));
         
-        bBCLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        bBCLabel.setFont(new Font("Inter", Font.BOLD, 24));
         bBCLabel.setForeground(new Color(255, 255, 255));
         
-        oBCLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        oBCLabel.setFont(new Font("Inter", Font.BOLD, 24));
         oBCLabel.setForeground(new Color(255, 255, 255));
         
-        tMCLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        tMCLabel.setFont(new Font("Inter", Font.BOLD, 24));
         tMCLabel.setForeground(new Color(255, 255, 255));
         
-        // Panel title labels
-        jLabel15.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        jLabel15.setForeground(new Color(255, 255, 255));
+        // Panel title labels with modern styling
+        jLabel15.setFont(new Font("Inter", Font.BOLD, 18));
+        jLabel15.setForeground(new Color(248, 250, 252));
         
-        jLabel16.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        jLabel16.setForeground(new Color(255, 255, 255));
+        jLabel16.setFont(new Font("Inter", Font.BOLD, 18));
+        jLabel16.setForeground(new Color(248, 250, 252));
     }
     
     private void fixLayoutConstraints() {
-        // Set maximum sizes to prevent overflow
-        totalBookPanel.setMaximumSize(new java.awt.Dimension(280, 140));
-        borrowedBookPanel.setMaximumSize(new java.awt.Dimension(280, 140));
-        overdueBookPanel.setMaximumSize(new java.awt.Dimension(280, 140));
-        totalMemberPanel.setMaximumSize(new java.awt.Dimension(280, 140));
+        // Enhanced maximum sizes
+        totalBookPanel.setMaximumSize(new java.awt.Dimension(300, 160));
+        borrowedBookPanel.setMaximumSize(new java.awt.Dimension(300, 160));
+        overdueBookPanel.setMaximumSize(new java.awt.Dimension(300, 160));
+        totalMemberPanel.setMaximumSize(new java.awt.Dimension(300, 160));
         
-        memberListPanel.setMaximumSize(new java.awt.Dimension(350, 250));
-        bookListPanel.setMaximumSize(new java.awt.Dimension(350, 250));
+        memberListPanel.setMaximumSize(new java.awt.Dimension(380, 280));
+        bookListPanel.setMaximumSize(new java.awt.Dimension(380, 280));
         
-        // Ensure panels can shrink
-        totalBookPanel.setMinimumSize(new java.awt.Dimension(200, 100));
-        borrowedBookPanel.setMinimumSize(new java.awt.Dimension(200, 100));
-        overdueBookPanel.setMinimumSize(new java.awt.Dimension(200, 100));
-        totalMemberPanel.setMinimumSize(new java.awt.Dimension(200, 100));
+        // Improved minimum sizes
+        totalBookPanel.setMinimumSize(new java.awt.Dimension(250, 120));
+        borrowedBookPanel.setMinimumSize(new java.awt.Dimension(250, 120));
+        overdueBookPanel.setMinimumSize(new java.awt.Dimension(250, 120));
+        totalMemberPanel.setMinimumSize(new java.awt.Dimension(250, 120));
         
-        memberListPanel.setMinimumSize(new java.awt.Dimension(280, 200));
-        bookListPanel.setMinimumSize(new java.awt.Dimension(280, 200));
+        memberListPanel.setMinimumSize(new java.awt.Dimension(320, 220));
+        bookListPanel.setMinimumSize(new java.awt.Dimension(320, 220));
     }
     
     private void fixCardContentSizing() {
-        // Fix table column widths to fit in smaller space
+        // Enhanced table column widths
         if (memberTable.getColumnModel().getColumnCount() > 0) {
-            memberTable.getColumnModel().getColumn(0).setPreferredWidth(40);  // ID
-            memberTable.getColumnModel().getColumn(1).setPreferredWidth(120); // Name
-            memberTable.getColumnModel().getColumn(2).setPreferredWidth(80);  // NIC
-            memberTable.getColumnModel().getColumn(3).setPreferredWidth(80);  // Mobile
-            memberTable.getColumnModel().getColumn(4).setPreferredWidth(120); // Email
+            memberTable.getColumnModel().getColumn(0).setPreferredWidth(50);  // ID
+            memberTable.getColumnModel().getColumn(1).setPreferredWidth(130); // Name
+            memberTable.getColumnModel().getColumn(2).setPreferredWidth(90);  // NIC
+            memberTable.getColumnModel().getColumn(3).setPreferredWidth(90);  // Mobile
+            memberTable.getColumnModel().getColumn(4).setPreferredWidth(130); // Email
         }
         
         if (bookTable.getColumnModel().getColumnCount() > 0) {
-            bookTable.getColumnModel().getColumn(0).setPreferredWidth(40);   // ID
-            bookTable.getColumnModel().getColumn(1).setPreferredWidth(100);  // Title
-            bookTable.getColumnModel().getColumn(2).setPreferredWidth(80);   // Author
-            bookTable.getColumnModel().getColumn(3).setPreferredWidth(60);   // Genre
-            bookTable.getColumnModel().getColumn(4).setPreferredWidth(80);   // Added Date
-            bookTable.getColumnModel().getColumn(5).setPreferredWidth(60);   // Status
+            bookTable.getColumnModel().getColumn(0).setPreferredWidth(50);   // ID
+            bookTable.getColumnModel().getColumn(1).setPreferredWidth(110);  // Title
+            bookTable.getColumnModel().getColumn(2).setPreferredWidth(90);   // Author
+            bookTable.getColumnModel().getColumn(3).setPreferredWidth(70);   // Genre
+            bookTable.getColumnModel().getColumn(4).setPreferredWidth(90);   // Added Date
+            bookTable.getColumnModel().getColumn(5).setPreferredWidth(70);   // Status
         }
         
-        // Fix button sizes to fit in cards
-        addNewMemberBtn.setPreferredSize(new java.awt.Dimension(120, 30));
-        memberSeeAllBtn.setPreferredSize(new java.awt.Dimension(80, 25));
-        addNewBookBtn.setPreferredSize(new java.awt.Dimension(120, 30));
-        bookSeeAllBtn.setPreferredSize(new java.awt.Dimension(80, 25));
+        // Enhanced button sizes
+        addNewMemberBtn.setPreferredSize(new java.awt.Dimension(130, 35));
+        memberSeeAllBtn.setPreferredSize(new java.awt.Dimension(90, 30));
+        addNewBookBtn.setPreferredSize(new java.awt.Dimension(130, 35));
+        bookSeeAllBtn.setPreferredSize(new java.awt.Dimension(90, 30));
         
-        // Set smaller row height for tables
-        memberTable.setRowHeight(25);
-        bookTable.setRowHeight(25);
+        // Improved row height for tables
+        memberTable.setRowHeight(28);
+        bookTable.setRowHeight(28);
         
-        // Ensure tables don't take too much space
-        memberTable.setPreferredScrollableViewportSize(new java.awt.Dimension(280, 150));
-        bookTable.setPreferredScrollableViewportSize(new java.awt.Dimension(280, 150));
+        // Enhanced table viewport sizes
+        memberTable.setPreferredScrollableViewportSize(new java.awt.Dimension(300, 160));
+        bookTable.setPreferredScrollableViewportSize(new java.awt.Dimension(300, 160));
         
         // Style the buttons within cards
         styleCardButtons();
     }
     
     private void styleCardButtons() {
-        // Style member list buttons
-        addNewMemberBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        // Enhanced member list buttons
+        addNewMemberBtn.setFont(new Font("Inter", Font.BOLD, 13));
         
-        memberSeeAllBtn.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        memberSeeAllBtn.setFont(new Font("Inter", Font.PLAIN, 12));
         
-        // Style book list buttons
-        addNewBookBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        // Enhanced book list buttons
+        addNewBookBtn.setFont(new Font("Inter", Font.BOLD, 13));
         
-        bookSeeAllBtn.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        bookSeeAllBtn.setFont(new Font("Inter", Font.PLAIN, 12));
     }
 
     private void updateDateTime() {

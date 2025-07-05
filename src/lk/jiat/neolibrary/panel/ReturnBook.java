@@ -7,6 +7,9 @@ package lk.jiat.neolibrary.panel;
 import com.formdev.flatlaf.FlatClientProperties;
 import lk.jiat.neolibrary.component.FormattedTextField;
 import lk.jiat.neolibrary.component.RoundButton;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -22,10 +25,143 @@ public class ReturnBook extends javax.swing.JPanel {
     }
     
     private void init(){
+        // Modern glassmorphism styling
+        this.setBackground(new Color(15, 23, 42)); // Slate-900
+        
+        // Enhanced field styling
+        memberIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
         bookIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
-        bookGenreCombo.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
-        borrowedDate.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
-        returnDate.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
+        
+        // Modern combo box styling
+        bookGenreCombo.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
+        
+        // Enhanced date field styling
+        borrowedDate.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
+        returnDate.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
+        
+        // Enhanced typography
+        updateTypography();
+        
+        // Modern form styling
+        styleFormComponents();
+        
+        // Enhanced button styling
+        styleButtons();
+    }
+    
+    private void updateTypography() {
+        // Header with modern typography
+        jLabel1.setFont(new Font("Inter", Font.BOLD, 32));
+        jLabel1.setForeground(new Color(248, 250, 252));
+        
+        // Section headers
+        jLabel2.setFont(new Font("Inter", Font.BOLD, 20));
+        jLabel2.setForeground(new Color(241, 245, 249));
+        
+        jLabel6.setFont(new Font("Inter", Font.BOLD, 20));
+        jLabel6.setForeground(new Color(241, 245, 249));
+        
+        jLabel11.setFont(new Font("Inter", Font.BOLD, 20));
+        jLabel11.setForeground(new Color(241, 245, 249));
+        
+        // Form labels
+        jLabel12.setFont(new Font("Inter", Font.PLAIN, 14));
+        jLabel12.setForeground(new Color(203, 213, 225));
+        
+        jLabel13.setFont(new Font("Inter", Font.PLAIN, 14));
+        jLabel13.setForeground(new Color(203, 213, 225));
+        
+        jLabel14.setFont(new Font("Inter", Font.PLAIN, 14));
+        jLabel14.setForeground(new Color(203, 213, 225));
+        
+        jLabel3.setFont(new Font("Inter", Font.PLAIN, 14));
+        jLabel3.setForeground(new Color(203, 213, 225));
+        
+        jLabel4.setFont(new Font("Inter", Font.PLAIN, 14));
+        jLabel4.setForeground(new Color(203, 213, 225));
+        
+        jLabel5.setFont(new Font("Inter", Font.PLAIN, 14));
+        jLabel5.setForeground(new Color(203, 213, 225));
+        
+        jLabel10.setFont(new Font("Inter", Font.PLAIN, 14));
+        jLabel10.setForeground(new Color(203, 213, 225));
+        
+        jLabel7.setFont(new Font("Inter", Font.PLAIN, 14));
+        jLabel7.setForeground(new Color(203, 213, 225));
+        
+        jLabel8.setFont(new Font("Inter", Font.PLAIN, 14));
+        jLabel8.setForeground(new Color(203, 213, 225));
+    }
+    
+    private void styleFormComponents() {
+        // Enhanced text field styling
+        memberIdField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(71, 85, 105), 1),
+            BorderFactory.createEmptyBorder(10, 15, 10, 15)
+        ));
+        memberIdField.setBackground(new Color(30, 41, 59));
+        memberIdField.setForeground(new Color(241, 245, 249));
+        memberIdField.setFont(new Font("Inter", Font.PLAIN, 14));
+        
+        memberNameField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(71, 85, 105), 1),
+            BorderFactory.createEmptyBorder(10, 15, 10, 15)
+        ));
+        memberNameField.setBackground(new Color(30, 41, 59));
+        memberNameField.setForeground(new Color(241, 245, 249));
+        memberNameField.setFont(new Font("Inter", Font.PLAIN, 14));
+        
+        mobileField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(71, 85, 105), 1),
+            BorderFactory.createEmptyBorder(10, 15, 10, 15)
+        ));
+        mobileField.setBackground(new Color(30, 41, 59));
+        mobileField.setForeground(new Color(241, 245, 249));
+        mobileField.setFont(new Font("Inter", Font.PLAIN, 14));
+        
+        bookIdField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(71, 85, 105), 1),
+            BorderFactory.createEmptyBorder(10, 15, 10, 15)
+        ));
+        bookIdField.setBackground(new Color(30, 41, 59));
+        bookIdField.setForeground(new Color(241, 245, 249));
+        bookIdField.setFont(new Font("Inter", Font.PLAIN, 14));
+        
+        bookTitleField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(71, 85, 105), 1),
+            BorderFactory.createEmptyBorder(10, 15, 10, 15)
+        ));
+        bookTitleField.setBackground(new Color(30, 41, 59));
+        bookTitleField.setForeground(new Color(241, 245, 249));
+        bookTitleField.setFont(new Font("Inter", Font.PLAIN, 14));
+        
+        bookAuthorField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(71, 85, 105), 1),
+            BorderFactory.createEmptyBorder(10, 15, 10, 15)
+        ));
+        bookAuthorField.setBackground(new Color(30, 41, 59));
+        bookAuthorField.setForeground(new Color(241, 245, 249));
+        bookAuthorField.setFont(new Font("Inter", Font.PLAIN, 14));
+        
+        // Enhanced combo box styling
+        bookGenreCombo.setFont(new Font("Inter", Font.PLAIN, 14));
+        bookGenreCombo.setForeground(new Color(241, 245, 249));
+        bookGenreCombo.setBackground(new Color(30, 41, 59));
+        
+        // Enhanced date field styling
+        borrowedDate.setFont(new Font("Inter", Font.PLAIN, 14));
+        borrowedDate.setForeground(new Color(241, 245, 249));
+        borrowedDate.setBackground(new Color(30, 41, 59));
+        
+        returnDate.setFont(new Font("Inter", Font.PLAIN, 14));
+        returnDate.setForeground(new Color(241, 245, 249));
+        returnDate.setBackground(new Color(30, 41, 59));
+    }
+    
+    private void styleButtons() {
+        // Enhanced button styling
+        returnBookBtn.setFont(new Font("Inter", Font.BOLD, 16));
+        returnBookBtn.setPreferredSize(new java.awt.Dimension(180, 45));
     }
 
     /**
