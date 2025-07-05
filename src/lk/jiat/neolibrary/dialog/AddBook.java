@@ -198,7 +198,56 @@ public class AddBook extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // Collect form data
+        String title = jTextField2.getText().trim();
+        String author = jTextField4.getText().trim();
+        java.util.Date addedDate = jDateChooser1.getDate();
+        String genreName = (String) jComboBox1.getSelectedItem();
+
+        // Validate input
+        if (title.isEmpty() || author.isEmpty() || addedDate == null || genreName == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Validation Error", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Get genre_id from genre name
+        int genreId = -1;
+        try {
+            java.sql.ResultSet rs = lk.jiat.neolibrary.connection.MySQL.executeSearch(
+                "SELECT genre_id FROM genre WHERE genre_name='" + genreName.replace("'", "''") + "'"
+            );
+            if (rs.next()) {
+                genreId = rs.getInt("genre_id");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Genre not found in database.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error fetching genre.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Format date for SQL
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String addedDateStr = sdf.format(addedDate);
+
+        // Insert book into database (only the required columns)
+        try {
+            String sql = String.format(
+                "INSERT INTO book (title, author, added_date, genre_id, b_status_id) VALUES ('%s', '%s', '%s', %d, 1)",
+                title.replace("'", "''"),
+                author.replace("'", "''"),
+                addedDateStr,
+                genreId
+            );
+            lk.jiat.neolibrary.connection.MySQL.executeIUD(sql);
+            javax.swing.JOptionPane.showMessageDialog(this, "Book added successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Failed to add book.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void updateTypography() {
