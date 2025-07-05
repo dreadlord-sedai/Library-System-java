@@ -239,21 +239,72 @@ public class IssueBook extends javax.swing.JPanel {
     }
     
     private void lendBook() {
-        if (!Validator.isInputFieldValid(memberIdField.getText())) {
+        String memberIdText = memberIdField.getText().trim();
+        String bookIdText = bookIdField.getText().trim();
+        System.out.println("[DEBUG] lendBook called with memberId=" + memberIdText + ", bookId=" + bookIdText);
+        if (!Validator.isInputFieldValid(memberIdText) || !Validator.isInputFieldValid(bookIdText)) {
+            JOptionPane.showMessageDialog(this, "Please enter valid Member ID and Book ID.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+            System.out.println("[DEBUG] Validation failed: empty member or book ID");
             return;
         }
-        if (!Validator.isInputFieldValid(bookIdField.getText())) {
-            return;
-        }
-        
-        Integer memberId = Integer.valueOf(memberIdField.getText());
-        Integer bookId = Integer.valueOf(bookIdField.getText());
+        Integer memberId = Integer.valueOf(memberIdText);
+        Integer bookId = Integer.valueOf(bookIdText);
         try {
-            MySQL.executeIUD("INSERT INTO `issue_records` (`issue_date`,`due_date`,`member_id`,`book_id`) VALUES ('" + sdf.format(issueDate) + "','" + sdf.format(due) + "','" + memberId + "','" + bookId + "');");
-            MySQL.executeIUD("UPDATE `book` SET `b_status_id` = '" + BookStatus.ISSUED.getId() + "' WHERE `book_id` = '" + bookId + "'");
-            // Refresh the book data - this will be handled by the parent component
+            // Check if member exists
+            ResultSet memberRS = MySQL.executeSearch("SELECT * FROM `member` WHERE `member_id` = '" + memberId + "';");
+            if (!memberRS.next()) {
+                JOptionPane.showMessageDialog(this, "Member ID does not exist.", "Error", JOptionPane.ERROR_MESSAGE);
+                System.out.println("[DEBUG] Member not found: " + memberId);
+                return;
+            }
+            // Check if book exists and is available
+            ResultSet bookRS = MySQL.executeSearch("SELECT * FROM `book` WHERE `book_id` = '" + bookId + "';");
+            if (!bookRS.next()) {
+                JOptionPane.showMessageDialog(this, "Book ID does not exist.", "Error", JOptionPane.ERROR_MESSAGE);
+                System.out.println("[DEBUG] Book not found: " + bookId);
+                return;
+            }
+            int statusId = bookRS.getInt("b_status_id");
+            System.out.println("[DEBUG] Book status: " + statusId);
+            if (statusId != 1) { // 1 = Available
+                JOptionPane.showMessageDialog(this, "Book is not available for lending.", "Error", JOptionPane.ERROR_MESSAGE);
+                System.out.println("[DEBUG] Book not available: statusId=" + statusId);
+                return;
+            }
+            // Set issueDate and due if not already set
+            if (issueDate == null) {
+                issueDate = new Date();
+            }
+            if (due == null) {
+                // Default to 14 days from now
+                java.util.Calendar cal = java.util.Calendar.getInstance();
+                cal.setTime(issueDate);
+                cal.add(java.util.Calendar.DAY_OF_MONTH, 14);
+                due = cal.getTime();
+            }
+            // Insert into issue_records
+            String issueSql = "INSERT INTO `issue_records` (`issue_date`,`due_date`,`return_data`,`member_id`,`book_id`) VALUES ('" + sdf.format(issueDate) + "','" + sdf.format(due) + "',NULL,'" + memberId + "','" + bookId + "');";
+            System.out.println("[DEBUG] Executing: " + issueSql);
+            MySQL.executeIUD(issueSql);
+            // Update book status to Issued
+            String updateSql = "UPDATE `book` SET `b_status_id` = '" + BookStatus.ISSUED.getId() + "' WHERE `book_id` = '" + bookId + "'";
+            System.out.println("[DEBUG] Executing: " + updateSql);
+            MySQL.executeIUD(updateSql);
+            JOptionPane.showMessageDialog(this, "Book successfully lent!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            // Clear fields
+            memberIdField.setText("");
+            memberNameField.setText("");
+            moblieField.setText("");
+            bookIdField.setText("");
+            bookTitleField.setText("");
+            bookAuthorField.setText("");
+            bookGenreCombo.setSelectedIndex(0);
+            lendDateField.setValue(null);
+            dueDateField.setValue(null);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Failed to lend book: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("[DEBUG] SQLException: " + e.getMessage());
         }
     }
 
