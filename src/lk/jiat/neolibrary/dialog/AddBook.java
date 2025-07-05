@@ -4,6 +4,10 @@
  */
 package lk.jiat.neolibrary.dialog;
 
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.BorderFactory;
+
 /**
  *
  * @author Yashitha
@@ -43,6 +47,14 @@ public class AddBook extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("zlibrary | Add Book");
         setResizable(false);
+        
+        // Set modern background
+        this.getContentPane().setBackground(new Color(17, 24, 39)); // Dark blue-gray
+        jPanel2.setBackground(new Color(17, 24, 39));
+        
+        // Update typography and styling
+        updateTypography();
+        styleFormComponents();
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -188,6 +200,61 @@ public class AddBook extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void updateTypography() {
+        // Title
+        jLabel1.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        jLabel1.setForeground(new Color(255, 255, 255));
+        
+        // Form labels
+        jLabel4.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel4.setForeground(new Color(243, 244, 246));
+        
+        jLabel3.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel3.setForeground(new Color(243, 244, 246));
+        
+        jLabel6.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel6.setForeground(new Color(243, 244, 246));
+        
+        jLabel9.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel9.setForeground(new Color(243, 244, 246));
+    }
+    
+    private void styleFormComponents() {
+        // Style text fields
+        styleTextField(jTextField2);
+        styleTextField(jTextField4);
+        
+        // Style date chooser
+        jDateChooser1.setBackground(new Color(55, 65, 81));
+        jDateChooser1.setForeground(new Color(243, 244, 246));
+        jDateChooser1.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        
+        // Style combo box
+        jComboBox1.setBackground(new Color(55, 65, 81));
+        jComboBox1.setForeground(new Color(243, 244, 246));
+        jComboBox1.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        jComboBox1.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(75, 85, 99), 1),
+            BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
+        
+        // Style button
+        jButton1.setBackground(new Color(99, 102, 241));
+        jButton1.setForeground(new Color(255, 255, 255));
+        jButton1.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        jButton1.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+    }
+    
+    private void styleTextField(javax.swing.JTextField textField) {
+        textField.setBackground(new Color(55, 65, 81));
+        textField.setForeground(new Color(243, 244, 246));
+        textField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(75, 85, 99), 1),
+            BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
+        textField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+    }
 
     /**
      * @param args the command line arguments

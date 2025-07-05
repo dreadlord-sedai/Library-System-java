@@ -6,10 +6,13 @@ package lk.jiat.neolibrary.dialog;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import lk.jiat.neolibrary.component.RoundButton;
-import lk.jiat.neolibrary.validation.Validator;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.BorderFactory;
+import lk.jiat.neolibrary.component.RoundButton;
+import lk.jiat.neolibrary.validation.Validator;
 import lk.jiat.neolibrary.connection.MySQL;
 import lk.jiat.neolibrary.gui.Home;
 import raven.toast.Notifications;
@@ -34,12 +37,58 @@ public class Login extends javax.swing.JDialog {
     }
 
     private void init() {
+        // Set modern background
+        this.getContentPane().setBackground(new Color(17, 24, 39)); // Dark blue-gray
+        jPanel1.setBackground(new Color(17, 24, 39));
+        jPanel2.setBackground(new Color(17, 24, 39));
+        
         FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/neolibrary/images/logo.svg",
                 logo.getWidth(),
                 logo.getHeight());
         logo.setIcon(icon);
         this.setIconImage(icon.getImage());
-
+        
+        // Update typography and styling
+        updateTypography();
+        styleFormComponents();
+    }
+    
+    private void updateTypography() {
+        // Title
+        jLabel1.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        jLabel1.setForeground(new Color(255, 255, 255));
+        
+        // Form labels
+        jLabel2.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel2.setForeground(new Color(243, 244, 246));
+        
+        jLabel3.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel3.setForeground(new Color(243, 244, 246));
+    }
+    
+    private void styleFormComponents() {
+        // Style text fields
+        emailAddressField.setBackground(new Color(55, 65, 81));
+        emailAddressField.setForeground(new Color(243, 244, 246));
+        emailAddressField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(75, 85, 99), 1),
+            BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
+        emailAddressField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        
+        passwordField.setBackground(new Color(55, 65, 81));
+        passwordField.setForeground(new Color(243, 244, 246));
+        passwordField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(75, 85, 99), 1),
+            BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
+        passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        
+        // Style login button
+        loginBtn.setBackground(new Color(99, 102, 241));
+        loginBtn.setForeground(new Color(255, 255, 255));
+        loginBtn.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        loginBtn.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
     }
 
     private void login() {

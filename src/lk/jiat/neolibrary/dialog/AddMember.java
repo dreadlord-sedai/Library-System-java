@@ -4,6 +4,10 @@
  */
 package lk.jiat.neolibrary.dialog;
 
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.BorderFactory;
+
 /**
  *
  * @author Yashitha
@@ -50,6 +54,14 @@ public class AddMember extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("zlibrary | Add Member");
         setResizable(false);
+        
+        // Set modern background
+        this.getContentPane().setBackground(new Color(17, 24, 39)); // Dark blue-gray
+        jPanel2.setBackground(new Color(17, 24, 39));
+        
+        // Update typography and styling
+        updateTypography();
+        styleFormComponents();
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -269,6 +281,73 @@ public class AddMember extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void updateTypography() {
+        // Title
+        jLabel1.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        jLabel1.setForeground(new Color(255, 255, 255));
+        
+        // Form labels
+        jLabel2.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel2.setForeground(new Color(243, 244, 246));
+        
+        jLabel3.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel3.setForeground(new Color(243, 244, 246));
+        
+        jLabel4.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel4.setForeground(new Color(243, 244, 246));
+        
+        jLabel5.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel5.setForeground(new Color(243, 244, 246));
+        
+        jLabel6.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel6.setForeground(new Color(243, 244, 246));
+        
+        jLabel8.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel8.setForeground(new Color(243, 244, 246));
+        
+        jLabel9.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel9.setForeground(new Color(243, 244, 246));
+    }
+    
+    private void styleFormComponents() {
+        // Style text fields
+        styleTextField(jTextField1);
+        styleTextField(jTextField2);
+        styleTextField(jTextField3);
+        styleTextField(jTextField4);
+        styleTextField(jTextField5);
+        
+        // Style radio buttons
+        jRadioButton1.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        jRadioButton1.setForeground(new Color(243, 244, 246));
+        jRadioButton1.setBackground(new Color(17, 24, 39));
+        
+        jRadioButton2.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        jRadioButton2.setForeground(new Color(243, 244, 246));
+        jRadioButton2.setBackground(new Color(17, 24, 39));
+        
+        // Style date chooser
+        jDateChooser1.setBackground(new Color(55, 65, 81));
+        jDateChooser1.setForeground(new Color(243, 244, 246));
+        jDateChooser1.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        
+        // Style button
+        jButton1.setBackground(new Color(99, 102, 241));
+        jButton1.setForeground(new Color(255, 255, 255));
+        jButton1.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        jButton1.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+    }
+    
+    private void styleTextField(javax.swing.JTextField textField) {
+        textField.setBackground(new Color(55, 65, 81));
+        textField.setForeground(new Color(243, 244, 246));
+        textField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(75, 85, 99), 1),
+            BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
+        textField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+    }
 
     /**
      * @param args the command line arguments

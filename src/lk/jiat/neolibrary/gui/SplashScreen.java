@@ -6,6 +6,9 @@ package lk.jiat.neolibrary.gui;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.BorderFactory;
 import lk.jiat.neolibrary.component.ImageBackgroundPanel.BackgroundPanel;
 
 /**
@@ -30,7 +33,21 @@ public class SplashScreen extends javax.swing.JFrame {
                 logo.getWidth(),
                 logo.getHeight());
         logo.setIcon(icon);
-
+        
+        // Update typography and styling
+        updateTypography();
+    }
+    
+    private void updateTypography() {
+        // Title with modern styling
+        jLabel1.setFont(new Font("Segoe UI", Font.BOLD, 48));
+        jLabel1.setForeground(new Color(255, 255, 255));
+        jLabel1.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+        
+        // Progress bar styling
+        jProgressBar1.setBackground(new Color(55, 65, 81));
+        jProgressBar1.setForeground(new Color(99, 102, 241));
+        jProgressBar1.setBorder(BorderFactory.createEmptyBorder());
     }
 
     private void loadAnimation() {

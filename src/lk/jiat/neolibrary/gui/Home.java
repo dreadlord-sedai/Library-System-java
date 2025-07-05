@@ -8,6 +8,8 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -45,33 +47,59 @@ public class Home extends javax.swing.JFrame {
     }
     
     private void init() {
+        // Set modern background color
+        jPanel1.setBackground(new Color(17, 24, 39)); // Dark blue-gray
+        
+        // Logo setup
         FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/neolibrary/images/logo.svg",
                 logo.getWidth(),
                 logo.getHeight());
         logo.setIcon(icon);
         this.setIconImage(icon.getImage());
         
+        // Navigation icons with modern sizing
         dashboardBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/dashboard.svg",
-                20,
-                20));
+                18,
+                18));
         bookBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/books.svg",
-                20,
-                20));
+                18,
+                18));
         memberBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/members.svg",
-                20,
-                20));
+                18,
+                18));
         issueBookBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/issue_book.svg",
-                20,
-                20));
+                18,
+                18));
         returnBookBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/return_book.svg",
-                20,
-                20));
+                18,
+                18));
         logoutBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/logout.svg",
-                20,
-                20));
+                18,
+                18));
         userNameLabel.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/user.svg",
-                20,
-                20));
+                18,
+                18));
+        
+        // Modern typography
+        jLabel1.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        jLabel1.setForeground(new Color(255, 255, 255));
+        
+        userNameLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        userNameLabel.setForeground(new Color(243, 244, 246)); // Gray-100
+        
+        userRoleLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        userRoleLabel.setForeground(new Color(156, 163, 175)); // Gray-400
+        
+        // Content panel styling
+        contentPanel.setBackground(new Color(31, 41, 55)); // Gray-800
+        contentPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        
+        // Fix content panel sizing to prevent overflow
+        contentPanel.setPreferredSize(null);
+        contentPanel.setMinimumSize(new java.awt.Dimension(800, 600));
+        
+        // Also fix the main panel sizing
+        jPanel1.setPreferredSize(null);
     }
     
     private void loadPanels(){
@@ -307,8 +335,23 @@ public class Home extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // Set proper window size and ensure content is visible
+        this.setSize(1400, 900);
+        this.setLocationRelativeTo(null);
+        this.revalidate();
+        this.repaint();
+        
+        // Force layout update after a short delay to ensure proper sizing
+        javax.swing.Timer timer = new javax.swing.Timer(100, new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                contentPanel.revalidate();
+                contentPanel.repaint();
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
     }//GEN-LAST:event_formWindowOpened
 
     private void memberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memberBtnActionPerformed

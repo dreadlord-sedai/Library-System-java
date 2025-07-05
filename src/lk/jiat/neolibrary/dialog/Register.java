@@ -6,12 +6,15 @@ package lk.jiat.neolibrary.dialog;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Color;
+import java.awt.Font;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.BorderFactory;
 import lk.jiat.neolibrary.component.RoundButton;
 import lk.jiat.neolibrary.entity.Gender;
 import lk.jiat.neolibrary.entity.UserRole;
 import lk.jiat.neolibrary.validation.Validator;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import lk.jiat.neolibrary.connection.MySQL;
 import lk.jiat.neolibrary.entity.UserStatus;
 import raven.toast.Notifications;
@@ -39,11 +42,97 @@ public class Register extends javax.swing.JDialog {
     }
 
     private void init() {
+        // Set modern background
+        this.getContentPane().setBackground(new Color(17, 24, 39)); // Dark blue-gray
+        jPanel1.setBackground(new Color(17, 24, 39));
+        jPanel2.setBackground(new Color(17, 24, 39));
+        
         FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/neolibrary/images/logo.svg",
                 logo.getWidth(),
                 logo.getHeight());
         logo.setIcon(icon);
         this.setIconImage(icon.getImage());
+        
+        // Update typography and styling
+        updateTypography();
+        styleFormComponents();
+    }
+    
+    private void updateTypography() {
+        // Title
+        jLabel1.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        jLabel1.setForeground(new Color(255, 255, 255));
+        
+        // Form labels
+        jLabel2.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel2.setForeground(new Color(243, 244, 246));
+        
+        jLabel3.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel3.setForeground(new Color(243, 244, 246));
+        
+        jLabel4.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel4.setForeground(new Color(243, 244, 246));
+        
+        jLabel5.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel5.setForeground(new Color(243, 244, 246));
+        
+        jLabel6.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel6.setForeground(new Color(243, 244, 246));
+        
+        jLabel7.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        jLabel7.setForeground(new Color(243, 244, 246));
+    }
+    
+    private void styleFormComponents() {
+        // Style text fields
+        styleTextField(firstNameField);
+        styleTextField(lastNameField);
+        styleTextField(emailAddressField);
+        stylePasswordField(passwordField);
+        
+        // Style radio buttons
+        maleRadio.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        maleRadio.setForeground(new Color(243, 244, 246));
+        maleRadio.setBackground(new Color(17, 24, 39));
+        
+        femaleRadio.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        femaleRadio.setForeground(new Color(243, 244, 246));
+        femaleRadio.setBackground(new Color(17, 24, 39));
+        
+        // Style combo box
+        userRoleCombo.setBackground(new Color(55, 65, 81));
+        userRoleCombo.setForeground(new Color(243, 244, 246));
+        userRoleCombo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        userRoleCombo.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(75, 85, 99), 1),
+            BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
+        
+        // Style register button
+        registerBtn.setBackground(new Color(99, 102, 241));
+        registerBtn.setForeground(new Color(255, 255, 255));
+        registerBtn.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        registerBtn.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
+    }
+    
+    private void styleTextField(javax.swing.JTextField textField) {
+        textField.setBackground(new Color(55, 65, 81));
+        textField.setForeground(new Color(243, 244, 246));
+        textField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(75, 85, 99), 1),
+            BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
+        textField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+    }
+    
+    private void stylePasswordField(javax.swing.JPasswordField passwordField) {
+        passwordField.setBackground(new Color(55, 65, 81));
+        passwordField.setForeground(new Color(243, 244, 246));
+        passwordField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(75, 85, 99), 1),
+            BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
+        passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
     }
 
     private void loadUserRole() {
