@@ -108,16 +108,16 @@ public class Books extends javax.swing.JPanel {
     
     private void styleButtons() {
         // Search button - blue
-        bookSearchBtn.setFont(new Font("Inter", Font.BOLD, 14));
-        bookSearchBtn.setPreferredSize(new java.awt.Dimension(120, 40));
+        bookSearchBtn.setUI(null);
+        bookSearchBtn.putClientProperty("JButton.background", new Color(59, 130, 246));
         bookSearchBtn.setBackground(new Color(59, 130, 246));
         bookSearchBtn.setOpaque(true);
         bookSearchBtn.setContentAreaFilled(true);
         bookSearchBtn.repaint();
 
         // Add Book button - green
-        addBookBtn.setFont(new Font("Inter", Font.BOLD, 14));
-        addBookBtn.setPreferredSize(new java.awt.Dimension(160, 40));
+        addBookBtn.setUI(null);
+        addBookBtn.putClientProperty("JButton.background", new Color(34, 197, 94));
         addBookBtn.setBackground(new Color(34, 197, 94));
         addBookBtn.setOpaque(true);
         addBookBtn.setContentAreaFilled(true);

@@ -102,15 +102,15 @@ public class Members extends javax.swing.JPanel {
     
     private void styleButtons() {
         // Add Member button - green
-        addMemberBtn.setFont(new Font("Inter", Font.BOLD, 14));
-        addMemberBtn.setPreferredSize(new java.awt.Dimension(160, 40));
+        addMemberBtn.setUI(null);
+        addMemberBtn.putClientProperty("JButton.background", new Color(34, 197, 94));
         addMemberBtn.setBackground(new Color(34, 197, 94));
         addMemberBtn.setOpaque(true);
         addMemberBtn.setContentAreaFilled(true);
         addMemberBtn.repaint();
         // Search button - blue (if exists)
-        memberSearchBtn.setFont(new Font("Inter", Font.BOLD, 14));
-        memberSearchBtn.setPreferredSize(new java.awt.Dimension(120, 40));
+        memberSearchBtn.setUI(null);
+        memberSearchBtn.putClientProperty("JButton.background", new Color(59, 130, 246));
         memberSearchBtn.setBackground(new Color(59, 130, 246));
         memberSearchBtn.setOpaque(true);
         memberSearchBtn.setContentAreaFilled(true);

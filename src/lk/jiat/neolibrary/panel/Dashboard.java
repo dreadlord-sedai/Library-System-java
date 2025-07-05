@@ -848,24 +848,32 @@ public class Dashboard extends javax.swing.JPanel {
     private void styleButtons() {
         // Add Book and Add Member buttons - green
         if (addNewBookBtn != null) {
+            addNewBookBtn.setUI(null);
+            addNewBookBtn.putClientProperty("JButton.background", new java.awt.Color(34, 197, 94));
             addNewBookBtn.setBackground(new java.awt.Color(34, 197, 94));
             addNewBookBtn.setOpaque(true);
             addNewBookBtn.setContentAreaFilled(true);
             addNewBookBtn.repaint();
         }
         if (addNewMemberBtn != null) {
+            addNewMemberBtn.setUI(null);
+            addNewMemberBtn.putClientProperty("JButton.background", new java.awt.Color(34, 197, 94));
             addNewMemberBtn.setBackground(new java.awt.Color(34, 197, 94));
             addNewMemberBtn.setOpaque(true);
             addNewMemberBtn.setContentAreaFilled(true);
             addNewMemberBtn.repaint();
         }
         if (bookSeeAllBtn != null) {
+            bookSeeAllBtn.setUI(null);
+            bookSeeAllBtn.putClientProperty("JButton.background", new java.awt.Color(34, 197, 94));
             bookSeeAllBtn.setBackground(new java.awt.Color(34, 197, 94));
             bookSeeAllBtn.setOpaque(true);
             bookSeeAllBtn.setContentAreaFilled(true);
             bookSeeAllBtn.repaint();
         }
         if (memberSeeAllBtn != null) {
+            memberSeeAllBtn.setUI(null);
+            memberSeeAllBtn.putClientProperty("JButton.background", new java.awt.Color(34, 197, 94));
             memberSeeAllBtn.setBackground(new java.awt.Color(34, 197, 94));
             memberSeeAllBtn.setOpaque(true);
             memberSeeAllBtn.setContentAreaFilled(true);
