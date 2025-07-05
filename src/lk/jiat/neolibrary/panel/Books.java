@@ -107,15 +107,37 @@ public class Books extends javax.swing.JPanel {
     }
     
     private void styleButtons() {
-        // Enhanced button styling
+        // Search button - blue
         bookSearchBtn.setFont(new Font("Inter", Font.BOLD, 14));
         bookSearchBtn.setPreferredSize(new java.awt.Dimension(120, 40));
-        
+        bookSearchBtn.setBackground(new Color(59, 130, 246));
+        bookSearchBtn.setOpaque(true);
+        bookSearchBtn.setContentAreaFilled(true);
+        bookSearchBtn.repaint();
+
+        // Add Book button - green
         addBookBtn.setFont(new Font("Inter", Font.BOLD, 14));
         addBookBtn.setPreferredSize(new java.awt.Dimension(160, 40));
-        
+        addBookBtn.setBackground(new Color(34, 197, 94));
+        addBookBtn.setOpaque(true);
+        addBookBtn.setContentAreaFilled(true);
+        addBookBtn.repaint();
+
+        // Generate Report button - keep as is or set to blue if you want
         generateReportBtn.setFont(new Font("Inter", Font.BOLD, 14));
         generateReportBtn.setPreferredSize(new java.awt.Dimension(180, 40));
+        generateReportBtn.setBackground(new Color(99, 102, 241));
+        generateReportBtn.setOpaque(true);
+        generateReportBtn.setContentAreaFilled(true);
+        generateReportBtn.repaint();
+
+        resetBtn.setFont(new Font("Inter", Font.BOLD, 14));
+        resetBtn.setPreferredSize(new java.awt.Dimension(120, 40));
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
     }
 
     private void loadStatus() {
@@ -203,6 +225,7 @@ public class Books extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         bookStatusCombo = new javax.swing.JComboBox<>();
         searchByCombo = new javax.swing.JComboBox<>();
+        resetBtn = new RoundButton();
 
         setBackground(new java.awt.Color(0, 30, 51));
         setPreferredSize(new java.awt.Dimension(1792, 1010));
@@ -298,6 +321,15 @@ public class Books extends javax.swing.JPanel {
             }
         });
 
+        resetBtn.setText("Reset");
+        resetBtn.setFont(new Font("Inter", Font.BOLD, 14));
+        resetBtn.setPreferredSize(new java.awt.Dimension(120, 40));
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -313,6 +345,8 @@ public class Books extends javax.swing.JPanel {
                         .addComponent(bookStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(bookSearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 783, Short.MAX_VALUE)
                         .addComponent(addBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -333,6 +367,7 @@ public class Books extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bookSearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bookStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchByCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -377,6 +412,14 @@ public class Books extends javax.swing.JPanel {
             bookStatusCombo.setEnabled(false);
         }
     }//GEN-LAST:event_searchByComboActionPerformed
+
+    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {
+        bookSearchField.setText("");
+        searchByCombo.setSelectedIndex(0);
+        bookStatusCombo.setSelectedIndex(0);
+        query = BASE_QUERY + " ORDER BY `book_id` ASC";
+        loadData();
+    }
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -389,5 +432,6 @@ public class Books extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> searchByCombo;
+    private javax.swing.JButton resetBtn;
     // End of variables declaration//GEN-END:variables
 }

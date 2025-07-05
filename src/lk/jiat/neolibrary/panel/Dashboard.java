@@ -611,7 +611,7 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel15.setText("Member List");
         jLabel15.setPreferredSize(new java.awt.Dimension(150, 48));
 
-        addNewMemberBtn.setBackground(new java.awt.Color(255, 255, 255));
+        addNewMemberBtn.setBackground(new java.awt.Color(34, 197, 94));
         addNewMemberBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         addNewMemberBtn.setForeground(new java.awt.Color(0, 0, 0));
         addNewMemberBtn.setText("Add New Member");
@@ -623,8 +623,8 @@ public class Dashboard extends javax.swing.JPanel {
             }
         });
 
-        memberSeeAllBtn.setBackground(new java.awt.Color(60, 63, 65));
-        memberSeeAllBtn.setForeground(new java.awt.Color(0, 153, 255));
+        memberSeeAllBtn.setBackground(new java.awt.Color(34, 197, 94));
+        memberSeeAllBtn.setForeground(new java.awt.Color(0, 0, 0));
         memberSeeAllBtn.setText("See All");
         memberSeeAllBtn.setBorder(null);
         memberSeeAllBtn.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -673,7 +673,7 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel16.setText("Book List");
         jLabel16.setPreferredSize(new java.awt.Dimension(150, 48));
 
-        addNewBookBtn.setBackground(new java.awt.Color(255, 255, 255));
+        addNewBookBtn.setBackground(new java.awt.Color(34, 197, 94));
         addNewBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         addNewBookBtn.setForeground(new java.awt.Color(0, 0, 0));
         addNewBookBtn.setText("Add New Book");
@@ -685,8 +685,8 @@ public class Dashboard extends javax.swing.JPanel {
             }
         });
 
-        bookSeeAllBtn.setBackground(new java.awt.Color(60, 63, 65));
-        bookSeeAllBtn.setForeground(new java.awt.Color(0, 153, 255));
+        bookSeeAllBtn.setBackground(new java.awt.Color(34, 197, 94));
+        bookSeeAllBtn.setForeground(new java.awt.Color(0, 0, 0));
         bookSeeAllBtn.setText("See All");
         bookSeeAllBtn.setBorder(null);
         bookSeeAllBtn.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -845,6 +845,33 @@ public class Dashboard extends javax.swing.JPanel {
         homeScreen.setActiveBtn(homeScreen.getBookBtn());
     }//GEN-LAST:event_bookSeeAllBtnActionPerformed
 
+    private void styleButtons() {
+        // Add Book and Add Member buttons - green
+        if (addNewBookBtn != null) {
+            addNewBookBtn.setBackground(new java.awt.Color(34, 197, 94));
+            addNewBookBtn.setOpaque(true);
+            addNewBookBtn.setContentAreaFilled(true);
+            addNewBookBtn.repaint();
+        }
+        if (addNewMemberBtn != null) {
+            addNewMemberBtn.setBackground(new java.awt.Color(34, 197, 94));
+            addNewMemberBtn.setOpaque(true);
+            addNewMemberBtn.setContentAreaFilled(true);
+            addNewMemberBtn.repaint();
+        }
+        if (bookSeeAllBtn != null) {
+            bookSeeAllBtn.setBackground(new java.awt.Color(34, 197, 94));
+            bookSeeAllBtn.setOpaque(true);
+            bookSeeAllBtn.setContentAreaFilled(true);
+            bookSeeAllBtn.repaint();
+        }
+        if (memberSeeAllBtn != null) {
+            memberSeeAllBtn.setBackground(new java.awt.Color(34, 197, 94));
+            memberSeeAllBtn.setOpaque(true);
+            memberSeeAllBtn.setContentAreaFilled(true);
+            memberSeeAllBtn.repaint();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNewBookBtn;
