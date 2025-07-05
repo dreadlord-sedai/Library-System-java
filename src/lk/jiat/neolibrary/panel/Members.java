@@ -57,10 +57,6 @@ public class Members extends javax.swing.JPanel {
         
         // Enhanced scroll pane styling
         jScrollPane2.putClientProperty(FlatClientProperties.STYLE, "arc:20; borderWidth:0");
-        mainScrollPane.putClientProperty(FlatClientProperties.STYLE, "arc:0; borderWidth:0");
-        
-        // Main content panel styling
-        mainContentPanel.setBackground(new Color(15, 23, 42)); // Slate-900
         
         // Modern combo box styling
         searchByCombo.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
@@ -213,10 +209,6 @@ public class Members extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         memberStatusCombo = new javax.swing.JComboBox<>();
         searchByCombo = new javax.swing.JComboBox<>();
-        
-        // Main content panel for scrolling
-        mainContentPanel = new javax.swing.JPanel();
-        mainScrollPane = new javax.swing.JScrollPane();
 
         setBackground(new java.awt.Color(0, 30, 51));
         setPreferredSize(new java.awt.Dimension(1792, 1010));
@@ -298,19 +290,14 @@ public class Members extends javax.swing.JPanel {
             }
         });
 
-        // Main content panel layout
-        javax.swing.GroupLayout mainContentPanelLayout = new javax.swing.GroupLayout(mainContentPanel);
-        mainContentPanel.setLayout(mainContentPanelLayout);
-        mainContentPanelLayout.setHorizontalGroup(
-            mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainContentPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(160, 160, 160))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContentPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainContentPanelLayout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(searchByCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(memberSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -320,19 +307,23 @@ public class Members extends javax.swing.JPanel {
                         .addComponent(memberSearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 779, Short.MAX_VALUE)
                         .addComponent(addMemberBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainContentPanelLayout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(generateReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2))
                 .addGap(10, 10, 10))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(160, 160, 160))
         );
-        mainContentPanelLayout.setVerticalGroup(
-            mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainContentPanelLayout.createSequentialGroup()
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addGroup(mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(memberSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(memberSearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addMemberBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,23 +334,6 @@ public class Members extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(generateReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
-        );
-
-        // Set the main content panel as the viewport of the scroll pane
-        mainScrollPane.setViewportView(mainContentPanel);
-        mainScrollPane.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        mainScrollPane.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-        // Main panel layout (just the scroll pane)
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1792, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -407,7 +381,5 @@ public class Members extends javax.swing.JPanel {
     private javax.swing.JTextField memberSearchField;
     private javax.swing.JComboBox<String> memberStatusCombo;
     private javax.swing.JComboBox<String> searchByCombo;
-    private javax.swing.JPanel mainContentPanel;
-    private javax.swing.JScrollPane mainScrollPane;
     // End of variables declaration//GEN-END:variables
 }
