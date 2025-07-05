@@ -17,6 +17,8 @@ public class SplashScreen extends javax.swing.JFrame {
     /**
      * Creates new form SplashScreen
      */
+    private static SplashScreen splashScreen;
+
     public SplashScreen() {
         initComponents();
         init();
@@ -30,8 +32,8 @@ public class SplashScreen extends javax.swing.JFrame {
         logo.setIcon(icon);
 
     }
-    
-    private void loadAnimation(){
+
+    private void loadAnimation() {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -43,12 +45,12 @@ public class SplashScreen extends javax.swing.JFrame {
                         e.printStackTrace();
                     }
                 }
-                
+
                 new SelectScreen().setVisible(true);
                 splashScreen.dispose();
             }
         });
-        
+
         t.start();
     }
 
@@ -120,9 +122,6 @@ public class SplashScreen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-    private static SplashScreen splashScreen;
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         FlatDarkLaf.setup();

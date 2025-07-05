@@ -7,7 +7,17 @@ package lk.jiat.neolibrary.gui;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.CardLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import lk.jiat.neolibrary.component.RoundButton;
+import lk.jiat.neolibrary.panel.Books;
+import lk.jiat.neolibrary.panel.Dashboard;
+import lk.jiat.neolibrary.panel.IssueBook;
+import lk.jiat.neolibrary.panel.Members;
+import lk.jiat.neolibrary.panel.ReturnBook;
 
 /**
  *
@@ -18,9 +28,20 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
-    public Home() {
+    private CardLayout contentPanelLayout;
+    private Dashboard dashboardPanel; 
+    private Books booksPanel; 
+    private Members membersPanel; 
+    private IssueBook issueBookPanel; 
+    private ReturnBook returnBookPanel; 
+    
+    public Home(String userName,String userRole){
         initComponents();
         init();
+        loadPanels();
+        setActiveBtn(dashboardBtn);
+        userNameLabel.setText(userName);
+        userRoleLabel.setText(userRole);
     }
     
     private void init() {
@@ -29,7 +50,61 @@ public class Home extends javax.swing.JFrame {
                 logo.getHeight());
         logo.setIcon(icon);
         this.setIconImage(icon.getImage());
-        contentPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
+        
+        dashboardBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/dashboard.svg",
+                20,
+                20));
+        bookBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/books.svg",
+                20,
+                20));
+        memberBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/members.svg",
+                20,
+                20));
+        issueBookBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/issue_book.svg",
+                20,
+                20));
+        returnBookBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/return_book.svg",
+                20,
+                20));
+        logoutBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/logout.svg",
+                20,
+                20));
+        userNameLabel.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/user.svg",
+                20,
+                20));
+    }
+    
+    private void loadPanels(){
+        if (contentPanelLayout == null && contentPanel.getLayout() instanceof CardLayout) {
+            this.contentPanelLayout = (CardLayout) contentPanel.getLayout();
+        }
+        
+        this.dashboardPanel = new Dashboard(this);
+        this.booksPanel = new Books(this);
+        this.membersPanel = new Members(this);
+        this.issueBookPanel = new IssueBook();
+        this.returnBookPanel = new ReturnBook();
+        
+        dashboardPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40"); 
+        booksPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
+        membersPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
+        issueBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
+        returnBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
+        
+        this.contentPanel.add(dashboardPanel, "dashboard_panel");
+        this.contentPanel.add(booksPanel, "books_panel");
+        this.contentPanel.add(membersPanel, "members_panel");
+        this.contentPanel.add(issueBookPanel, "issue_book_panel");
+        this.contentPanel.add(returnBookPanel, "return_book_panel");
+        SwingUtilities.updateComponentTreeUI(contentPanel);
+    }
+    
+    public void setActiveBtn(JButton activeBtn){
+        JButton[] navBtns = {dashboardBtn,bookBtn,memberBtn,issueBookBtn,returnBookBtn};
+        for (JButton btn : navBtns) {
+            btn.setSelected(false);
+        }
+        activeBtn.setSelected(true);
     }
 
     /**
@@ -43,18 +118,19 @@ public class Home extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         contentPanel = new javax.swing.JPanel();
-        dashboardBtn = new javax.swing.JButton();
-        bookBtn = new javax.swing.JButton();
-        memberBtn = new javax.swing.JButton();
+        dashboardBtn = new RoundButton(true);
+        bookBtn = new RoundButton(true);
+        memberBtn = new RoundButton(true);
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        issueBookBtn = new javax.swing.JButton();
-        returnBookBtn = new javax.swing.JButton();
-        logoutBtn = new javax.swing.JButton();
+        userNameLabel = new javax.swing.JLabel();
+        userRoleLabel = new javax.swing.JLabel();
+        issueBookBtn = new RoundButton(true);
+        returnBookBtn = new RoundButton(true);
+        logoutBtn = new RoundButton();
         logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("NeoLibrary || Home");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -63,36 +139,35 @@ public class Home extends javax.swing.JFrame {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(0, 0));
 
-        contentPanel.setBackground(new java.awt.Color(2, 0, 0));
         contentPanel.setPreferredSize(new java.awt.Dimension(1792, 0));
-
-        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-        contentPanel.setLayout(contentPanelLayout);
-        contentPanelLayout.setHorizontalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1035, Short.MAX_VALUE)
-        );
-        contentPanelLayout.setVerticalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 777, Short.MAX_VALUE)
-        );
+        contentPanel.setLayout(new java.awt.CardLayout());
 
         dashboardBtn.setBackground(new java.awt.Color(60, 63, 65));
         dashboardBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         dashboardBtn.setText("Dashboard");
-        dashboardBtn.setBorder(null);
+        dashboardBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         dashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        dashboardBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dashboardBtnActionPerformed(evt);
+            }
+        });
 
         bookBtn.setBackground(new java.awt.Color(60, 63, 65));
         bookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         bookBtn.setText("Books");
-        bookBtn.setBorder(null);
+        bookBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bookBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        bookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookBtnActionPerformed(evt);
+            }
+        });
 
         memberBtn.setBackground(new java.awt.Color(60, 63, 65));
         memberBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         memberBtn.setText("Members");
-        memberBtn.setBorder(null);
+        memberBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         memberBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         memberBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,23 +181,22 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setText("NeoLibrary");
         jLabel1.setPreferredSize(new java.awt.Dimension(0, 16));
 
-        jLabel2.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel2.setText("Yashitha");
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel2.setVerifyInputWhenFocusTarget(false);
+        userNameLabel.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
+        userNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        userNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        userNameLabel.setText("Yashitha");
+        userNameLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        userNameLabel.setVerifyInputWhenFocusTarget(false);
 
-        jLabel3.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel3.setText("Librarian");
-        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        userRoleLabel.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        userRoleLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        userRoleLabel.setText("Librarian");
+        userRoleLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         issueBookBtn.setBackground(new java.awt.Color(60, 63, 65));
         issueBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         issueBookBtn.setText("Issue Book");
-        issueBookBtn.setBorder(null);
+        issueBookBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         issueBookBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         issueBookBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +207,7 @@ public class Home extends javax.swing.JFrame {
         returnBookBtn.setBackground(new java.awt.Color(60, 63, 65));
         returnBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         returnBookBtn.setText("Return Book");
-        returnBookBtn.setBorder(null);
+        returnBookBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         returnBookBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         returnBookBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +218,7 @@ public class Home extends javax.swing.JFrame {
         logoutBtn.setBackground(new java.awt.Color(60, 63, 65));
         logoutBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         logoutBtn.setText("Logout");
-        logoutBtn.setBorder(null);
+        logoutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logoutBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,27 +233,33 @@ public class Home extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(memberBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(issueBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(returnBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dashboardBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(memberBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(issueBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(returnBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(dashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 841, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16))
-                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE)))
+                            .addComponent(userRoleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,8 +267,17 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(userRoleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(dashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,16 +289,7 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(returnBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE))))
+                        .addGap(30, 30, 30))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -232,21 +312,50 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void memberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memberBtnActionPerformed
-        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "members_panel");
+        setActiveBtn(memberBtn);
     }//GEN-LAST:event_memberBtnActionPerformed
 
     private void issueBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_issueBookBtnActionPerformed
-        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "issue_book_panel");
+        setActiveBtn(issueBookBtn);
     }//GEN-LAST:event_issueBookBtnActionPerformed
 
     private void returnBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBookBtnActionPerformed
-        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "return_book_panel");
+        setActiveBtn(returnBookBtn);
     }//GEN-LAST:event_returnBookBtnActionPerformed
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_logoutBtnActionPerformed
 
+    private void dashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardBtnActionPerformed
+        this.contentPanelLayout.show(contentPanel, "dashboard_panel");
+        setActiveBtn(dashboardBtn);
+    }//GEN-LAST:event_dashboardBtnActionPerformed
+
+    private void bookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookBtnActionPerformed
+        this.contentPanelLayout.show(contentPanel, "books_panel");
+        setActiveBtn(bookBtn);
+    }//GEN-LAST:event_bookBtnActionPerformed
+
+    public JPanel getContentPanel() {
+        return contentPanel;
+    }
+
+    public CardLayout getContentPanelLayout() {
+        return contentPanelLayout;
+    }
+
+    public JButton getBookBtn() {
+        return bookBtn;
+    }
+
+    public JButton getMemberBtn() {
+        return memberBtn;
+    }    
+    
     /**
      * @param args the command line arguments
      */
@@ -258,7 +367,7 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                new Home("Yashitha","Admin").setVisible(true);
             }
         });
     }
@@ -269,12 +378,12 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton dashboardBtn;
     private javax.swing.JButton issueBookBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel logo;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton memberBtn;
     private javax.swing.JButton returnBookBtn;
+    private javax.swing.JLabel userNameLabel;
+    private javax.swing.JLabel userRoleLabel;
     // End of variables declaration//GEN-END:variables
 }

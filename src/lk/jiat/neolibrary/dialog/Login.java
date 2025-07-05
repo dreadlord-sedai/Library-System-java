@@ -7,6 +7,12 @@ package lk.jiat.neolibrary.dialog;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import lk.jiat.neolibrary.component.RoundButton;
+import lk.jiat.neolibrary.validation.Validator;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import lk.jiat.neolibrary.connection.MySQL;
+import lk.jiat.neolibrary.gui.Home;
+import raven.toast.Notifications;
 
 /**
  *
@@ -17,11 +23,14 @@ public class Login extends javax.swing.JDialog {
     /**
      * Creates new form Login
      */
+    private java.awt.Frame selecScreen;
+
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         FlatDarkLaf.setup();
         initComponents();
         init();
+        this.selecScreen = parent;
     }
 
     private void init() {
@@ -30,7 +39,47 @@ public class Login extends javax.swing.JDialog {
                 logo.getHeight());
         logo.setIcon(icon);
         this.setIconImage(icon.getImage());
-        
+
+    }
+
+    private void login() {
+        String email = emailAddressField.getText().trim();
+        String password = String.valueOf(passwordField.getPassword());
+
+        if (!Validator.isEmailValid(email)) {
+            return;
+        }
+        if (!Validator.isPasswordValid(password)) {
+            return;
+        }
+
+        try {
+            ResultSet userExists = MySQL.executeSearch("SELECT * FROM `user` INNER JOIN `role` ON `user`.`role_id` = `role`.`role_id` WHERE "
+                    + "`user`.`email` = '" + email + "' AND `user`.`password` = '" + password + "'");
+            if (userExists.next()) {
+                if (userExists.getInt("user.status_id") == 1) {
+                    String userRole = userExists.getString("role_name");
+                    String userName = userExists.getString("fname");
+                    Notifications.getInstance().show(Notifications.Type.SUCCESS,
+                            Notifications.Location.TOP_CENTER,
+                            5000,
+                            "Login Successful.");
+                    new Home(userName, userRole).setVisible(true);
+                    this.dispose();
+                    this.selecScreen.dispose();
+                }else{
+                    Notifications.getInstance().show(Notifications.Type.ERROR,
+                            Notifications.Location.TOP_CENTER,
+                            5000,
+                            "You are Inactive. Please contact Admin.");
+                    emailAddressField.setText(null);
+                    passwordField.setText(null);
+                }
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -49,7 +98,7 @@ public class Login extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         emailAddressField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        passwordFeild = new javax.swing.JPasswordField();
+        passwordField = new javax.swing.JPasswordField();
         loginBtn = new RoundButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -79,8 +128,8 @@ public class Login extends javax.swing.JDialog {
         jLabel3.setText("Password");
         jPanel2.add(jLabel3);
 
-        passwordFeild.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        jPanel2.add(passwordFeild);
+        passwordField.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        jPanel2.add(passwordField);
 
         loginBtn.setBackground(new java.awt.Color(0, 153, 255));
         loginBtn.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
@@ -88,6 +137,11 @@ public class Login extends javax.swing.JDialog {
         loginBtn.setText("Login");
         loginBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginBtn.setPreferredSize(new java.awt.Dimension(70, 50));
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -131,12 +185,16 @@ public class Login extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        login();
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField emailAddressField;
@@ -147,6 +205,6 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton loginBtn;
     private javax.swing.JLabel logo;
-    private javax.swing.JPasswordField passwordFeild;
+    private javax.swing.JPasswordField passwordField;
     // End of variables declaration//GEN-END:variables
 }

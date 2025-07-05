@@ -13,6 +13,7 @@ import lk.jiat.neolibrary.validation.Validator;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import lk.jiat.neolibrary.connection.MySQL;
+import lk.jiat.neolibrary.entity.UserStatus;
 import raven.toast.Notifications;
 
 /**
@@ -24,14 +25,15 @@ public class Register extends javax.swing.JDialog {
     /**
      * Creates new form Register
      */
-    private java.awt.Frame loginParent;
+    
+    private java.awt.Frame selectScreen;
     
     public Register(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         FlatDarkLaf.setup();
         initComponents();
         init();
-        this.loginParent = parent;
+        this.selectScreen = parent;
         loadUserRole();
 
     }
@@ -70,37 +72,44 @@ public class Register extends javax.swing.JDialog {
         String password = String.valueOf(passwordField.getPassword());
         int gender = getGender();
         int userRole = userRoleCombo.getSelectedIndex();
-        
-        if (!Validator.isInputFieldValid(firstName)) return;
-        if (!Validator.isInputFieldValid(lastName)) return;
-        if (!Validator.isEmailValid(email)) return;
-        if (!Validator.isPasswordValid(password)) return;
-        if (!Validator.isIndexValid(gender)) return;
-        if (!Validator.isIndexValid(userRole)) return;
-        
+
+        if (!Validator.isInputFieldValid(firstName)) {
+            return;
+        }
+        if (!Validator.isInputFieldValid(lastName)) {
+            return;
+        }
+        if (!Validator.isEmailValid(email)) {
+            return;
+        }
+        if (!Validator.isPasswordValid(password)) {
+            return;
+        }
+        if (!Validator.isIndexValid(gender)) {
+            return;
+        }
+        if (!Validator.isIndexValid(userRole)) {
+            return;
+        }
+
         try {
-            ResultSet emailExists = MySQL.executeSearch("SELECT `email` FROM `user` WHERE `user`.`email` = '"+email+"'");
+            ResultSet emailExists = MySQL.executeSearch("SELECT `email` FROM `user` WHERE `user`.`email` = '" + email + "'");
             if (emailExists.next()) {
                 Notifications.getInstance().show(Notifications.Type.ERROR,
-                            Notifications.Location.BOTTOM_RIGHT,
-                            3000,
-                            "OOPS!...Email Address already exists.");
-            }else{
-                int rowCount = MySQL.executeIUD("INSERT INTO `user` (`fname`,`lname`,`email`,`password`,`gender_id`,`role_id`) "
-                        + "VALUES ('"+firstName+"','"+lastName+"','"+email+"','"+password+"','"+gender+"','"+userRole+"')");
-                if (rowCount > 0) {
-                    Notifications.getInstance().show(Notifications.Type.SUCCESS,
-                            Notifications.Location.BOTTOM_RIGHT,
-                            3000,
-                            "User Registration Successful.");
-                    new Login(loginParent, true).setVisible(true);
-                    this.dispose();
-                } else {
-                    Notifications.getInstance().show(Notifications.Type.ERROR,
-                            Notifications.Location.BOTTOM_RIGHT,
-                            3000,
-                            "OOPS!...User Registration Unsuccessful!");
-                }
+                        Notifications.Location.TOP_CENTER,
+                        5000,
+                        "OOPS!...Email Address already exists.");
+            } else {
+                MySQL.executeIUD("INSERT INTO `user` (`fname`,`lname`,`email`,`password`,`gender_id`,`role_id`,`status_id`) "
+                        + "VALUES ('" + firstName + "','" + lastName + "','" + email + "','" + password + "','" + gender + "','" + userRole + "','"+UserStatus.ACTIVE.getId()+"')");
+
+                Notifications.getInstance().show(Notifications.Type.SUCCESS,
+                        Notifications.Location.TOP_CENTER,
+                        5000,
+                        "User Registration Successful.");
+                this.dispose();
+                new Login(selectScreen, true).setVisible(true);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

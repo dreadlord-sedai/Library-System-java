@@ -4,6 +4,24 @@
  */
 package lk.jiat.neolibrary.panel;
 
+import com.formdev.flatlaf.FlatClientProperties;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+import lk.jiat.neolibrary.component.FormattedTable;
+import lk.jiat.neolibrary.component.FormattedTextField;
+import lk.jiat.neolibrary.component.RoundButton;
+import lk.jiat.neolibrary.connection.MySQL;
+import lk.jiat.neolibrary.dialog.AddMember;
+import lk.jiat.neolibrary.entity.UserStatus;
+import lk.jiat.neolibrary.gui.Home;
+import lk.jiat.neolibrary.validation.Validator;
+
 /**
  *
  * @author Yashitha
@@ -13,8 +31,106 @@ public class Members extends javax.swing.JPanel {
     /**
      * Creates new form Members
      */
-    public Members() {
+    private final Home homeScreen;
+    private final HashMap<String, String> searchByMap;
+    private final String BASE_QUERY = "SELECT * FROM `member` INNER JOIN `gender` ON `member`.`gender_id` = `gender`.`gender_id` "
+            + "INNER JOIN `status` ON `member`.`status_id` = `status`.`status_id`";
+    private String query;
+
+    public Members(Home parent) {
         initComponents();
+        this.homeScreen = parent;
+        this.searchByMap = new HashMap();
+        this.query = BASE_QUERY + " ORDER BY `member_id` ASC";
+        init();
+        loadStatus();
+        loadSearchBy();
+        loadData();
+    }
+
+    private void init() {
+        jScrollPane2.putClientProperty(FlatClientProperties.STYLE, "arc:40;");
+        searchByCombo.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
+        memberStatusCombo.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
+    }
+
+    private void loadStatus() {
+        UserStatus[] stats = UserStatus.values();
+        memberStatusCombo.removeAllItems();
+        memberStatusCombo.addItem("All");
+        for (UserStatus status : stats) {
+            memberStatusCombo.addItem(String.valueOf(status));
+        }
+    }
+
+    private void loadSearchBy() {
+        searchByCombo.removeAllItems();
+        searchByCombo.addItem("Search By");
+        for (int i = 0; i < memberListTable.getColumnCount(); i++) {
+            searchByCombo.addItem(memberListTable.getColumnName(i));
+        }
+
+        searchByMap.put("ID", "`member`.`member_id`");
+        searchByMap.put("Name", "USER_NAME");
+        searchByMap.put("NIC", "`member`.`nic`");
+        searchByMap.put("Email Address", "`member`.`email`");
+        searchByMap.put("Mobile Number", "`member`.`mobile`");
+        searchByMap.put("Gender", "`gender`.`gender_name`");
+        searchByMap.put("Registered Date", "`member`.`Author`");
+        searchByMap.put("Status", "`member`.`status_id`");
+    }
+
+    private void loadData() {
+        ResultSet tableData;
+        DefaultTableModel dtm = (DefaultTableModel) memberListTable.getModel();
+        try {
+            tableData = MySQL.executeSearch(query);
+            while (tableData.next()) {
+                String dateStr = tableData.getString("registered_date");
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM, yyyy");
+
+                Date date = inputFormat.parse(dateStr);
+
+                Vector<String> v = new Vector();
+                v.add(tableData.getString("member_id"));
+                v.add(tableData.getString("fname") + " " + tableData.getString("lname"));
+                v.add(tableData.getString("nic"));
+                v.add(tableData.getString("email"));
+                v.add(tableData.getString("mobile"));
+                v.add(tableData.getString("gender_name"));
+                v.add(outputFormat.format(date));
+                v.add(tableData.getString("status_name"));
+                dtm.addRow(v);
+            }
+        } catch (SQLException | ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    private void searchData() {
+        String searchBySelected = searchByCombo.getSelectedItem().toString();
+        int statusSelected = memberStatusCombo.getSelectedIndex();
+        String column = searchByMap.get(searchBySelected);
+        String searchText = memberSearchField.getText();
+        if (searchBySelected.equalsIgnoreCase("user_name")) {
+            query = BASE_QUERY + "WHERE fname LIKE '%" + searchText + "%' OR lname LIKE '%" + searchText + "%' ORDER BY `member_id` ASC";
+        } else if (searchBySelected.equals("Status")) {
+            if (statusSelected != 0) {
+                query = BASE_QUERY + " WHERE " + column + " = '" + statusSelected + "' ORDER BY `member_id` ASC;";
+            } else {
+                query = BASE_QUERY + " ORDER BY `member_id` ASC";
+            }
+        } else {
+            query = BASE_QUERY + " WHERE " + column + " LIKE '" + searchText + "%' ORDER BY `member_id` ASC;";
+        }
+        
+        
+        DefaultTableModel dtm = (DefaultTableModel) memberListTable.getModel();
+        dtm.setRowCount(0);
+
+        loadData();
     }
 
     /**
@@ -26,14 +142,17 @@ public class Members extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        memberSearchField = new javax.swing.JTextField();
-        memberSearchBtn = new javax.swing.JButton();
-        addMemberBtn = new javax.swing.JButton();
+        memberSearchField = new FormattedTextField(true);
+        memberSearchBtn = new RoundButton();
+        addMemberBtn = new RoundButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        memberListTable = new javax.swing.JTable();
-        generateReportBtn = new javax.swing.JButton();
+        memberListTable = new FormattedTable();
+        generateReportBtn = new RoundButton();
         jLabel1 = new javax.swing.JLabel();
+        memberStatusCombo = new javax.swing.JComboBox<>();
+        searchByCombo = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(0, 30, 51));
         setPreferredSize(new java.awt.Dimension(1792, 1010));
 
         memberSearchField.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
@@ -42,29 +161,39 @@ public class Members extends javax.swing.JPanel {
         memberSearchBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         memberSearchBtn.setForeground(new java.awt.Color(255, 255, 255));
         memberSearchBtn.setText("Search");
+        memberSearchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        memberSearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                memberSearchBtnActionPerformed(evt);
+            }
+        });
 
         addMemberBtn.setBackground(new java.awt.Color(255, 255, 255));
         addMemberBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         addMemberBtn.setForeground(new java.awt.Color(0, 0, 0));
         addMemberBtn.setText("Add New Member");
+        addMemberBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMemberBtnActionPerformed(evt);
+            }
+        });
 
+        memberListTable.setBackground(new java.awt.Color(60, 63, 65));
         memberListTable.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
+        memberListTable.setForeground(new java.awt.Color(255, 255, 255));
         memberListTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Name", "NIC", "Email Address", "Mobile Number", "Registered Date", "Gender"
+                "ID", "Name", "NIC", "Email Address", "Mobile Number", "Gender", "Registered Date", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -75,7 +204,7 @@ public class Members extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        memberListTable.setRowHeight(50);
+        memberListTable.setRowHeight(40);
         memberListTable.setRowSelectionAllowed(false);
         memberListTable.setShowHorizontalLines(true);
         memberListTable.getTableHeader().setReorderingAllowed(false);
@@ -91,10 +220,23 @@ public class Members extends javax.swing.JPanel {
         generateReportBtn.setForeground(new java.awt.Color(255, 255, 255));
         generateReportBtn.setText("Generate Report");
 
-        jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 214, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Members");
+
+        memberStatusCombo.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        memberStatusCombo.setForeground(new java.awt.Color(255, 255, 255));
+        memberStatusCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
+
+        searchByCombo.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        searchByCombo.setForeground(new java.awt.Color(255, 255, 255));
+        searchByCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
+        searchByCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByComboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -104,10 +246,14 @@ public class Members extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(searchByCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(memberSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addGap(18, 18, 18)
+                        .addComponent(memberStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(memberSearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1155, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 779, Short.MAX_VALUE)
                         .addComponent(addMemberBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -117,7 +263,7 @@ public class Members extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(160, 160, 160))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,14 +274,49 @@ public class Members extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(memberSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(memberSearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addMemberBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addMemberBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(memberStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchByCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(generateReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(38, 38, 38))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMemberBtnActionPerformed
+        AddMember addMemberDialog = new AddMember(homeScreen, true);
+        addMemberDialog.setLocationRelativeTo(homeScreen);
+        addMemberDialog.setVisible(true);
+    }//GEN-LAST:event_addMemberBtnActionPerformed
+
+    private void searchByComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByComboActionPerformed
+        if (String.valueOf(searchByCombo.getSelectedItem()).equals("Status")) {
+            memberSearchField.setText("");
+            memberSearchField.setEnabled(false);
+            memberStatusCombo.setEnabled(true);
+        } else {
+            if (String.valueOf(searchByCombo.getSelectedItem()).equals("Added Date")){
+                memberSearchField.putClientProperty("JTextField.placeholderText", "YYYY-MM-DD");
+            }
+            memberSearchField.setText("");
+            memberSearchField.setEnabled(true);
+            memberStatusCombo.setEnabled(false);
+        }
+    }//GEN-LAST:event_searchByComboActionPerformed
+
+    private void memberSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memberSearchBtnActionPerformed
+        if (!Validator.isIndexValid(searchByCombo.getSelectedIndex())) {
+            return;
+        }
+        if (memberSearchField.isEnabled()) {
+            if (!Validator.isInputFieldValid(memberSearchField.getText())) {
+                return;
+            }
+        }
+        searchData();
+    }//GEN-LAST:event_memberSearchBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -146,5 +327,7 @@ public class Members extends javax.swing.JPanel {
     private javax.swing.JTable memberListTable;
     private javax.swing.JButton memberSearchBtn;
     private javax.swing.JTextField memberSearchField;
+    private javax.swing.JComboBox<String> memberStatusCombo;
+    private javax.swing.JComboBox<String> searchByCombo;
     // End of variables declaration//GEN-END:variables
 }

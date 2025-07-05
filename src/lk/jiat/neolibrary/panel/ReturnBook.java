@@ -4,6 +4,10 @@
  */
 package lk.jiat.neolibrary.panel;
 
+import com.formdev.flatlaf.FlatClientProperties;
+import lk.jiat.neolibrary.component.FormattedTextField;
+import lk.jiat.neolibrary.component.RoundButton;
+
 /**
  *
  * @author Yashitha
@@ -15,6 +19,13 @@ public class ReturnBook extends javax.swing.JPanel {
      */
     public ReturnBook() {
         initComponents();
+    }
+    
+    private void init(){
+        bookIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
+        bookGenreCombo.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
+        borrowedDate.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
+        returnDate.putClientProperty(FlatClientProperties.STYLE, "arc:15;");
     }
 
     /**
@@ -34,36 +45,37 @@ public class ReturnBook extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
+        memberNameField = new FormattedTextField();
+        memberIdField = new FormattedTextField();
+        mobileField = new FormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        bookTitleField = new FormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        bookAuthorField = new FormattedTextField();
+        bookIdField = new FormattedTextField();
+        bookGenreCombo = new javax.swing.JComboBox<>();
         jSeparator3 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        returnDate = new javax.swing.JFormattedTextField();
+        borrowedDate = new javax.swing.JFormattedTextField();
         jLabel11 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        returnBookBtn = new RoundButton();
 
+        setBackground(new java.awt.Color(0, 30, 51));
         setPreferredSize(new java.awt.Dimension(1792, 1010));
 
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(153, 214, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Return Books");
+        jLabel1.setText("Return Book");
 
         jLabel2.setFont(new java.awt.Font("Dubai Medium", 1, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -72,6 +84,7 @@ public class ReturnBook extends javax.swing.JPanel {
         jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
         jSeparator1.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
 
+        jPanel3.setBackground(new java.awt.Color(0, 30, 51));
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
         jLabel12.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
@@ -101,35 +114,38 @@ public class ReturnBook extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         jPanel3.add(jLabel14, gridBagConstraints);
 
-        jTextField10.setEditable(false);
-        jTextField10.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
-        jTextField10.setForeground(new java.awt.Color(255, 255, 255));
+        memberNameField.setEditable(false);
+        memberNameField.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
+        memberNameField.setForeground(new java.awt.Color(255, 255, 255));
+        memberNameField.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 50);
-        jPanel3.add(jTextField10, gridBagConstraints);
+        jPanel3.add(memberNameField, gridBagConstraints);
 
-        jTextField11.setEditable(false);
-        jTextField11.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
-        jTextField11.setForeground(new java.awt.Color(255, 255, 255));
+        memberIdField.setEditable(false);
+        memberIdField.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
+        memberIdField.setForeground(new java.awt.Color(255, 255, 255));
+        memberIdField.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 50);
-        jPanel3.add(jTextField11, gridBagConstraints);
+        jPanel3.add(memberIdField, gridBagConstraints);
 
-        jTextField12.setEditable(false);
-        jTextField12.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
-        jTextField12.setForeground(new java.awt.Color(255, 255, 255));
+        mobileField.setEditable(false);
+        mobileField.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
+        mobileField.setForeground(new java.awt.Color(255, 255, 255));
+        mobileField.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        jPanel3.add(jTextField12, gridBagConstraints);
+        jPanel3.add(mobileField, gridBagConstraints);
 
         jLabel6.setFont(new java.awt.Font("Dubai Medium", 1, 20)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,6 +154,7 @@ public class ReturnBook extends javax.swing.JPanel {
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
         jSeparator2.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
 
+        jPanel1.setBackground(new java.awt.Color(0, 30, 51));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel4.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
@@ -153,7 +170,7 @@ public class ReturnBook extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Lender Name");
+        jLabel3.setText("Title");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -162,16 +179,17 @@ public class ReturnBook extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 50);
         jPanel1.add(jLabel3, gridBagConstraints);
 
-        jTextField2.setEditable(false);
-        jTextField2.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
+        bookTitleField.setEditable(false);
+        bookTitleField.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
+        bookTitleField.setForeground(new java.awt.Color(255, 255, 255));
+        bookTitleField.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 50);
-        jPanel1.add(jTextField2, gridBagConstraints);
+        jPanel1.add(bookTitleField, gridBagConstraints);
 
         jLabel5.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -194,19 +212,20 @@ public class ReturnBook extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         jPanel1.add(jLabel10, gridBagConstraints);
 
-        jTextField8.setEditable(false);
-        jTextField8.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
-        jTextField8.setForeground(new java.awt.Color(255, 255, 255));
+        bookAuthorField.setEditable(false);
+        bookAuthorField.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
+        bookAuthorField.setForeground(new java.awt.Color(255, 255, 255));
+        bookAuthorField.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 50);
-        jPanel1.add(jTextField8, gridBagConstraints);
+        jPanel1.add(bookAuthorField, gridBagConstraints);
 
-        jTextField9.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
-        jTextField9.setForeground(new java.awt.Color(255, 255, 255));
+        bookIdField.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
+        bookIdField.setForeground(new java.awt.Color(255, 255, 255));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -214,24 +233,26 @@ public class ReturnBook extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 50);
-        jPanel1.add(jTextField9, gridBagConstraints);
+        jPanel1.add(bookIdField, gridBagConstraints);
 
-        jComboBox1.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Horror", "Romance", "Action" }));
-        jComboBox1.setEnabled(false);
-        jComboBox1.setPreferredSize(new java.awt.Dimension(72, 34));
+        bookGenreCombo.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
+        bookGenreCombo.setForeground(new java.awt.Color(255, 255, 255));
+        bookGenreCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Horror", "Romance", "Action" }));
+        bookGenreCombo.setEnabled(false);
+        bookGenreCombo.setFocusable(false);
+        bookGenreCombo.setPreferredSize(new java.awt.Dimension(72, 34));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        jPanel1.add(jComboBox1, gridBagConstraints);
+        jPanel1.add(bookGenreCombo, gridBagConstraints);
 
         jSeparator3.setForeground(new java.awt.Color(204, 204, 204));
         jSeparator3.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
 
+        jPanel2.setBackground(new java.awt.Color(0, 30, 51));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jLabel7.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
@@ -252,29 +273,33 @@ public class ReturnBook extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         jPanel2.add(jLabel8, gridBagConstraints);
 
-        jDateChooser1.setForeground(new java.awt.Color(255, 255, 255));
-        jDateChooser1.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
-        jDateChooser1.setPreferredSize(new java.awt.Dimension(88, 34));
+        returnDate.setEditable(false);
+        returnDate.setForeground(new java.awt.Color(255, 255, 255));
+        returnDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("MMM d,y | EEEE,h:mm a"))));
+        returnDate.setFocusable(false);
+        returnDate.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
+        returnDate.setPreferredSize(new java.awt.Dimension(126, 34));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        jPanel2.add(jDateChooser1, gridBagConstraints);
+        jPanel2.add(returnDate, gridBagConstraints);
 
-        jFormattedTextField1.setEditable(false);
-        jFormattedTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        jFormattedTextField1.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
-        jFormattedTextField1.setPreferredSize(new java.awt.Dimension(126, 34));
+        borrowedDate.setEditable(false);
+        borrowedDate.setForeground(new java.awt.Color(255, 255, 255));
+        borrowedDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("MMM d,y | EEEE,h:mm a"))));
+        borrowedDate.setFocusable(false);
+        borrowedDate.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
+        borrowedDate.setPreferredSize(new java.awt.Dimension(126, 34));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 50);
-        jPanel2.add(jFormattedTextField1, gridBagConstraints);
+        jPanel2.add(borrowedDate, gridBagConstraints);
 
         jLabel11.setFont(new java.awt.Font("Dubai Medium", 1, 20)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -283,44 +308,42 @@ public class ReturnBook extends javax.swing.JPanel {
         jSeparator4.setForeground(new java.awt.Color(204, 204, 204));
         jSeparator4.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 255));
-        jButton1.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Return Book");
+        returnBookBtn.setBackground(new java.awt.Color(0, 153, 255));
+        returnBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
+        returnBookBtn.setForeground(new java.awt.Color(255, 255, 255));
+        returnBookBtn.setText("Return Book");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator1)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(20, 20, 20)))
-                .addGap(7, 7, 7))
+                    .addComponent(jSeparator1)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(914, 914, 914)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(returnBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1088, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1732, Short.MAX_VALUE)
                             .addComponent(jSeparator2)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator3))))
                 .addGap(30, 30, 30))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(160, 160, 160))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,27 +361,28 @@ public class ReturnBook extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                .addGap(30, 30, 30)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addGap(71, 71, 71)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(returnBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JTextField bookAuthorField;
+    private javax.swing.JComboBox<String> bookGenreCombo;
+    private javax.swing.JTextField bookIdField;
+    private javax.swing.JTextField bookTitleField;
+    private javax.swing.JFormattedTextField borrowedDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -379,11 +403,10 @@ public class ReturnBook extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField memberIdField;
+    private javax.swing.JTextField memberNameField;
+    private javax.swing.JTextField mobileField;
+    private javax.swing.JButton returnBookBtn;
+    private javax.swing.JFormattedTextField returnDate;
     // End of variables declaration//GEN-END:variables
 }

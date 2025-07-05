@@ -1,6 +1,5 @@
 package lk.jiat.neolibrary.connection;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,58 +8,65 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-
 public class MySQL {
 
-    private static Properties appProperties = null;
-    private static Connection connection = null;
-    private static boolean propertiesLoaded = false;
+    private static Properties appProperties;
+    private static Connection connection;
 
-    private static void loadProperties() {
-        if (!propertiesLoaded) {
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             appProperties = new Properties();
-            String filePath = System.getProperty("user.dir") + "//neolibrary.properties";
-            try (FileInputStream fis = new FileInputStream(filePath)) {
+            String filePath = System.getProperty("user.dir") + "\\neolibrary.properties";
+
+            try (java.io.InputStream fis = new java.io.FileInputStream(filePath);) {
                 appProperties.load(fis);
-                propertiesLoaded = true;
             } catch (FileNotFoundException e) {
-                throw new RuntimeException("Database properties file not found: " + filePath, e);
+                e.printStackTrace();
             } catch (IOException e) {
-                throw new RuntimeException("Error loading database properties file: " + filePath, e);
+                e.printStackTrace();
             }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+
     }
 
+    private static final String DB_URL = appProperties.getProperty("db.url");
+    private static final String DB_USERNAME = appProperties.getProperty("db.username");
+    private static final String DB_PASSWORD = appProperties.getProperty("db.password");
+
     public static Connection getConnection() {
-        loadProperties();
-        String DB_URL = appProperties.getProperty("db.url");
-        String DB_USERNAME = appProperties.getProperty("db.username");
-        String DB_PASSWORD = appProperties.getProperty("db.password");
 
         try {
             if (connection == null || connection.isClosed()) {
-                Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException("Failed to connect to the database. Please check your configuration and database server.", e);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return connection;
     }
 
     public static ResultSet executeSearch(String query) throws SQLException {
-        Connection conn = getConnection();
-        if (conn == null) {
-            throw new SQLException("Database connection is not available.");
-        }
-        return conn.createStatement().executeQuery(query);
+        return getConnection().createStatement().executeQuery(query);
     }
 
-    public static int executeIUD(String query) throws SQLException {
-        Connection conn = getConnection();
-        if (conn == null) {
-            throw new SQLException("Database connection is not available.");
-        }
-        return conn.createStatement().executeUpdate(query);
+    public static void executeIUD(String query) throws SQLException {
+        getConnection().createStatement().executeUpdate(query);
     }
+
+    public static void closeConnection() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+        }
+    }
+
+    public static Properties getAppProperties() {
+        return appProperties;
+    }
+    
 }
