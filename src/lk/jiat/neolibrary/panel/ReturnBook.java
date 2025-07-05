@@ -10,6 +10,11 @@ import lk.jiat.neolibrary.component.RoundButton;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
+import java.util.Vector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -181,6 +186,84 @@ public class ReturnBook extends javax.swing.JPanel {
         // Enhanced button styling
         returnBookBtn.setFont(new Font("Inter", Font.BOLD, 16));
         returnBookBtn.setPreferredSize(new java.awt.Dimension(180, 45));
+    }
+    
+    private void loadGenres() {
+        try {
+            ResultSet rs = lk.jiat.neolibrary.connection.MySQL.executeSearch(
+                "SELECT genre_id, genre_name FROM genre ORDER BY genre_name"
+            );
+            
+            Vector<String> genres = new Vector<>();
+            while (rs.next()) {
+                genres.add(rs.getString("genre_name"));
+            }
+            
+            bookGenreCombo.setModel(new DefaultComboBoxModel<>(genres));
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error loading genres.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void setupActionListeners() {
+        // Add action listener for member ID field
+        memberIdField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadMember();
+            }
+        });
+        
+        // Add action listener for book ID field
+        bookIdField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadBook();
+            }
+        });
+    }
+    
+    private void loadMember() {
+        String memberId = memberIdField.getText().trim();
+        try {
+            ResultSet memberRS = lk.jiat.neolibrary.connection.MySQL.executeSearch(
+                "SELECT * FROM member WHERE member_id = '" + memberId + "'"
+            );
+            if (memberRS.next()) {
+                memberNameField.setText(memberRS.getString("fname") + " " + memberRS.getString("lname"));
+                mobileField.setText(memberRS.getString("mobile"));
+            } else {
+                JOptionPane.showMessageDialog(null,
+                    "Enter valid member ID.",
+                    "Data Loading Error",
+                    JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void loadBook() {
+        String bookId = bookIdField.getText().trim();
+        try {
+            ResultSet bookRS = lk.jiat.neolibrary.connection.MySQL.executeSearch(
+                "SELECT b.*, g.genre_name FROM book b " +
+                "INNER JOIN genre g ON b.genre_id = g.genre_id " +
+                "WHERE b.book_id = '" + bookId + "'"
+            );
+            if (bookRS.next()) {
+                bookTitleField.setText(bookRS.getString("title"));
+                bookAuthorField.setText(bookRS.getString("author"));
+                bookGenreCombo.setSelectedItem(bookRS.getString("genre_name"));
+            } else {
+                JOptionPane.showMessageDialog(null,
+                    "Enter valid book ID.",
+                    "Data Loading Error",
+                    JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -392,7 +475,7 @@ public class ReturnBook extends javax.swing.JPanel {
 
         bookGenreCombo.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
         bookGenreCombo.setForeground(new java.awt.Color(255, 255, 255));
-        bookGenreCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Horror", "Romance", "Action" }));
+        // Remove hardcoded genres - will be loaded from database
         bookGenreCombo.setEnabled(false);
         bookGenreCombo.setFocusable(false);
         bookGenreCombo.setPreferredSize(new java.awt.Dimension(72, 34));

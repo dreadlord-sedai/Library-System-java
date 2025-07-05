@@ -47,7 +47,7 @@ public class Login extends javax.swing.JDialog {
                 logo.getHeight());
         logo.setIcon(icon);
         this.setIconImage(icon.getImage());
-        
+
         // Update typography and styling
         updateTypography();
         styleFormComponents();

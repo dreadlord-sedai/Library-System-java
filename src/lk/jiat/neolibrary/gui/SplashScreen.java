@@ -184,7 +184,7 @@ public class SplashScreen extends javax.swing.JFrame {
                         e.printStackTrace();
                     }
                 }
-                
+
                 // Fade out animation
                 fadeIn = false;
                 Timer fadeOutTimer = new Timer(16, new ActionListener() {
@@ -196,8 +196,8 @@ public class SplashScreen extends javax.swing.JFrame {
                             ((Timer)e.getSource()).stop();
                             
                             // Open main screen
-                            new SelectScreen().setVisible(true);
-                            splashScreen.dispose();
+                new SelectScreen().setVisible(true);
+                splashScreen.dispose();
                         }
                         mainPanel.setFadeAlpha(fadeAlpha);
                         mainPanel.repaint();

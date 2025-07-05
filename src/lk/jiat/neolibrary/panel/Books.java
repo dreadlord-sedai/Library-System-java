@@ -348,6 +348,7 @@ public class Books extends javax.swing.JPanel {
         AddBook addBookDialog = new AddBook(homeScreen, true);
         addBookDialog.setLocationRelativeTo(homeScreen);
         addBookDialog.setVisible(true);
+        loadData(); // Refresh the books table after adding a book
     }//GEN-LAST:event_addBookBtnActionPerformed
 
     private void bookSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookSearchBtnActionPerformed

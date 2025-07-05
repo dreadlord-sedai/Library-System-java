@@ -7,6 +7,8 @@ package lk.jiat.neolibrary.dialog;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
+import java.util.Vector;
 
 /**
  *
@@ -20,6 +22,7 @@ public class AddBook extends javax.swing.JDialog {
     public AddBook(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        loadGenres(); // Load genres from database
     }
 
     /**
@@ -173,7 +176,7 @@ public class AddBook extends javax.swing.JDialog {
 
         jComboBox1.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Horror", "Romance", "Action" }));
+        // Remove hardcoded genres - will be loaded from database
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
@@ -196,6 +199,25 @@ public class AddBook extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loadGenres() {
+        try {
+            java.sql.ResultSet rs = lk.jiat.neolibrary.connection.MySQL.executeSearch(
+                "SELECT genre_id, genre_name FROM genre ORDER BY genre_name"
+            );
+            
+            Vector<String> genres = new Vector<>();
+            while (rs.next()) {
+                genres.add(rs.getString("genre_name"));
+            }
+            
+            jComboBox1.setModel(new DefaultComboBoxModel<>(genres));
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error loading genres.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Collect form data
