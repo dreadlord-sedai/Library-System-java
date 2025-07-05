@@ -145,6 +145,7 @@ public class Books extends javax.swing.JPanel {
     private void loadData() {
         ResultSet tableData;
         DefaultTableModel bookDTM = (DefaultTableModel) bookListTable.getModel();
+        bookDTM.setRowCount(0); // Clear table before loading new data
         try {
             tableData = MySQL.executeSearch(query);
             while (tableData.next()) {
@@ -166,7 +167,6 @@ public class Books extends javax.swing.JPanel {
         } catch (SQLException | ParseException e) {
             e.printStackTrace();
         }
-
     }
 
     private void searchData() {
