@@ -151,9 +151,7 @@ public class Books extends javax.swing.JPanel {
 
         bookSearchField.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
 
-        bookSearchBtn.setBackground(new java.awt.Color(0, 153, 255));
         bookSearchBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        bookSearchBtn.setForeground(new java.awt.Color(255, 255, 255));
         bookSearchBtn.setText("Search");
         bookSearchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bookSearchBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -162,9 +160,7 @@ public class Books extends javax.swing.JPanel {
             }
         });
 
-        addBookBtn.setBackground(new java.awt.Color(255, 255, 255));
         addBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        addBookBtn.setForeground(new java.awt.Color(0, 0, 0));
         addBookBtn.setText("Add New Book");
         addBookBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,9 +217,7 @@ public class Books extends javax.swing.JPanel {
             bookListTable.getColumnModel().getColumn(5).setMaxWidth(150);
         }
 
-        generateReportBtn.setBackground(new java.awt.Color(0, 153, 255));
         generateReportBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        generateReportBtn.setForeground(new java.awt.Color(255, 255, 255));
         generateReportBtn.setText("Generate Report");
 
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 36)); // NOI18N

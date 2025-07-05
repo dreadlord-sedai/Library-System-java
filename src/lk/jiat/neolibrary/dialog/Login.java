@@ -180,9 +180,7 @@ public class Login extends javax.swing.JDialog {
         passwordField.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         jPanel2.add(passwordField);
 
-        loginBtn.setBackground(new java.awt.Color(0, 153, 255));
         loginBtn.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
-        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
         loginBtn.setText("Login");
         loginBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginBtn.setPreferredSize(new java.awt.Dimension(70, 50));

@@ -91,13 +91,13 @@ public class Register extends javax.swing.JDialog {
         stylePasswordField(passwordField);
         
         // Style radio buttons
-        maleRadio.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        maleRadio.setForeground(new Color(243, 244, 246));
         maleRadio.setBackground(new Color(17, 24, 39));
+        maleRadio.setForeground(new Color(243, 244, 246));
+        maleRadio.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         
-        femaleRadio.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        femaleRadio.setForeground(new Color(243, 244, 246));
         femaleRadio.setBackground(new Color(17, 24, 39));
+        femaleRadio.setForeground(new Color(243, 244, 246));
+        femaleRadio.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         
         // Style combo box
         userRoleCombo.setBackground(new Color(55, 65, 81));
@@ -108,9 +108,7 @@ public class Register extends javax.swing.JDialog {
             BorderFactory.createEmptyBorder(8, 12, 8, 12)
         ));
         
-        // Style register button
-        registerBtn.setBackground(new Color(99, 102, 241));
-        registerBtn.setForeground(new Color(255, 255, 255));
+        // Style register button - removed direct color setting
         registerBtn.setFont(new Font("Segoe UI", Font.BOLD, 16));
         registerBtn.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
     }
@@ -393,9 +391,7 @@ public class Register extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 30, 5, 10);
         jPanel2.add(jLabel7, gridBagConstraints);
 
-        registerBtn.setBackground(new java.awt.Color(0, 153, 255));
         registerBtn.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
-        registerBtn.setForeground(new java.awt.Color(255, 255, 255));
         registerBtn.setText("Register");
         registerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerBtn.addActionListener(new java.awt.event.ActionListener() {

@@ -73,9 +73,7 @@ public class Home extends javax.swing.JFrame {
         returnBookBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/return_book.svg",
                 18,
                 18));
-        logoutBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/logout.svg",
-                18,
-                18));
+        logoutBtn = new RoundButton(true);
         userNameLabel.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/user.svg",
                 18,
                 18));
@@ -154,7 +152,7 @@ public class Home extends javax.swing.JFrame {
         userRoleLabel = new javax.swing.JLabel();
         issueBookBtn = new RoundButton(true);
         returnBookBtn = new RoundButton(true);
-        logoutBtn = new RoundButton();
+        logoutBtn = new RoundButton(true);
         logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -170,7 +168,6 @@ public class Home extends javax.swing.JFrame {
         contentPanel.setPreferredSize(new java.awt.Dimension(1792, 0));
         contentPanel.setLayout(new java.awt.CardLayout());
 
-        dashboardBtn.setBackground(new java.awt.Color(60, 63, 65));
         dashboardBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         dashboardBtn.setText("Dashboard");
         dashboardBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -181,7 +178,6 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        bookBtn.setBackground(new java.awt.Color(60, 63, 65));
         bookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         bookBtn.setText("Books");
         bookBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -192,7 +188,6 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        memberBtn.setBackground(new java.awt.Color(60, 63, 65));
         memberBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         memberBtn.setText("Members");
         memberBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -221,7 +216,6 @@ public class Home extends javax.swing.JFrame {
         userRoleLabel.setText("Librarian");
         userRoleLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        issueBookBtn.setBackground(new java.awt.Color(60, 63, 65));
         issueBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         issueBookBtn.setText("Issue Book");
         issueBookBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -232,7 +226,6 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        returnBookBtn.setBackground(new java.awt.Color(60, 63, 65));
         returnBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         returnBookBtn.setText("Return Book");
         returnBookBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -243,7 +236,6 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        logoutBtn.setBackground(new java.awt.Color(60, 63, 65));
         logoutBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         logoutBtn.setText("Logout");
         logoutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

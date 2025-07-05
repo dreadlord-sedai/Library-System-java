@@ -157,9 +157,7 @@ public class Members extends javax.swing.JPanel {
 
         memberSearchField.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
 
-        memberSearchBtn.setBackground(new java.awt.Color(0, 153, 255));
         memberSearchBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        memberSearchBtn.setForeground(new java.awt.Color(255, 255, 255));
         memberSearchBtn.setText("Search");
         memberSearchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         memberSearchBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -168,9 +166,7 @@ public class Members extends javax.swing.JPanel {
             }
         });
 
-        addMemberBtn.setBackground(new java.awt.Color(255, 255, 255));
         addMemberBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        addMemberBtn.setForeground(new java.awt.Color(0, 0, 0));
         addMemberBtn.setText("Add New Member");
         addMemberBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,9 +211,7 @@ public class Members extends javax.swing.JPanel {
             memberListTable.getColumnModel().getColumn(0).setMaxWidth(100);
         }
 
-        generateReportBtn.setBackground(new java.awt.Color(0, 153, 255));
         generateReportBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        generateReportBtn.setForeground(new java.awt.Color(255, 255, 255));
         generateReportBtn.setText("Generate Report");
 
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 36)); // NOI18N

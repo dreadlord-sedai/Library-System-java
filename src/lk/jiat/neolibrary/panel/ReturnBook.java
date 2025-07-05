@@ -308,9 +308,7 @@ public class ReturnBook extends javax.swing.JPanel {
         jSeparator4.setForeground(new java.awt.Color(204, 204, 204));
         jSeparator4.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
 
-        returnBookBtn.setBackground(new java.awt.Color(0, 153, 255));
         returnBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
-        returnBookBtn.setForeground(new java.awt.Color(255, 255, 255));
         returnBookBtn.setText("Return Book");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

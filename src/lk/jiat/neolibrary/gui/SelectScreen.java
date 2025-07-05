@@ -54,9 +54,7 @@ public class SelectScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        loginBtn.setBackground(new java.awt.Color(0, 153, 255));
         loginBtn.setFont(new java.awt.Font("Lucida Fax", 1, 18)); // NOI18N
-        loginBtn.setForeground(new java.awt.Color(0, 0, 0));
         loginBtn.setText("LOGIN");
         loginBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginBtn.setPreferredSize(new java.awt.Dimension(230, 50));
@@ -66,9 +64,7 @@ public class SelectScreen extends javax.swing.JFrame {
             }
         });
 
-        registerBtn.setBackground(new java.awt.Color(0, 204, 51));
         registerBtn.setFont(new java.awt.Font("Lucida Fax", 1, 18)); // NOI18N
-        registerBtn.setForeground(new java.awt.Color(0, 0, 0));
         registerBtn.setText("REGISTER");
         registerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerBtn.setPreferredSize(new java.awt.Dimension(230, 50));

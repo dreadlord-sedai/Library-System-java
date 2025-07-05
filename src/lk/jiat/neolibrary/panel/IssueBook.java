@@ -409,9 +409,7 @@ public class IssueBook extends javax.swing.JPanel {
         jSeparator4.setForeground(new java.awt.Color(204, 204, 204));
         jSeparator4.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
 
-        lendBookBtn.setBackground(new java.awt.Color(0, 153, 255));
         lendBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
-        lendBookBtn.setForeground(new java.awt.Color(255, 255, 255));
         lendBookBtn.setText("Lend a Book");
         lendBookBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
