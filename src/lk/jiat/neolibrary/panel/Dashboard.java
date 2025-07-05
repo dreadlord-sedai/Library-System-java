@@ -263,21 +263,13 @@ public class Dashboard extends javax.swing.JPanel {
     private void styleCardButtons() {
         // Style member list buttons
         addNewMemberBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        addNewMemberBtn.setBackground(new Color(34, 197, 94)); // Green
-        addNewMemberBtn.setForeground(new Color(255, 255, 255));
         
         memberSeeAllBtn.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-        memberSeeAllBtn.setBackground(new Color(99, 102, 241)); // Indigo
-        memberSeeAllBtn.setForeground(new Color(255, 255, 255));
         
         // Style book list buttons
         addNewBookBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        addNewBookBtn.setBackground(new Color(34, 197, 94)); // Green
-        addNewBookBtn.setForeground(new Color(255, 255, 255));
         
         bookSeeAllBtn.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-        bookSeeAllBtn.setBackground(new Color(99, 102, 241)); // Indigo
-        bookSeeAllBtn.setForeground(new Color(255, 255, 255));
     }
 
     private void updateDateTime() {
