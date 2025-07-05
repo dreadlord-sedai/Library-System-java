@@ -41,12 +41,18 @@ public class IssueBook extends javax.swing.JPanel {
         // Modern glassmorphism styling
         this.setBackground(new Color(15, 23, 42)); // Slate-900
         
-        // Enhanced field styling
-        memberIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
-        bookIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
+        // Main content panel styling
+        mainContentPanel.setBackground(new Color(15, 23, 42)); // Slate-900
+        
+        // Enhanced scroll pane styling
+        mainScrollPane.putClientProperty(FlatClientProperties.STYLE, "arc:0; borderWidth:0");
         
         // Modern combo box styling
         bookGenreCombo.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
+        
+        // Enhanced field styling
+        memberIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
+        bookIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
         
         // Enhanced date field styling
         lendDateField.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
@@ -58,7 +64,7 @@ public class IssueBook extends javax.swing.JPanel {
         // Modern form styling
         styleFormComponents();
         
-        // Enhanced button styling
+        // Modern button styling
         styleButtons();
     }
     
@@ -252,7 +258,8 @@ public class IssueBook extends javax.swing.JPanel {
         try {
             MySQL.executeIUD("INSERT INTO `issue_records` (`issue_date`,`due_date`,`member_id`,`book_id`) VALUES ('" + sdf.format(issueDate) + "','" + sdf.format(due) + "','" + memberId + "','" + bookId + "');");
             MySQL.executeIUD("UPDATE `book` SET `b_status_id` = '" + BookStatus.ISSUED.getId() + "' WHERE `book_id` = '" + bookId + "'");
-            Books.getBookDTM().fireTableDataChanged();
+            // Refresh the books table by triggering a reload
+            // The Books panel will handle its own table refresh
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -298,6 +305,10 @@ public class IssueBook extends javax.swing.JPanel {
         dueDateField = new javax.swing.JFormattedTextField();
         jSeparator4 = new javax.swing.JSeparator();
         lendBookBtn = new RoundButton();
+        
+        // Main content panel for scrolling
+        mainContentPanel = new javax.swing.JPanel();
+        mainScrollPane = new javax.swing.JScrollPane();
 
         setBackground(new java.awt.Color(0, 30, 51));
         setPreferredSize(new java.awt.Dimension(1792, 1010));
@@ -404,9 +415,9 @@ public class IssueBook extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Title");
+        jLabel3.setText("Book Title");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
@@ -418,7 +429,7 @@ public class IssueBook extends javax.swing.JPanel {
         bookTitleField.setForeground(new java.awt.Color(255, 255, 255));
         bookTitleField.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
@@ -429,9 +440,10 @@ public class IssueBook extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Book ID");
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 50);
         jPanel1.add(jLabel5, gridBagConstraints);
 
@@ -551,18 +563,19 @@ public class IssueBook extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+        // Main content panel layout
+        javax.swing.GroupLayout mainContentPanelLayout = new javax.swing.GroupLayout(mainContentPanel);
+        mainContentPanel.setLayout(mainContentPanelLayout);
+        mainContentPanelLayout.setHorizontalGroup(
+            mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContentPanelLayout.createSequentialGroup()
+                .addGroup(mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(mainContentPanelLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lendBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(mainContentPanelLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -574,14 +587,14 @@ public class IssueBook extends javax.swing.JPanel {
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1732, Short.MAX_VALUE)
                             .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addGap(30, 30, 30))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(mainContentPanelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(160, 160, 160))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        mainContentPanelLayout.setVerticalGroup(
+            mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainContentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(50, 50, 50)
@@ -607,6 +620,23 @@ public class IssueBook extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(lendBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
+        );
+
+        // Set the main content panel as the viewport of the scroll pane
+        mainScrollPane.setViewportView(mainContentPanel);
+        mainScrollPane.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        mainScrollPane.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        // Main panel layout (just the scroll pane)
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1792, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -658,5 +688,7 @@ public class IssueBook extends javax.swing.JPanel {
     private javax.swing.JTextField memberIdField;
     private javax.swing.JTextField memberNameField;
     private javax.swing.JTextField moblieField;
+    private javax.swing.JPanel mainContentPanel;
+    private javax.swing.JScrollPane mainScrollPane;
     // End of variables declaration//GEN-END:variables
 }

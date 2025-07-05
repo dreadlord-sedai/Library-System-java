@@ -28,12 +28,17 @@ public class ReturnBook extends javax.swing.JPanel {
         // Modern glassmorphism styling
         this.setBackground(new Color(15, 23, 42)); // Slate-900
         
-        // Enhanced field styling
-        memberIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
-        bookIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
+        // Main content panel styling
+        mainContentPanel.setBackground(new Color(15, 23, 42)); // Slate-900
+        
+        // Enhanced scroll pane styling
+        mainScrollPane.putClientProperty(FlatClientProperties.STYLE, "arc:0; borderWidth:0");
         
         // Modern combo box styling
         bookGenreCombo.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
+        
+        // Enhanced field styling
+        bookIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
         
         // Enhanced date field styling
         borrowedDate.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
@@ -45,7 +50,7 @@ public class ReturnBook extends javax.swing.JPanel {
         // Modern form styling
         styleFormComponents();
         
-        // Enhanced button styling
+        // Modern button styling
         styleButtons();
     }
     
@@ -195,23 +200,28 @@ public class ReturnBook extends javax.swing.JPanel {
         bookAuthorField = new FormattedTextField();
         bookIdField = new FormattedTextField();
         bookGenreCombo = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        returnDate = new javax.swing.JFormattedTextField();
         borrowedDate = new javax.swing.JFormattedTextField();
-        jLabel11 = new javax.swing.JLabel();
+        returnDate = new javax.swing.JFormattedTextField();
         jSeparator4 = new javax.swing.JSeparator();
         returnBookBtn = new RoundButton();
+        
+        // Main content panel for scrolling
+        mainContentPanel = new javax.swing.JPanel();
+        mainScrollPane = new javax.swing.JScrollPane();
 
         setBackground(new java.awt.Color(0, 30, 51));
         setPreferredSize(new java.awt.Dimension(1792, 1010));
 
+        jLabel1.setBackground(new java.awt.Color(0, 30, 51));
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 214, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Return Book");
+        jLabel1.setText("Return Books");
 
         jLabel2.setFont(new java.awt.Font("Dubai Medium", 1, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -447,25 +457,26 @@ public class ReturnBook extends javax.swing.JPanel {
         returnBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
         returnBookBtn.setText("Return Book");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        // Main content panel layout
+        javax.swing.GroupLayout mainContentPanelLayout = new javax.swing.GroupLayout(mainContentPanel);
+        mainContentPanel.setLayout(mainContentPanelLayout);
+        mainContentPanelLayout.setHorizontalGroup(
+            mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContentPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator1)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContentPanelLayout.createSequentialGroup()
+                .addGroup(mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(mainContentPanelLayout.createSequentialGroup()
                         .addGap(914, 914, 914)
                         .addComponent(returnBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(mainContentPanelLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1732, Short.MAX_VALUE)
                             .addComponent(jSeparator2)
@@ -474,14 +485,14 @@ public class ReturnBook extends javax.swing.JPanel {
                             .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator3))))
                 .addGap(30, 30, 30))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(mainContentPanelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(160, 160, 160))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        mainContentPanelLayout.setVerticalGroup(
+            mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainContentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(50, 50, 50)
@@ -507,6 +518,23 @@ public class ReturnBook extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(returnBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
+        );
+
+        // Set the main content panel as the viewport of the scroll pane
+        mainScrollPane.setViewportView(mainContentPanel);
+        mainScrollPane.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        mainScrollPane.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        // Main panel layout (just the scroll pane)
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1792, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -542,5 +570,7 @@ public class ReturnBook extends javax.swing.JPanel {
     private javax.swing.JTextField mobileField;
     private javax.swing.JButton returnBookBtn;
     private javax.swing.JFormattedTextField returnDate;
+    private javax.swing.JPanel mainContentPanel;
+    private javax.swing.JScrollPane mainScrollPane;
     // End of variables declaration//GEN-END:variables
 }

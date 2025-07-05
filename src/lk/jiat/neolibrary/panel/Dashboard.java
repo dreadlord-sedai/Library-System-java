@@ -80,7 +80,6 @@ public class Dashboard extends javax.swing.JPanel {
         bookListPanel.add(bookBtnPanel);
         // --- END ROBUST CARD LAYOUT FIX ---
         init();
-        updateDateTime();
         loadBookDetails();
         loadMemberDetails();
         this.homeScreen = parent;
@@ -144,15 +143,6 @@ public class Dashboard extends javax.swing.JPanel {
         // Improved scroll pane sizing
         jScrollPane1.setPreferredSize(new java.awt.Dimension(320, 200));
         jScrollPane3.setPreferredSize(new java.awt.Dimension(320, 200));
-        
-        // Modern DateTime field styling
-        dateTimeFormattedFeild.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(71, 85, 105), 1),
-            BorderFactory.createEmptyBorder(8, 12, 8, 12)
-        ));
-        dateTimeFormattedFeild.setBackground(new Color(30, 41, 59));
-        dateTimeFormattedFeild.setForeground(new Color(241, 245, 249));
-        dateTimeFormattedFeild.setFont(new Font("Inter", Font.PLAIN, 14));
         
         // Update typography for labels
         updateTypography();
@@ -273,18 +263,6 @@ public class Dashboard extends javax.swing.JPanel {
         addNewBookBtn.setFont(new Font("Inter", Font.BOLD, 13));
         
         bookSeeAllBtn.setFont(new Font("Inter", Font.PLAIN, 12));
-    }
-
-    private void updateDateTime() {
-        dateTimeFormattedFeild.setValue(new Date());
-
-        Timer timer = new Timer(60000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dateTimeFormattedFeild.setValue(new Date());
-            }
-        });
-        timer.start();
     }
 
     private void loadBookDetails() {
@@ -807,12 +785,8 @@ public class Dashboard extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dateTimeFormattedFeild)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -834,11 +808,7 @@ public class Dashboard extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dateTimeFormattedFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(borrowedBookPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
