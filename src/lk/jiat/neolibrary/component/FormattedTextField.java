@@ -21,7 +21,6 @@ public class FormattedTextField extends JTextField {
 
     public FormattedTextField(boolean isSearchBar) {
         this.isSearchBar = isSearchBar;
-        this.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1; focusWidth:2");
         init();
     }
 

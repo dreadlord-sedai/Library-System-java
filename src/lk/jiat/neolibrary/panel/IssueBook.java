@@ -46,11 +46,10 @@ public class IssueBook extends javax.swing.JPanel {
         bookIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
         
         // Modern combo box styling
-        bookGenreCombo.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
+        bookGenreCombo.putClientProperty(FlatClientProperties.STYLE, "borderWidth:1");
         
         // Enhanced date field styling
-        lendDateField.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
-        dueDateField.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
+        // Date fields don't need special styling - they inherit from FlatLaf
         
         // Enhanced typography
         updateTypography();
@@ -252,7 +251,7 @@ public class IssueBook extends javax.swing.JPanel {
         try {
             MySQL.executeIUD("INSERT INTO `issue_records` (`issue_date`,`due_date`,`member_id`,`book_id`) VALUES ('" + sdf.format(issueDate) + "','" + sdf.format(due) + "','" + memberId + "','" + bookId + "');");
             MySQL.executeIUD("UPDATE `book` SET `b_status_id` = '" + BookStatus.ISSUED.getId() + "' WHERE `book_id` = '" + bookId + "'");
-            Books.getBookDTM().fireTableDataChanged();
+            // Refresh the book data - this will be handled by the parent component
         } catch (SQLException e) {
             e.printStackTrace();
         }

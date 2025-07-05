@@ -8,8 +8,19 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
-import lk.jiat.neolibrary.component.ImageBackgroundPanel.BackgroundPanel;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
+import lk.jiat.neolibrary.gui.SelectScreen;
 
 /**
  *
@@ -21,54 +32,230 @@ public class SplashScreen extends javax.swing.JFrame {
      * Creates new form SplashScreen
      */
     private static SplashScreen splashScreen;
+    private Timer fadeTimer;
+    private float fadeAlpha = 0.0f;
+    private boolean fadeIn = true;
+    
+    // UI Components
+    private GlassmorphismPanel mainPanel;
+    private JLabel logo;
+    private JLabel titleLabel;
+    private JLabel subtitleLabel;
+    private JProgressBar progressBar;
+    private JLabel statusLabel;
 
     public SplashScreen() {
+        // Set up FlatLaf before initializing components
+        FlatDarkLaf.setup();
         initComponents();
         init();
         loadAnimation();
     }
 
     private void init() {
-        FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/neolibrary/images/logo.svg",
-                logo.getWidth(),
-                logo.getHeight());
-        logo.setIcon(icon);
+        // Set up modern styling
+        setupModernStyling();
         
-        // Update typography and styling
-        updateTypography();
+        // Start fade-in animation
+        startFadeAnimation();
     }
     
-    private void updateTypography() {
-        // Title with modern styling
-        jLabel1.setFont(new Font("Segoe UI", Font.BOLD, 48));
-        jLabel1.setForeground(new Color(255, 255, 255));
-        jLabel1.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+    private void setupModernStyling() {
+        // Create components
+        mainPanel = new GlassmorphismPanel();
+        logo = new JLabel();
+        titleLabel = new JLabel();
+        subtitleLabel = new JLabel();
+        progressBar = new JProgressBar();
+        statusLabel = new JLabel();
         
-        // Progress bar styling
-        jProgressBar1.setBackground(new Color(55, 65, 81));
-        jProgressBar1.setForeground(new Color(99, 102, 241));
-        jProgressBar1.setBorder(BorderFactory.createEmptyBorder());
+        // Update logo
+        FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/neolibrary/images/logo.svg", 120, 120);
+        logo.setIcon(icon);
+        logo.setHorizontalAlignment(JLabel.CENTER);
+        
+        // Modern typography
+        titleLabel.setFont(new Font("Inter", Font.BOLD, 56));
+        titleLabel.setForeground(new Color(255, 255, 255));
+        titleLabel.setText("Z Library");
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
+        
+        subtitleLabel.setFont(new Font("Inter", Font.PLAIN, 18));
+        subtitleLabel.setForeground(new Color(156, 163, 175));
+        subtitleLabel.setText("Modern Library Management System");
+        subtitleLabel.setHorizontalAlignment(JLabel.CENTER);
+        
+        // Modern progress bar
+        progressBar.setBackground(new Color(30, 41, 59, 100));
+        progressBar.setForeground(new Color(99, 102, 241));
+        progressBar.setBorder(BorderFactory.createEmptyBorder());
+        progressBar.setPreferredSize(new java.awt.Dimension(400, 8));
+        
+        // Status label
+        statusLabel.setFont(new Font("Inter", Font.PLAIN, 14));
+        statusLabel.setForeground(new Color(148, 163, 184));
+        statusLabel.setText("Initializing...");
+        statusLabel.setHorizontalAlignment(JLabel.CENTER);
+        
+        // Set up layout
+        setupLayout();
+    }
+    
+    private void setupLayout() {
+        // Set up main panel layout with proper centering
+        mainPanel.setLayout(new java.awt.BorderLayout());
+        mainPanel.setBorder(new EmptyBorder(60, 40, 60, 40));
+
+        // Center all components horizontally using a Box for vertical stacking
+        javax.swing.Box box = javax.swing.Box.createVerticalBox();
+        logo.setAlignmentX(javax.swing.JComponent.CENTER_ALIGNMENT);
+        titleLabel.setAlignmentX(javax.swing.JComponent.CENTER_ALIGNMENT);
+        subtitleLabel.setAlignmentX(javax.swing.JComponent.CENTER_ALIGNMENT);
+        progressBar.setAlignmentX(javax.swing.JComponent.CENTER_ALIGNMENT);
+        statusLabel.setAlignmentX(javax.swing.JComponent.CENTER_ALIGNMENT);
+
+        box.add(logo);
+        box.add(javax.swing.Box.createVerticalStrut(30));
+        box.add(titleLabel);
+        box.add(javax.swing.Box.createVerticalStrut(10));
+        box.add(subtitleLabel);
+        box.add(javax.swing.Box.createVerticalStrut(80));
+        box.add(progressBar);
+        box.add(javax.swing.Box.createVerticalStrut(20));
+        box.add(statusLabel);
+
+        mainPanel.removeAll();
+        mainPanel.add(box, java.awt.BorderLayout.CENTER);
+
+        // Set the glassmorphism panel as the content pane
+        setContentPane(mainPanel);
+
+        // Set frame properties
+        setSize(800, 500);
+        setLocationRelativeTo(null);
+    }
+    
+    private void startFadeAnimation() {
+        fadeTimer = new Timer(16, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (fadeIn) {
+                    fadeAlpha += 0.05f;
+                    if (fadeAlpha >= 1.0f) {
+                        fadeAlpha = 1.0f;
+                        fadeIn = false;
+                    }
+                }
+                mainPanel.setFadeAlpha(fadeAlpha);
+                mainPanel.repaint();
+            }
+        });
+        fadeTimer.start();
     }
 
     private void loadAnimation() {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
+                String[] statuses = {
+                    "Loading modules...",
+                    "Connecting to database...",
+                    "Initializing UI components...",
+                    "Preparing interface...",
+                    "Almost ready..."
+                };
+                
                 for (int i = 0; i < 100; i++) {
-                    jProgressBar1.setValue(i);
+                    final int progress = i;
+                    final String status = statuses[Math.min(i / 20, statuses.length - 1)];
+                    
+                    // Update UI on EDT
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setValue(progress);
+                            statusLabel.setText(status);
+                        }
+                    });
+                    
                     try {
-                        Thread.sleep(20);
+                        Thread.sleep(30);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-
-                new SelectScreen().setVisible(true);
-                splashScreen.dispose();
+                
+                // Fade out animation
+                fadeIn = false;
+                Timer fadeOutTimer = new Timer(16, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        fadeAlpha -= 0.05f;
+                        if (fadeAlpha <= 0.0f) {
+                            fadeAlpha = 0.0f;
+                            ((Timer)e.getSource()).stop();
+                            
+                            // Open main screen
+                            new SelectScreen().setVisible(true);
+                            splashScreen.dispose();
+                        }
+                        mainPanel.setFadeAlpha(fadeAlpha);
+                        mainPanel.repaint();
+                    }
+                });
+                fadeOutTimer.start();
             }
         });
 
         t.start();
+    }
+
+    // Custom glassmorphism panel
+    private class GlassmorphismPanel extends JPanel {
+        private float fadeAlpha = 1.0f;
+        
+        public GlassmorphismPanel() {
+            setOpaque(false);
+        }
+        
+        public void setFadeAlpha(float alpha) {
+            this.fadeAlpha = alpha;
+        }
+        
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2d = (Graphics2D) g.create();
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            
+            // First fill with a solid color to ensure visibility
+            g2d.setColor(new Color(59, 130, 246));  // Bright blue
+            g2d.fillRect(0, 0, getWidth(), getHeight());
+            
+            // Then add gradient overlay
+            GradientPaint gradient = new GradientPaint(
+                0, 0, new Color(59, 130, 246, 200),  // Bright blue with transparency
+                getWidth(), getHeight(), new Color(147, 51, 234, 200)  // Purple with transparency
+            );
+            g2d.setPaint(gradient);
+            g2d.fillRect(0, 0, getWidth(), getHeight());
+            
+            // Add subtle pattern overlay
+            g2d.setColor(new Color(255, 255, 255, 5));
+            for (int i = 0; i < getWidth(); i += 40) {
+                for (int j = 0; j < getHeight(); j += 40) {
+                    g2d.fillOval(i, j, 2, 2);
+                }
+            }
+            
+            // Apply fade effect
+            if (fadeAlpha < 1.0f) {
+                g2d.setColor(new Color(0, 0, 0, (int)((1.0f - fadeAlpha) * 255)));
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+            
+            g2d.dispose();
+        }
     }
 
     /**
@@ -80,56 +267,19 @@ public class SplashScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new BackgroundPanel("/lk/jiat/neolibrary/images/background.jpg");
-        logo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-
-        logo.setForeground(new java.awt.Color(0, 51, 255));
-        logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logo.setPreferredSize(new java.awt.Dimension(100, 100));
-
-        jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("zlibrary");
-
-        jProgressBar1.setForeground(new java.awt.Color(0, 153, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(169, 169, 169)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
 
         pack();
@@ -140,9 +290,6 @@ public class SplashScreen extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        FlatDarkLaf.setup();
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -153,9 +300,5 @@ public class SplashScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 }

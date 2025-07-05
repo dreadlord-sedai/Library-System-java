@@ -6,10 +6,19 @@ package lk.jiat.neolibrary.gui;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import lk.jiat.neolibrary.component.RoundButton;
 import lk.jiat.neolibrary.dialog.Login;
 import lk.jiat.neolibrary.dialog.Register;
-import lk.jiat.neolibrary.component.ImageBackgroundPanel.BackgroundPanel;
 
 /**
  *
@@ -21,20 +30,45 @@ public class SelectScreen extends javax.swing.JFrame {
      * Creates new form SelectScreen
      */
     
-    
     public SelectScreen() {
         FlatDarkLaf.setup();
         initComponents();
         init();
-        
     }
     
     private void init() {
-        FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/neolibrary/images/logo.svg",
-                logo.getWidth(),
-                logo.getHeight());
+        // Set up the logo
+        FlatSVGIcon icon = new FlatSVGIcon("lk/jiat/neolibrary/images/logo.svg", 120, 120);
         logo.setIcon(icon);
         
+        // Set up the title
+        titleLabel.setText("Z Library");
+        titleLabel.setFont(new Font("Inter", Font.BOLD, 36));
+        titleLabel.setForeground(new Color(255, 255, 255));
+        
+        // Set up the subtitle
+        subtitleLabel.setText("Welcome to the future of library management");
+        subtitleLabel.setFont(new Font("Inter", Font.PLAIN, 16));
+        subtitleLabel.setForeground(new Color(200, 200, 200));
+        
+        // Style the buttons
+        styleButton((RoundButton) loginBtn, "LOGIN", new Color(99, 102, 241));
+        styleButton((RoundButton) registerBtn, "REGISTER", new Color(34, 197, 94));
+        
+        // Set up the glassmorphism panel
+        glassPanel.setOpaque(false);
+        glassPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
+    }
+    
+    private void styleButton(RoundButton button, String text, Color color) {
+        button.setText(text);
+        button.setFont(new Font("Inter", Font.BOLD, 16));
+        button.setPreferredSize(new java.awt.Dimension(280, 55));
+        button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        
+        // Remove any hardcoded colors - let RoundButton handle styling
+        button.setBackground(null);
+        button.setForeground(null);
     }
 
     /**
@@ -46,72 +80,90 @@ public class SelectScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new BackgroundPanel("/lk/jiat/neolibrary/images/background.jpg");
+        mainPanel = new GradientPanel();
+        glassPanel = new GlassPanel();
         logo = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
+        subtitleLabel = new javax.swing.JLabel();
         loginBtn = new RoundButton();
         registerBtn = new RoundButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
-        loginBtn.setFont(new java.awt.Font("Lucida Fax", 1, 18)); // NOI18N
+        mainPanel.setLayout(new java.awt.BorderLayout());
+
+        glassPanel.setLayout(new java.awt.BorderLayout());
+
+        logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logo.setPreferredSize(new java.awt.Dimension(120, 120));
+
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Z Library");
+
+        subtitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        subtitleLabel.setText("Welcome to the future of library management");
+
         loginBtn.setText("LOGIN");
         loginBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        loginBtn.setPreferredSize(new java.awt.Dimension(230, 50));
+        loginBtn.setPreferredSize(new java.awt.Dimension(280, 55));
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginBtnActionPerformed(evt);
             }
         });
 
-        registerBtn.setFont(new java.awt.Font("Lucida Fax", 1, 18)); // NOI18N
         registerBtn.setText("REGISTER");
         registerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        registerBtn.setPreferredSize(new java.awt.Dimension(230, 50));
+        registerBtn.setPreferredSize(new java.awt.Dimension(280, 55));
         registerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerBtnActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(240, Short.MAX_VALUE))
+        javax.swing.GroupLayout glassPanelLayout = new javax.swing.GroupLayout(glassPanel);
+        glassPanel.setLayout(glassPanelLayout);
+        glassPanelLayout.setHorizontalGroup(
+            glassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(glassPanelLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(glassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(subtitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+        glassPanelLayout.setVerticalGroup(
+            glassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(glassPanelLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(subtitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
+
+        mainPanel.add(glassPanel, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -130,15 +182,59 @@ public class SelectScreen extends javax.swing.JFrame {
         registerDialog.setVisible(true);
     }//GEN-LAST:event_registerBtnActionPerformed
 
+    // Custom gradient background panel
+    private static class GradientPanel extends JPanel {
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2d = (Graphics2D) g.create();
+            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            
+            // Create gradient background with more visible colors
+            GradientPaint gradient = new GradientPaint(
+                0, 0, new Color(17, 24, 39),  // Dark blue-gray
+                getWidth(), getHeight(), new Color(55, 65, 81)  // Lighter blue-gray
+            );
+            g2d.setPaint(gradient);
+            g2d.fillRect(0, 0, getWidth(), getHeight());
+            
+            g2d.dispose();
+        }
+    }
+    
+    // Custom glassmorphism panel
+    private static class GlassPanel extends JPanel {
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2d = (Graphics2D) g.create();
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            
+            // Create glassmorphism effect with more visible transparency
+            g2d.setColor(new Color(255, 255, 255, 30));
+            g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
+            
+            // Add subtle border
+            g2d.setColor(new Color(255, 255, 255, 50));
+            g2d.setStroke(new java.awt.BasicStroke(1));
+            g2d.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 30, 30);
+            
+            g2d.dispose();
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel glassPanel;
     private javax.swing.JButton loginBtn;
     private javax.swing.JLabel logo;
+    private javax.swing.JPanel mainPanel;
     private javax.swing.JButton registerBtn;
+    private javax.swing.JLabel subtitleLabel;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -56,11 +56,11 @@ public class Members extends javax.swing.JPanel {
         this.setBackground(new Color(15, 23, 42)); // Slate-900
         
         // Enhanced scroll pane styling
-        jScrollPane2.putClientProperty(FlatClientProperties.STYLE, "arc:20; borderWidth:0");
+        jScrollPane2.putClientProperty(FlatClientProperties.STYLE, "arc:20");
         
         // Modern combo box styling
-        searchByCombo.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
-        memberStatusCombo.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
+        searchByCombo.putClientProperty(FlatClientProperties.STYLE, "borderWidth:1");
+        memberStatusCombo.putClientProperty(FlatClientProperties.STYLE, "borderWidth:1");
         
         // Enhanced search field styling
         memberSearchField.setBorder(BorderFactory.createCompoundBorder(

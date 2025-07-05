@@ -33,11 +33,10 @@ public class ReturnBook extends javax.swing.JPanel {
         bookIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
         
         // Modern combo box styling
-        bookGenreCombo.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
+        bookGenreCombo.putClientProperty(FlatClientProperties.STYLE, "borderWidth:1");
         
         // Enhanced date field styling
-        borrowedDate.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
-        returnDate.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:1");
+        // Date fields don't need special styling - they inherit from FlatLaf
         
         // Enhanced typography
         updateTypography();
