@@ -95,25 +95,19 @@ public class Dashboard extends javax.swing.JPanel {
         // Fix sizing issues - remove fixed preferred size
         this.setPreferredSize(null);
         
-        // Modern glassmorphism card styling
-        // overdueBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
-        // totalMemberPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
-        // memberListPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
-        // bookListPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
-        // totalBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
-        // borrowedBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
-        // overdueBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
-        // totalMemberIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
-        // jScrollPane1.putClientProperty(FlatClientProperties.STYLE, "arc:16");
-        // jScrollPane3.putClientProperty(FlatClientProperties.STYLE, "arc:16");
-        
-        // New modern color scheme with gradients
-        totalBookPanel.setBackground(new Color(59, 130, 246)); // Blue-500
-        borrowedBookPanel.setBackground(new Color(16, 185, 129)); // Emerald-500
-        overdueBookPanel.setBackground(new Color(245, 158, 11)); // Amber-500
-        totalMemberPanel.setBackground(new Color(139, 92, 246)); // Violet-500
+        // Modern card styling: rounded corners, drop shadow, bold colors
+        setCardStyle(totalBookPanel, new Color(59, 130, 246)); // Blue-500
+        setCardStyle(borrowedBookPanel, new Color(16, 185, 129)); // Emerald-500
+        setCardStyle(overdueBookPanel, new Color(245, 158, 11)); // Amber-500
+        setCardStyle(totalMemberPanel, new Color(139, 92, 246)); // Violet-500
         memberListPanel.setBackground(new Color(30, 41, 59, 180)); // Slate-800 with transparency
         bookListPanel.setBackground(new Color(30, 41, 59, 180)); // Slate-800 with transparency
+
+        // Add count and label to each card, centered
+        setCardContent(totalBookPanel, tBCLabel, jLabel4);
+        setCardContent(borrowedBookPanel, bBCLabel, jLabel7);
+        setCardContent(overdueBookPanel, oBCLabel, jLabel10);
+        setCardContent(totalMemberPanel, tMCLabel, jLabel13);
 
         // Enhanced card panel sizing
         totalBookPanel.setPreferredSize(new java.awt.Dimension(280, 140));
@@ -121,24 +115,8 @@ public class Dashboard extends javax.swing.JPanel {
         overdueBookPanel.setPreferredSize(new java.awt.Dimension(280, 140));
         totalMemberPanel.setPreferredSize(new java.awt.Dimension(280, 140));
 
-        // Modern icon styling with larger icons
-        // totalBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
-        // borrowedBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
-        // overdueBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
-        // totalMemberIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
-
-        totalBookIcon.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/total_book_label.svg",
-                32,
-                32));
-        borrowedBookIcon.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/borrowed_book_label.svg",
-                32,
-                32));
-        overdueBookIcon.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/hourglass_label.svg",
-                32,
-                32));
-        totalMemberIcon.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/members.svg",
-                32,
-                32));
+        // Remove icons from cards
+        // (No icon set or used)
 
         // Enhanced scroll pane styling
         // jScrollPane1.putClientProperty(FlatClientProperties.STYLE, "arc:16");
@@ -156,6 +134,25 @@ public class Dashboard extends javax.swing.JPanel {
         
         // Improved table and button sizing
         fixCardContentSizing();
+    }
+
+    // Add this helper method for card styling
+    private void setCardStyle(javax.swing.JPanel panel, Color bgColor) {
+        panel.setBackground(bgColor);
+        panel.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+            javax.swing.BorderFactory.createEmptyBorder(10, 20, 10, 20),
+            javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(new Color(0,0,0,30), 1, true),
+                javax.swing.BorderFactory.createMatteBorder(0, 0, 8, 0, new Color(0,0,0,30))
+            )
+        ));
+        panel.setOpaque(true);
+        panel.setLayout(new java.awt.BorderLayout());
+        panel.setPreferredSize(new java.awt.Dimension(280, 140));
+        panel.setMaximumSize(new java.awt.Dimension(300, 160));
+        panel.setMinimumSize(new java.awt.Dimension(250, 120));
+        // Add drop shadow effect (optional, for FlatLaf 3.6+)
+        panel.putClientProperty("JComponent.shadowType", "dropShadow");
     }
     
     private void updateTypography() {
@@ -354,19 +351,15 @@ public class Dashboard extends javax.swing.JPanel {
         totalBookPanel = new javax.swing.JPanel();
         tBCLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        totalBookIcon = new javax.swing.JLabel();
         borrowedBookPanel = new javax.swing.JPanel();
         bBCLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        borrowedBookIcon = new javax.swing.JLabel();
         overdueBookPanel = new javax.swing.JPanel();
         oBCLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        overdueBookIcon = new javax.swing.JLabel();
         totalMemberPanel = new javax.swing.JPanel();
         tMCLabel = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        totalMemberIcon = new javax.swing.JLabel();
         memberListPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         memberTable = new FormattedTable();
@@ -401,38 +394,6 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Total Books");
 
-        totalBookIcon.setBackground(new java.awt.Color(0, 153, 255));
-        totalBookIcon.setFont(new java.awt.Font("Dubai Medium", 0, 12)); // NOI18N
-        totalBookIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        totalBookIcon.setOpaque(true);
-        totalBookIcon.setPreferredSize(new java.awt.Dimension(80, 80));
-
-        javax.swing.GroupLayout totalBookPanelLayout = new javax.swing.GroupLayout(totalBookPanel);
-        totalBookPanel.setLayout(totalBookPanelLayout);
-        totalBookPanelLayout.setHorizontalGroup(
-            totalBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(totalBookPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(totalBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(totalBookPanelLayout.createSequentialGroup()
-                        .addComponent(tBCLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(totalBookIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
-        );
-        totalBookPanelLayout.setVerticalGroup(
-            totalBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(totalBookPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(totalBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tBCLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(totalBookIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(jLabel4)
-                .addGap(20, 20, 20))
-        );
-
         borrowedBookPanel.setPreferredSize(new java.awt.Dimension(428, 200));
 
         bBCLabel.setFont(new java.awt.Font("Dubai Medium", 0, 60)); // NOI18N
@@ -442,38 +403,6 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Dubai Medium", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Borrowed Books");
-
-        borrowedBookIcon.setBackground(new java.awt.Color(0, 153, 255));
-        borrowedBookIcon.setFont(new java.awt.Font("Dubai Medium", 0, 12)); // NOI18N
-        borrowedBookIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        borrowedBookIcon.setOpaque(true);
-        borrowedBookIcon.setPreferredSize(new java.awt.Dimension(80, 80));
-
-        javax.swing.GroupLayout borrowedBookPanelLayout = new javax.swing.GroupLayout(borrowedBookPanel);
-        borrowedBookPanel.setLayout(borrowedBookPanelLayout);
-        borrowedBookPanelLayout.setHorizontalGroup(
-            borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(borrowedBookPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(borrowedBookPanelLayout.createSequentialGroup()
-                        .addComponent(bBCLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(borrowedBookIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
-        );
-        borrowedBookPanelLayout.setVerticalGroup(
-            borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(borrowedBookPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bBCLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(borrowedBookIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(jLabel7)
-                .addGap(20, 20, 20))
-        );
 
         overdueBookPanel.setPreferredSize(new java.awt.Dimension(428, 200));
 
@@ -485,38 +414,6 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Overdue Books");
 
-        overdueBookIcon.setBackground(new java.awt.Color(0, 153, 255));
-        overdueBookIcon.setFont(new java.awt.Font("Dubai Medium", 0, 12)); // NOI18N
-        overdueBookIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        overdueBookIcon.setOpaque(true);
-        overdueBookIcon.setPreferredSize(new java.awt.Dimension(80, 80));
-
-        javax.swing.GroupLayout overdueBookPanelLayout = new javax.swing.GroupLayout(overdueBookPanel);
-        overdueBookPanel.setLayout(overdueBookPanelLayout);
-        overdueBookPanelLayout.setHorizontalGroup(
-            overdueBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(overdueBookPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(overdueBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(overdueBookPanelLayout.createSequentialGroup()
-                        .addComponent(oBCLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(overdueBookIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
-        );
-        overdueBookPanelLayout.setVerticalGroup(
-            overdueBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(overdueBookPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(overdueBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(oBCLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(overdueBookIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(jLabel10)
-                .addGap(20, 20, 20))
-        );
-
         totalMemberPanel.setPreferredSize(new java.awt.Dimension(428, 200));
 
         tMCLabel.setFont(new java.awt.Font("Dubai Medium", 0, 60)); // NOI18N
@@ -526,38 +423,6 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Dubai Medium", 0, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Total Members");
-
-        totalMemberIcon.setBackground(new java.awt.Color(0, 153, 255));
-        totalMemberIcon.setFont(new java.awt.Font("Dubai Medium", 0, 12)); // NOI18N
-        totalMemberIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        totalMemberIcon.setOpaque(true);
-        totalMemberIcon.setPreferredSize(new java.awt.Dimension(80, 80));
-
-        javax.swing.GroupLayout totalMemberPanelLayout = new javax.swing.GroupLayout(totalMemberPanel);
-        totalMemberPanel.setLayout(totalMemberPanelLayout);
-        totalMemberPanelLayout.setHorizontalGroup(
-            totalMemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(totalMemberPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(totalMemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(totalMemberPanelLayout.createSequentialGroup()
-                        .addComponent(tMCLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(totalMemberIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
-        );
-        totalMemberPanelLayout.setVerticalGroup(
-            totalMemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(totalMemberPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(totalMemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tMCLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(totalMemberIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(jLabel13)
-                .addGap(20, 20, 20))
-        );
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -881,6 +746,22 @@ public class Dashboard extends javax.swing.JPanel {
         }
     }
 
+    // Add this helper method for card content centering
+    private void setCardContent(javax.swing.JPanel panel, javax.swing.JLabel countLabel, javax.swing.JLabel textLabel) {
+        panel.removeAll();
+        java.awt.GridBagLayout gbl = new java.awt.GridBagLayout();
+        panel.setLayout(gbl);
+        java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.anchor = java.awt.GridBagConstraints.CENTER;
+        gbc.insets = new java.awt.Insets(0, 0, 10, 0);
+        gbc.gridy = 0;
+        panel.add(countLabel, gbc);
+        gbc.gridy = 1;
+        gbc.insets = new java.awt.Insets(0, 0, 0, 0);
+        panel.add(textLabel, gbc);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNewBookBtn;
     private javax.swing.JButton addNewMemberBtn;
@@ -908,9 +789,7 @@ public class Dashboard extends javax.swing.JPanel {
     private javax.swing.JPanel overdueBookPanel;
     private javax.swing.JLabel tBCLabel;
     private javax.swing.JLabel tMCLabel;
-    private javax.swing.JLabel totalBookIcon;
     private javax.swing.JPanel totalBookPanel;
-    private javax.swing.JLabel totalMemberIcon;
     private javax.swing.JPanel totalMemberPanel;
     // End of variables declaration//GEN-END:variables
 }
