@@ -123,8 +123,8 @@ public class Dashboard extends javax.swing.JPanel {
         // jScrollPane3.putClientProperty(FlatClientProperties.STYLE, "arc:16");
         
         // Improved scroll pane sizing
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(320, 200));
-        jScrollPane3.setPreferredSize(new java.awt.Dimension(320, 200));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(320, 600));
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(320, 600));
         
         // Update typography for labels
         updateTypography();
@@ -247,8 +247,8 @@ public class Dashboard extends javax.swing.JPanel {
         bookTable.setRowHeight(28);
         
         // Enhanced table viewport sizes
-        memberTable.setPreferredScrollableViewportSize(new java.awt.Dimension(300, 160));
-        bookTable.setPreferredScrollableViewportSize(new java.awt.Dimension(300, 160));
+        memberTable.setPreferredScrollableViewportSize(new java.awt.Dimension(300, 260));
+        bookTable.setPreferredScrollableViewportSize(new java.awt.Dimension(300, 260));
         
         // Style the buttons within cards
         styleCardButtons();
@@ -351,15 +351,19 @@ public class Dashboard extends javax.swing.JPanel {
         totalBookPanel = new javax.swing.JPanel();
         tBCLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        totalBookIcon = new javax.swing.JLabel();
         borrowedBookPanel = new javax.swing.JPanel();
         bBCLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        borrowedBookIcon = new javax.swing.JLabel();
         overdueBookPanel = new javax.swing.JPanel();
         oBCLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        overdueBookIcon = new javax.swing.JLabel();
         totalMemberPanel = new javax.swing.JPanel();
         tMCLabel = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        totalMemberIcon = new javax.swing.JLabel();
         memberListPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         memberTable = new FormattedTable();
@@ -394,6 +398,38 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Total Books");
 
+        totalBookIcon.setBackground(new java.awt.Color(0, 153, 255));
+        totalBookIcon.setFont(new java.awt.Font("Dubai Medium", 0, 12)); // NOI18N
+        totalBookIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalBookIcon.setOpaque(true);
+        totalBookIcon.setPreferredSize(new java.awt.Dimension(80, 80));
+
+        javax.swing.GroupLayout totalBookPanelLayout = new javax.swing.GroupLayout(totalBookPanel);
+        totalBookPanel.setLayout(totalBookPanelLayout);
+        totalBookPanelLayout.setHorizontalGroup(
+            totalBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(totalBookPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(totalBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(totalBookPanelLayout.createSequentialGroup()
+                        .addComponent(tBCLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(totalBookIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
+        );
+        totalBookPanelLayout.setVerticalGroup(
+            totalBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(totalBookPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(totalBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tBCLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalBookIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(jLabel4)
+                .addGap(20, 20, 20))
+        );
+
         borrowedBookPanel.setPreferredSize(new java.awt.Dimension(428, 200));
 
         bBCLabel.setFont(new java.awt.Font("Dubai Medium", 0, 60)); // NOI18N
@@ -403,6 +439,38 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Dubai Medium", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Borrowed Books");
+
+        borrowedBookIcon.setBackground(new java.awt.Color(0, 153, 255));
+        borrowedBookIcon.setFont(new java.awt.Font("Dubai Medium", 0, 12)); // NOI18N
+        borrowedBookIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        borrowedBookIcon.setOpaque(true);
+        borrowedBookIcon.setPreferredSize(new java.awt.Dimension(80, 80));
+
+        javax.swing.GroupLayout borrowedBookPanelLayout = new javax.swing.GroupLayout(borrowedBookPanel);
+        borrowedBookPanel.setLayout(borrowedBookPanelLayout);
+        borrowedBookPanelLayout.setHorizontalGroup(
+            borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(borrowedBookPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(borrowedBookPanelLayout.createSequentialGroup()
+                        .addComponent(bBCLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(borrowedBookIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
+        );
+        borrowedBookPanelLayout.setVerticalGroup(
+            borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(borrowedBookPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(borrowedBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bBCLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(borrowedBookIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(jLabel7)
+                .addGap(20, 20, 20))
+        );
 
         overdueBookPanel.setPreferredSize(new java.awt.Dimension(428, 200));
 
@@ -414,6 +482,38 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Overdue Books");
 
+        overdueBookIcon.setBackground(new java.awt.Color(0, 153, 255));
+        overdueBookIcon.setFont(new java.awt.Font("Dubai Medium", 0, 12)); // NOI18N
+        overdueBookIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        overdueBookIcon.setOpaque(true);
+        overdueBookIcon.setPreferredSize(new java.awt.Dimension(80, 80));
+
+        javax.swing.GroupLayout overdueBookPanelLayout = new javax.swing.GroupLayout(overdueBookPanel);
+        overdueBookPanel.setLayout(overdueBookPanelLayout);
+        overdueBookPanelLayout.setHorizontalGroup(
+            overdueBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(overdueBookPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(overdueBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(overdueBookPanelLayout.createSequentialGroup()
+                        .addComponent(oBCLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(overdueBookIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
+        );
+        overdueBookPanelLayout.setVerticalGroup(
+            overdueBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(overdueBookPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(overdueBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(oBCLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(overdueBookIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(jLabel10)
+                .addGap(20, 20, 20))
+        );
+
         totalMemberPanel.setPreferredSize(new java.awt.Dimension(428, 200));
 
         tMCLabel.setFont(new java.awt.Font("Dubai Medium", 0, 60)); // NOI18N
@@ -423,6 +523,38 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Dubai Medium", 0, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Total Members");
+
+        totalMemberIcon.setBackground(new java.awt.Color(0, 153, 255));
+        totalMemberIcon.setFont(new java.awt.Font("Dubai Medium", 0, 12)); // NOI18N
+        totalMemberIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalMemberIcon.setOpaque(true);
+        totalMemberIcon.setPreferredSize(new java.awt.Dimension(80, 80));
+
+        javax.swing.GroupLayout totalMemberPanelLayout = new javax.swing.GroupLayout(totalMemberPanel);
+        totalMemberPanel.setLayout(totalMemberPanelLayout);
+        totalMemberPanelLayout.setHorizontalGroup(
+            totalMemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(totalMemberPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(totalMemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(totalMemberPanelLayout.createSequentialGroup()
+                        .addComponent(tMCLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(totalMemberIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
+        );
+        totalMemberPanelLayout.setVerticalGroup(
+            totalMemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(totalMemberPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(totalMemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tMCLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalMemberIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(jLabel13)
+                .addGap(20, 20, 20))
+        );
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -789,7 +921,9 @@ public class Dashboard extends javax.swing.JPanel {
     private javax.swing.JPanel overdueBookPanel;
     private javax.swing.JLabel tBCLabel;
     private javax.swing.JLabel tMCLabel;
+    private javax.swing.JLabel totalBookIcon;
     private javax.swing.JPanel totalBookPanel;
+    private javax.swing.JLabel totalMemberIcon;
     private javax.swing.JPanel totalMemberPanel;
     // End of variables declaration//GEN-END:variables
 }

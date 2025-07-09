@@ -37,6 +37,13 @@ public class Home extends javax.swing.JFrame {
     private IssueBook issueBookPanel; 
     private ReturnBook returnBookPanel; 
     
+    private javax.swing.JLabel userNameLabel;
+    private javax.swing.JLabel userRoleLabel;
+    
+    private javax.swing.JPanel profilePanel;
+    private javax.swing.JLabel profileNameLabel;
+    private javax.swing.JLabel profileRoleLabel;
+    
     public Home(String userName,String userRole){
         initComponents();
         init();
@@ -44,6 +51,8 @@ public class Home extends javax.swing.JFrame {
         setActiveBtn(dashboardBtn);
         userNameLabel.setText(userName);
         userRoleLabel.setText(userRole);
+        profileNameLabel.setText(userName);
+        profileRoleLabel.setText(userRole);
     }
     
     private void init() {
@@ -71,10 +80,6 @@ public class Home extends javax.swing.JFrame {
                 18,
                 18));
         returnBookBtn.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/return_book.svg",
-                18,
-                18));
-        logoutBtn = new RoundButton(true);
-        userNameLabel.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/user.svg",
                 18,
                 18));
         
@@ -134,6 +139,13 @@ public class Home extends javax.swing.JFrame {
         activeBtn.setSelected(true);
     }
 
+    public void setUser(String name, String role) {
+        userNameLabel.setText(name);
+        userRoleLabel.setText(role);
+        if (profileNameLabel != null) profileNameLabel.setText(name);
+        if (profileRoleLabel != null) profileRoleLabel.setText(role);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,12 +161,36 @@ public class Home extends javax.swing.JFrame {
         bookBtn = new RoundButton(true);
         memberBtn = new RoundButton(true);
         jLabel1 = new javax.swing.JLabel();
-        userNameLabel = new javax.swing.JLabel();
-        userRoleLabel = new javax.swing.JLabel();
         issueBookBtn = new RoundButton(true);
         returnBookBtn = new RoundButton(true);
-        logoutBtn = new RoundButton();
         logo = new javax.swing.JLabel();
+
+        userNameLabel = new javax.swing.JLabel();
+        userRoleLabel = new javax.swing.JLabel();
+
+        profilePanel = new javax.swing.JPanel();
+        profilePanel.setBackground(new java.awt.Color(31, 41, 55));
+        profilePanel.setLayout(new java.awt.BorderLayout());
+        javax.swing.JLabel profileIcon = new javax.swing.JLabel();
+        profileIcon.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/user.svg", 28, 28));
+        profileIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.JPanel textPanel = new javax.swing.JPanel();
+        textPanel.setOpaque(false);
+        textPanel.setLayout(new java.awt.GridLayout(2, 1));
+        profileNameLabel = new javax.swing.JLabel();
+        profileRoleLabel = new javax.swing.JLabel();
+        profileNameLabel.setText(userNameLabel.getText());
+        profileNameLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        profileNameLabel.setForeground(new java.awt.Color(243, 244, 246));
+        profileRoleLabel.setText(userRoleLabel.getText());
+        profileRoleLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
+        profileRoleLabel.setForeground(new java.awt.Color(156, 163, 175));
+        textPanel.add(profileNameLabel);
+        textPanel.add(profileRoleLabel);
+        profilePanel.add(profileIcon, java.awt.BorderLayout.WEST);
+        profilePanel.add(textPanel, java.awt.BorderLayout.CENTER);
+        profilePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        profilePanel.setPreferredSize(new java.awt.Dimension(144, 48));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("zlibrary || Home");
@@ -208,18 +244,6 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setText("zlibrary");
         jLabel1.setPreferredSize(new java.awt.Dimension(0, 16));
 
-        userNameLabel.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
-        userNameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        userNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        userNameLabel.setText("Dehemi");
-        userNameLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        userNameLabel.setVerifyInputWhenFocusTarget(false);
-
-        userRoleLabel.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        userRoleLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        userRoleLabel.setText("Librarian");
-        userRoleLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
         issueBookBtn.setBackground(new java.awt.Color(60, 63, 65));
         issueBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         issueBookBtn.setText("Issue Book");
@@ -242,19 +266,6 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        logoutBtn.setBackground(new java.awt.Color(60, 63, 65));
-        logoutBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        logoutBtn.setText("Logout");
-        logoutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        logoutBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutBtnActionPerformed(evt);
-            }
-        });
-
-        logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -268,7 +279,7 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(memberBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(issueBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(returnBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(profilePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(dashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -279,11 +290,7 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 841, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(userRoleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26))
+                        .addGap(158, 158, 158))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))))
@@ -294,12 +301,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(userRoleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -315,7 +317,7 @@ public class Home extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(returnBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(profilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30))))
         );
 
@@ -368,10 +370,6 @@ public class Home extends javax.swing.JFrame {
         setActiveBtn(returnBookBtn);
     }//GEN-LAST:event_returnBookBtnActionPerformed
 
-    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
-        
-    }//GEN-LAST:event_logoutBtnActionPerformed
-
     private void dashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardBtnActionPerformed
         this.contentPanelLayout.show(contentPanel, "dashboard_panel");
         setActiveBtn(dashboardBtn);
@@ -422,10 +420,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel logo;
-    private javax.swing.JButton logoutBtn;
-    private javax.swing.JButton memberBtn;
     private javax.swing.JButton returnBookBtn;
-    private javax.swing.JLabel userNameLabel;
-    private javax.swing.JLabel userRoleLabel;
+    private javax.swing.JButton memberBtn;
     // End of variables declaration//GEN-END:variables
 }
