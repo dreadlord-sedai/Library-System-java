@@ -87,7 +87,7 @@ public class SplashScreen extends javax.swing.JFrame {
         
         // Modern progress bar
         progressBar.setBackground(new Color(30, 41, 59, 100));
-        progressBar.setForeground(new Color(99, 102, 241));
+        progressBar.setForeground(Color.BLACK);
         progressBar.setBorder(BorderFactory.createEmptyBorder());
         progressBar.setPreferredSize(new java.awt.Dimension(400, 8));
         
