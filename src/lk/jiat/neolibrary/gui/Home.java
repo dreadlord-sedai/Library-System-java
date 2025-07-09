@@ -409,7 +409,7 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home("Yashitha","Admin").setVisible(true);
+                new Home("Dehemi","Admin").setVisible(true);
             }
         });
     }

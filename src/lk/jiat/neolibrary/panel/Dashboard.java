@@ -351,7 +351,6 @@ public class Dashboard extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        dateTimeFormattedFeild = new javax.swing.JFormattedTextField();
         totalBookPanel = new javax.swing.JPanel();
         tBCLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -390,14 +389,7 @@ public class Dashboard extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Dubai Medium", 0, 40)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 214, 255));
-        jLabel2.setText("Yashitha!");
-
-        dateTimeFormattedFeild.setEditable(false);
-        dateTimeFormattedFeild.setBackground(new java.awt.Color(0, 30, 51));
-        dateTimeFormattedFeild.setForeground(new java.awt.Color(255, 255, 255));
-        dateTimeFormattedFeild.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("MMM d,y | EEEE,h:mm a"))));
-        dateTimeFormattedFeild.setFont(new java.awt.Font("Dubai Medium", 0, 18)); // NOI18N
-        dateTimeFormattedFeild.setSelectionColor(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Dehemi");
 
         totalBookPanel.setPreferredSize(new java.awt.Dimension(428, 200));
 
@@ -615,7 +607,7 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel15.setText("Member List");
         jLabel15.setPreferredSize(new java.awt.Dimension(150, 48));
 
-        addNewMemberBtn.setBackground(new java.awt.Color(34, 197, 94));
+        addNewMemberBtn.setBackground(new java.awt.Color(255, 255, 255));
         addNewMemberBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         addNewMemberBtn.setForeground(new java.awt.Color(0, 0, 0));
         addNewMemberBtn.setText("Add New Member");
@@ -627,8 +619,8 @@ public class Dashboard extends javax.swing.JPanel {
             }
         });
 
-        memberSeeAllBtn.setBackground(new java.awt.Color(34, 197, 94));
-        memberSeeAllBtn.setForeground(new java.awt.Color(0, 0, 0));
+        memberSeeAllBtn.setBackground(new java.awt.Color(60, 63, 65));
+        memberSeeAllBtn.setForeground(new java.awt.Color(0, 153, 255));
         memberSeeAllBtn.setText("See All");
         memberSeeAllBtn.setBorder(null);
         memberSeeAllBtn.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -655,7 +647,7 @@ public class Dashboard extends javax.swing.JPanel {
                             .addGroup(memberListPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(472, 472, 472)
-                                .addComponent(addNewMemberBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))))
+                                .addComponent(addNewMemberBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(27, 27, 27))
         );
         memberListPanelLayout.setVerticalGroup(
@@ -677,7 +669,7 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel16.setText("Book List");
         jLabel16.setPreferredSize(new java.awt.Dimension(150, 48));
 
-        addNewBookBtn.setBackground(new java.awt.Color(34, 197, 94));
+        addNewBookBtn.setBackground(new java.awt.Color(255, 255, 255));
         addNewBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         addNewBookBtn.setForeground(new java.awt.Color(0, 0, 0));
         addNewBookBtn.setText("Add New Book");
@@ -689,8 +681,8 @@ public class Dashboard extends javax.swing.JPanel {
             }
         });
 
-        bookSeeAllBtn.setBackground(new java.awt.Color(34, 197, 94));
-        bookSeeAllBtn.setForeground(new java.awt.Color(0, 0, 0));
+        bookSeeAllBtn.setBackground(new java.awt.Color(60, 63, 65));
+        bookSeeAllBtn.setForeground(new java.awt.Color(0, 153, 255));
         bookSeeAllBtn.setText("See All");
         bookSeeAllBtn.setBorder(null);
         bookSeeAllBtn.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -764,7 +756,7 @@ public class Dashboard extends javax.swing.JPanel {
                             .addGroup(bookListPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(472, 472, 472)
-                                .addComponent(addNewBookBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))))
+                                .addComponent(addNewBookBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(27, 27, 27))
         );
         bookListPanelLayout.setVerticalGroup(
@@ -789,31 +781,35 @@ public class Dashboard extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(memberListPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(totalBookPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                                .addComponent(totalBookPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(20, 20, 20)
-                                .addComponent(borrowedBookPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)))
+                                .addComponent(borrowedBookPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(overdueBookPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                                .addComponent(overdueBookPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
                                 .addGap(20, 20, 20)
-                                .addComponent(totalMemberPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE))
-                            .addComponent(bookListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(totalMemberPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE))
+                            .addComponent(bookListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(504, 504, 504)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(borrowedBookPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                     .addComponent(overdueBookPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
@@ -894,7 +890,6 @@ public class Dashboard extends javax.swing.JPanel {
     private javax.swing.JTable bookTable;
     private javax.swing.JLabel borrowedBookIcon;
     private javax.swing.JPanel borrowedBookPanel;
-    private javax.swing.JFormattedTextField dateTimeFormattedFeild;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;

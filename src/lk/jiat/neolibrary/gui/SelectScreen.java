@@ -94,7 +94,26 @@ public class SelectScreen extends javax.swing.JFrame {
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
+        // Center all content in glassPanel using BoxLayout (vertical)
+        javax.swing.Box box = javax.swing.Box.createVerticalBox();
+        logo.setAlignmentX(javax.swing.JComponent.CENTER_ALIGNMENT);
+        titleLabel.setAlignmentX(javax.swing.JComponent.CENTER_ALIGNMENT);
+        subtitleLabel.setAlignmentX(javax.swing.JComponent.CENTER_ALIGNMENT);
+        loginBtn.setAlignmentX(javax.swing.JComponent.CENTER_ALIGNMENT);
+        registerBtn.setAlignmentX(javax.swing.JComponent.CENTER_ALIGNMENT);
+        box.add(javax.swing.Box.createVerticalGlue());
+        box.add(logo);
+        box.add(javax.swing.Box.createVerticalStrut(20));
+        box.add(titleLabel);
+        box.add(javax.swing.Box.createVerticalStrut(10));
+        box.add(subtitleLabel);
+        box.add(javax.swing.Box.createVerticalStrut(40));
+        box.add(loginBtn);
+        box.add(javax.swing.Box.createVerticalStrut(20));
+        box.add(registerBtn);
+        box.add(javax.swing.Box.createVerticalGlue());
         glassPanel.setLayout(new java.awt.BorderLayout());
+        glassPanel.add(box, java.awt.BorderLayout.CENTER);
 
         logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logo.setPreferredSize(new java.awt.Dimension(120, 120));
@@ -122,36 +141,6 @@ public class SelectScreen extends javax.swing.JFrame {
                 registerBtnActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout glassPanelLayout = new javax.swing.GroupLayout(glassPanel);
-        glassPanel.setLayout(glassPanelLayout);
-        glassPanelLayout.setHorizontalGroup(
-            glassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(glassPanelLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(glassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(subtitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60))
-        );
-        glassPanelLayout.setVerticalGroup(
-            glassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(glassPanelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(subtitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
 
         mainPanel.add(glassPanel, java.awt.BorderLayout.CENTER);
 

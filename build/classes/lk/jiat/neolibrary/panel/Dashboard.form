@@ -28,34 +28,30 @@
               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="dateTimeFormattedFeild" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" pref="235" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="memberListPanel" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="totalBookPanel" pref="396" max="32767" attributes="0"/>
+                              <Component id="totalBookPanel" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="borrowedBookPanel" pref="396" max="32767" attributes="0"/>
+                              <Component id="borrowedBookPanel" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="overdueBookPanel" pref="393" max="32767" attributes="0"/>
+                              <Component id="overdueBookPanel" pref="425" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="totalMemberPanel" pref="399" max="32767" attributes="0"/>
+                              <Component id="totalMemberPanel" pref="431" max="32767" attributes="0"/>
                           </Group>
                           <Component id="bookListPanel" max="32767" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="504" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" pref="235" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -70,9 +66,7 @@
                   <Component id="jLabel1" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="dateTimeFormattedFeild" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="borrowedBookPanel" pref="201" max="32767" attributes="0"/>
                   <Component id="overdueBookPanel" pref="201" max="32767" attributes="0"/>
@@ -109,27 +103,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="d6" red="99" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Yashitha!"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="dateTimeFormattedFeild">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="1e" red="0" type="rgb"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="MMM d,y | EEEE,h:mm a" subtype="-1" type="1"/>
-        </Property>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dubai Medium" size="18" style="0"/>
-        </Property>
-        <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Dehemi"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="totalBookPanel">
@@ -466,7 +440,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="472" max="-2" attributes="0"/>
-                                  <Component id="addNewMemberBtn" pref="136" max="32767" attributes="0"/>
+                                  <Component id="addNewMemberBtn" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -652,7 +626,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="472" max="-2" attributes="0"/>
-                                  <Component id="addNewBookBtn" pref="136" max="32767" attributes="0"/>
+                                  <Component id="addNewBookBtn" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
