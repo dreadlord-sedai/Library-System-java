@@ -44,7 +44,7 @@ public class RoundButton extends JButton {
 
     private void init() {
         // Modern styling
-        this.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:0; focusWidth:0");
+        // this.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:0; focusWidth:0");
         this.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         this.setForeground(currentForeground);
         this.setBorder(null);

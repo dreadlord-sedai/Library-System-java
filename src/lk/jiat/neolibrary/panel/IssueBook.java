@@ -188,8 +188,8 @@ public class IssueBook extends javax.swing.JPanel {
         
         // Add rounded corners to panels (if supported)
         try {
-            jPanel1.putClientProperty("JPanel.arc", 15);
-            jPanel3.putClientProperty("JPanel.arc", 15);
+            // jPanel1.putClientProperty("JPanel.arc", 15);
+            // jPanel3.putClientProperty("JPanel.arc", 15);
         } catch (Exception e) {
             // Fallback if rounded corners not supported
         }

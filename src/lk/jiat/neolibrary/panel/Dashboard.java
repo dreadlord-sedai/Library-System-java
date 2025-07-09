@@ -96,13 +96,17 @@ public class Dashboard extends javax.swing.JPanel {
         this.setPreferredSize(null);
         
         // Modern glassmorphism card styling
-        totalBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
-        borrowedBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
-        overdueBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
-        totalMemberPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
-        memberListPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
-        bookListPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
-
+        // overdueBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
+        // totalMemberPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
+        // memberListPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
+        // bookListPanel.putClientProperty(FlatClientProperties.STYLE, "arc:20");
+        // totalBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
+        // borrowedBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
+        // overdueBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
+        // totalMemberIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
+        // jScrollPane1.putClientProperty(FlatClientProperties.STYLE, "arc:16");
+        // jScrollPane3.putClientProperty(FlatClientProperties.STYLE, "arc:16");
+        
         // New modern color scheme with gradients
         totalBookPanel.setBackground(new Color(59, 130, 246)); // Blue-500
         borrowedBookPanel.setBackground(new Color(16, 185, 129)); // Emerald-500
@@ -118,10 +122,10 @@ public class Dashboard extends javax.swing.JPanel {
         totalMemberPanel.setPreferredSize(new java.awt.Dimension(280, 140));
 
         // Modern icon styling with larger icons
-        totalBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
-        borrowedBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
-        overdueBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
-        totalMemberIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
+        // totalBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
+        // borrowedBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
+        // overdueBookIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
+        // totalMemberIcon.putClientProperty(FlatClientProperties.STYLE, "arc:999");
 
         totalBookIcon.setIcon(new FlatSVGIcon("lk/jiat/neolibrary/images/total_book_label.svg",
                 32,
@@ -137,8 +141,8 @@ public class Dashboard extends javax.swing.JPanel {
                 32));
 
         // Enhanced scroll pane styling
-        jScrollPane1.putClientProperty(FlatClientProperties.STYLE, "arc:16");
-        jScrollPane3.putClientProperty(FlatClientProperties.STYLE, "arc:16");
+        // jScrollPane1.putClientProperty(FlatClientProperties.STYLE, "arc:16");
+        // jScrollPane3.putClientProperty(FlatClientProperties.STYLE, "arc:16");
         
         // Improved scroll pane sizing
         jScrollPane1.setPreferredSize(new java.awt.Dimension(320, 200));

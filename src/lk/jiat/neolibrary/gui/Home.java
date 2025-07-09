@@ -111,11 +111,12 @@ public class Home extends javax.swing.JFrame {
         this.issueBookPanel = new IssueBook();
         this.returnBookPanel = new ReturnBook();
         
-        dashboardPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40"); 
-        booksPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
-        membersPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
-        issueBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
-        returnBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
+        // Removed FlatLaf arc style property from panels (not supported)
+        // dashboardPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40"); 
+        // booksPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
+        // membersPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
+        // issueBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
+        // returnBookPanel.putClientProperty(FlatClientProperties.STYLE, "arc:40");
         
         this.contentPanel.add(dashboardPanel, "dashboard_panel");
         this.contentPanel.add(booksPanel, "books_panel");
