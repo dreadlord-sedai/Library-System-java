@@ -24,6 +24,15 @@ import lk.jiat.neolibrary.validation.Validator;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.BorderFactory;
+import java.io.InputStream;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import java.sql.Connection;
 
 /**
  *
@@ -107,14 +116,6 @@ public class Books extends javax.swing.JPanel {
     }
     
     private void styleButtons() {
-        // Search button - blue
-        bookSearchBtn.setUI(null);
-        bookSearchBtn.putClientProperty("JButton.background", new Color(59, 130, 246));
-        bookSearchBtn.setBackground(new Color(59, 130, 246));
-        bookSearchBtn.setOpaque(true);
-        bookSearchBtn.setContentAreaFilled(true);
-        bookSearchBtn.repaint();
-
         // Add Book button - green
         addBookBtn.setUI(null);
         addBookBtn.putClientProperty("JButton.background", new Color(34, 197, 94));
@@ -122,22 +123,18 @@ public class Books extends javax.swing.JPanel {
         addBookBtn.setOpaque(true);
         addBookBtn.setContentAreaFilled(true);
         addBookBtn.repaint();
-
-        // Generate Report button - keep as is or set to blue if you want
+        
+        // Search button - blue
+        bookSearchBtn.setUI(null);
+        bookSearchBtn.putClientProperty("JButton.background", new Color(59, 130, 246));
+        bookSearchBtn.setBackground(new Color(59, 130, 246));
+        bookSearchBtn.setOpaque(true);
+        bookSearchBtn.setContentAreaFilled(true);
+        bookSearchBtn.repaint();
+        
+        // Generate Report button styling
         generateReportBtn.setFont(new Font("Inter", Font.BOLD, 14));
         generateReportBtn.setPreferredSize(new java.awt.Dimension(180, 40));
-        generateReportBtn.setBackground(new Color(99, 102, 241));
-        generateReportBtn.setOpaque(true);
-        generateReportBtn.setContentAreaFilled(true);
-        generateReportBtn.repaint();
-
-        resetBtn.setFont(new Font("Inter", Font.BOLD, 14));
-        resetBtn.setPreferredSize(new java.awt.Dimension(120, 40));
-        resetBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetBtnActionPerformed(evt);
-            }
-        });
     }
 
     private void loadStatus() {
@@ -242,14 +239,15 @@ public class Books extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         bookStatusCombo = new javax.swing.JComboBox<>();
         searchByCombo = new javax.swing.JComboBox<>();
-        resetBtn = new RoundButton();
 
         setBackground(new java.awt.Color(0, 30, 51));
         setPreferredSize(new java.awt.Dimension(1792, 1010));
 
         bookSearchField.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
 
+        bookSearchBtn.setBackground(new java.awt.Color(0, 153, 255));
         bookSearchBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        bookSearchBtn.setForeground(new java.awt.Color(255, 255, 255));
         bookSearchBtn.setText("Search");
         bookSearchBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bookSearchBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -258,7 +256,9 @@ public class Books extends javax.swing.JPanel {
             }
         });
 
+        addBookBtn.setBackground(new java.awt.Color(255, 255, 255));
         addBookBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        addBookBtn.setForeground(new java.awt.Color(0, 0, 0));
         addBookBtn.setText("Add New Book");
         addBookBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,8 +315,15 @@ public class Books extends javax.swing.JPanel {
             bookListTable.getColumnModel().getColumn(5).setMaxWidth(150);
         }
 
+        generateReportBtn.setBackground(new java.awt.Color(0, 153, 255));
         generateReportBtn.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        generateReportBtn.setForeground(new java.awt.Color(255, 255, 255));
         generateReportBtn.setText("Generate Report");
+        generateReportBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateReportBtnActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 214, 255));
@@ -338,15 +345,6 @@ public class Books extends javax.swing.JPanel {
             }
         });
 
-        resetBtn.setText("Reset");
-        resetBtn.setFont(new Font("Inter", Font.BOLD, 14));
-        resetBtn.setPreferredSize(new java.awt.Dimension(120, 40));
-        resetBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -362,8 +360,6 @@ public class Books extends javax.swing.JPanel {
                         .addComponent(bookStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(bookSearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 783, Short.MAX_VALUE)
                         .addComponent(addBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -384,7 +380,6 @@ public class Books extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bookSearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bookStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchByCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -430,14 +425,35 @@ public class Books extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_searchByComboActionPerformed
 
-    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        bookSearchField.setText("");
-        searchByCombo.setSelectedIndex(0);
-        bookStatusCombo.setSelectedIndex(0);
-        query = BASE_QUERY + " ORDER BY `book_id` ASC";
-        loadData();
-    }
-   
+    private void generateReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportBtnActionPerformed
+        try {
+            InputStream fileStream = getClass().getResourceAsStream("/lk/neolibrary/reports/books.jasper");
+
+            if (fileStream == null) {
+                JOptionPane.showMessageDialog(this, "Report file not found! Please check path and file name.");
+                return;
+            }
+
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(fileStream);
+
+            // Empty parameters map (you can add filter keys here if needed)
+            Map<String, Object> parameters = new HashMap<>();
+
+            // Get database connection
+            Connection conn = (Connection) lk.jiat.neolibrary.connection.MySQL.getConnection();
+
+            // Fill the report
+            JasperPrint print;
+            print = JasperFillManager.fillReport(jasperReport, parameters, conn);
+
+            // Display the report
+            JasperViewer.viewReport(print, false);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error generating report: " + e.getMessage());
+        }
+    }//GEN-LAST:event_generateReportBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBookBtn;
@@ -449,6 +465,5 @@ public class Books extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> searchByCombo;
-    private javax.swing.JButton resetBtn;
     // End of variables declaration//GEN-END:variables
 }
