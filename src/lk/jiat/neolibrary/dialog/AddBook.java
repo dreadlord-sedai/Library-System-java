@@ -221,8 +221,8 @@ public class AddBook extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Collect form data
-        String title = jTextField2.getText().trim();
-        String author = jTextField4.getText().trim();
+        String title = jTextField4.getText().trim();
+        String author = jTextField2.getText().trim();
         java.util.Date addedDate = jDateChooser1.getDate();
         String genreName = (String) jComboBox1.getSelectedItem();
 
