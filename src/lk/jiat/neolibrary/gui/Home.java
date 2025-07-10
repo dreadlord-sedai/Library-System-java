@@ -373,11 +373,19 @@ public class Home extends javax.swing.JFrame {
     private void dashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardBtnActionPerformed
         this.contentPanelLayout.show(contentPanel, "dashboard_panel");
         setActiveBtn(dashboardBtn);
+        // Refresh the dashboard data to show latest statistics
+        if (dashboardPanel != null) {
+            dashboardPanel.refreshData();
+        }
     }//GEN-LAST:event_dashboardBtnActionPerformed
 
     private void bookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookBtnActionPerformed
         this.contentPanelLayout.show(contentPanel, "books_panel");
         setActiveBtn(bookBtn);
+        // Refresh the books data to show latest status changes
+        if (booksPanel != null) {
+            booksPanel.refreshData();
+        }
     }//GEN-LAST:event_bookBtnActionPerformed
 
     public JPanel getContentPanel() {

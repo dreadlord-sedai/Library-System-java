@@ -190,6 +190,23 @@ public class Books extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * Public method to refresh the books data.
+     * This can be called from the Home screen when switching to the Books panel.
+     */
+    public void refreshData() {
+        // Reset to base query and reload data
+        query = BASE_QUERY + " ORDER BY `book_id` ASC";
+        loadData();
+        
+        // Reset search fields
+        bookSearchField.setText("");
+        searchByCombo.setSelectedIndex(0);
+        bookStatusCombo.setSelectedIndex(0);
+        bookSearchField.setEnabled(true);
+        bookStatusCombo.setEnabled(false);
+    }
 
     private void searchData() {
         String searchBySelected = searchByCombo.getSelectedItem().toString();

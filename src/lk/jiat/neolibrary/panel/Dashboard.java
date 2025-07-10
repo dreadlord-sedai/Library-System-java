@@ -321,6 +321,7 @@ public class Dashboard extends javax.swing.JPanel {
             tMCLabel.setText(totalMemberCount);
             
             DefaultTableModel dtm = (DefaultTableModel) memberTable.getModel();
+            dtm.setRowCount(0); // Clear existing data
             for (int i = 0; i < 10; i++) {
                 if (memberSet.next()) {
                     Vector<String> v = new Vector();
@@ -335,6 +336,15 @@ public class Dashboard extends javax.swing.JPanel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    /**
+     * Public method to refresh the dashboard data.
+     * This can be called from the Home screen when switching to the Dashboard panel.
+     */
+    public void refreshData() {
+        loadBookDetails();
+        loadMemberDetails();
     }
 
     /**
