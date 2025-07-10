@@ -35,8 +35,12 @@ public class ReturnBook extends javax.swing.JPanel {
         this.setBackground(new Color(15, 23, 42)); // Slate-900
         
         // Enhanced field styling
-        memberIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
-        bookIdField.putClientProperty("JTextField.placeholderText", "Press Enter After Typing");
+        memberIdField.putClientProperty("JTextField.placeholderText", "Enter Member ID and press Enter");
+        bookIdField.putClientProperty("JTextField.placeholderText", "Enter Book ID and press Enter");
+        
+        // Make fields editable
+        memberIdField.setEditable(true);
+        memberIdField.setFocusable(true);
         
         // Enhanced typography
         updateTypography();
@@ -146,28 +150,57 @@ public class ReturnBook extends javax.swing.JPanel {
                 loadBook();
             }
         });
+        
+        // Add action listener for return book button
+        returnBookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnBook();
+            }
+        });
     }
     
     private void loadMember() {
         String memberId = memberIdField.getText().trim();
+        if (memberId.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                "Please enter a Member ID.",
+                "Validation Error",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         try {
             ResultSet memberRS = lk.jiat.neolibrary.connection.MySQL.executeSearch(
                 "SELECT * FROM member WHERE member_id = '" + memberId + "'"
             );
             if (memberRS.next()) {
+                // Member found - could populate additional fields if needed
+                System.out.println("Member found: " + memberRS.getString("name"));
             } else {
                 JOptionPane.showMessageDialog(null,
-                    "Enter valid member ID.",
+                    "Member ID does not exist.",
                     "Data Loading Error",
                     JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                "Error loading member data.",
+                "Database Error",
+                JOptionPane.ERROR_MESSAGE);
         }
     }
     
     private void loadBook() {
         String bookId = bookIdField.getText().trim();
+        if (bookId.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                "Please enter a Book ID.",
+                "Validation Error",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         try {
             ResultSet bookRS = lk.jiat.neolibrary.connection.MySQL.executeSearch(
                 "SELECT b.*, g.genre_name FROM book b " +
@@ -175,14 +208,111 @@ public class ReturnBook extends javax.swing.JPanel {
                 "WHERE b.book_id = '" + bookId + "'"
             );
             if (bookRS.next()) {
+                // Book found - could populate additional fields if needed
+                System.out.println("Book found: " + bookRS.getString("title") + " by " + bookRS.getString("author"));
             } else {
                 JOptionPane.showMessageDialog(null,
-                    "Enter valid book ID.",
+                    "Book ID does not exist.",
                     "Data Loading Error",
                     JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                "Error loading book data.",
+                "Database Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void returnBook() {
+        String memberIdText = memberIdField.getText().trim();
+        String bookIdText = bookIdField.getText().trim();
+        
+        if (memberIdText.isEmpty() || bookIdText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                "Please enter both Member ID and Book ID.", 
+                "Validation Error", 
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        try {
+            Integer memberId = Integer.valueOf(memberIdText);
+            Integer bookId = Integer.valueOf(bookIdText);
+            
+            // Check if member exists
+            ResultSet memberRS = lk.jiat.neolibrary.connection.MySQL.executeSearch(
+                "SELECT * FROM member WHERE member_id = '" + memberId + "'"
+            );
+            if (!memberRS.next()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Member ID does not exist.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Check if book exists
+            ResultSet bookRS = lk.jiat.neolibrary.connection.MySQL.executeSearch(
+                "SELECT * FROM book WHERE book_id = '" + bookId + "'"
+            );
+            if (!bookRS.next()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Book ID does not exist.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Check if book is currently issued to this member
+            ResultSet issueRS = lk.jiat.neolibrary.connection.MySQL.executeSearch(
+                "SELECT * FROM issue_records WHERE member_id = '" + memberId + 
+                "' AND book_id = '" + bookId + "' AND return_data IS NULL"
+            );
+            if (!issueRS.next()) {
+                JOptionPane.showMessageDialog(this, 
+                    "This book is not currently issued to this member.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Update issue_records with return date
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String returnDate = sdf.format(new java.util.Date());
+            
+            String updateIssueSql = "UPDATE issue_records SET return_data = '" + returnDate + 
+                "' WHERE member_id = '" + memberId + "' AND book_id = '" + bookId + 
+                "' AND return_data IS NULL";
+            lk.jiat.neolibrary.connection.MySQL.executeIUD(updateIssueSql);
+            
+            // Update book status to AVAILABLE
+            String updateBookSql = "UPDATE book SET b_status_id = '" + 
+                lk.jiat.neolibrary.entity.BookStatus.OWNED.getId() + 
+                "' WHERE book_id = '" + bookId + "'";
+            lk.jiat.neolibrary.connection.MySQL.executeIUD(updateBookSql);
+            
+            JOptionPane.showMessageDialog(this, 
+                "Book successfully returned!", 
+                "Success", 
+                JOptionPane.INFORMATION_MESSAGE);
+            
+            // Clear fields
+            memberIdField.setText("");
+            bookIdField.setText("");
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, 
+                "Failed to return book: " + e.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, 
+                "Please enter valid numeric IDs.", 
+                "Validation Error", 
+                JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -238,10 +368,10 @@ public class ReturnBook extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 50);
         jPanel3.add(jLabel13, gridBagConstraints);
 
-        memberIdField.setEditable(false);
+        memberIdField.setEditable(true);
         memberIdField.setFont(new java.awt.Font("Dubai Medium", 0, 16)); // NOI18N
         memberIdField.setForeground(new java.awt.Color(255, 255, 255));
-        memberIdField.setFocusable(false);
+        memberIdField.setFocusable(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
